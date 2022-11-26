@@ -12,8 +12,8 @@ function Account() {
     return (
         <div   className='w-[100%]  flex flex-row  justify-between mt-8 mx-auto'>
             <div className='w-[80%]'>
-                <div className='bg-[grey] rounded-full w-[40%] h-[5vh]  relative flex flex-row justify-between'>
-                    <input type="text" className='bg-[#D3D3E8] focus:outline-0 rounded-full p-4 w-[100%] h-[100%]' placeholder="Search bookMark...." />
+                <div className='bg-[grey] rounded-full md:w-[40%] h-[5vh]  relative flex flex-row justify-between'>
+                    <input type="text" className='bg-[#D3D3E8] focus:outline-0 rounded-full p-4 w-[100%] h-[100%]' placeholder="Search ...." />
                     <AiOutlineSearch className='w-[10%] text-[grey] right-3 mt-2 text-[2.5rem] absolute' />
                 </div>
             </div>

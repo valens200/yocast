@@ -17,7 +17,7 @@ import { setShowForm } from '../features/BookMarkSlice'
 import { GiCrossMark } from "react-icons/gi"
 import { addBookMap , createNewCatgory } from '../features/BookMarkSlice'
 import { category } from '../types/appTypes'
-function Form() {
+function Update() {
     const [showCreateCategory, setShowCreateCategory] = useState(false);
     const dispatch = useAppDispatch();
     const [title, setTitle] = useState("");
@@ -26,6 +26,8 @@ function Form() {
     const [category, setCategory] = useState("");
     const Categories = useSelector((store: RootState) => store.bookmarks.Categories)
     const showForm = useSelector((store: RootState) => store.bookmarks.showForm);
+    const showUpdateForm = useSelector((store: RootState) => store.bookmarks.showUpdateForm);
+    const setSelectedBookMark : any = useSelector((store: RootState) => store.bookmarks.selectedBookMark);
     const clicked = (index: number) => {
         if (index == 1) {
             setShowCreateCategory(true)
@@ -74,11 +76,29 @@ function Form() {
         dispatch((createNewCatgory(newCategory)))
         
     }
+    const getValue = (data: string) => {
+        switch(data){
+            case 'Title':
+                return setSelectedBookMark.title;
+                break;
+            case 'name' : 
+                return setSelectedBookMark.name;
+                break;
+            case 'description':
+                return setSelectedBookMark.description;
+                break;
+            case 'id':
+                return setSelectedBookMark.id;
+            case 'Link':
+                return setSelectedBookMark.link
+        }
+
+    }
 
 
     const categories = useSelector((store: RootState) => store.bookmarks.Categories);
-    return showForm == true ? ReactDOM.createPortal(<div className='w-[100%]  text-white h-[74vh] absolute flex  fixed top-[10%] '>
-        <div className='items-center text-black shadow-lg flex items-center  bg-white  md:w-[26%] mx-auto items-center h-[100%]'>
+    return showUpdateForm == true ? ReactDOM.createPortal(<div className='w-[100%]  text-white h-[74vh] absolute flex  fixed top-[10%] '>
+        <div className='items-center text-black shadow-lg flex items-center  bg-white  w-[26%] mx-auto items-center h-[100%]'>
             <div className='h-[90%] flex flex-col space-y-8  w-[100%]'>
                 <div className="">
                     <div className='w-[20%]  float-right'>
@@ -87,12 +107,11 @@ function Form() {
                 </div>
                 <div className='w-[50%] flex flex-col space-y-3  mx-auto'>
                     <img className="w-[28%] mx-auto" src={logo} alt="" />
-                    <p className='text-center'>create new book mark</p>
+                    <p className='text-center'>Update  existing book mark</p>
                 </div>
                 <Fade>
                     {showCreateCategory == false ?
                         <form onSubmit={((e) => handleSubmit(e))}>
-
                             <div className='flex flex-col space-y-4'>
                                 {formData.map((data, index) => (
                                     <div className='flex w-[90%] mx-auto flex-col '>
@@ -100,6 +119,9 @@ function Form() {
                                             className="h-[100%] rounded-r-0   md:w-[100%] p-4"
                                             label={data.name}
                                             type={data.type}
+                                            // value={() => getValue(data.name)}
+                                            value={setSelectedBookMark.link}
+                                            // value="vava"
                                             onChange={(e) => handleInputs(data.name, e.target.value)}
                                             id="outlined-basic"
                                             variant="outlined"
@@ -181,4 +203,4 @@ function Form() {
     </div >, document.getElementById("create")!) : null
 }
 
-export default Form
+export default Update

@@ -28,7 +28,7 @@ function Sidebar() {
     }, [showForm])
 
     return (
-        <div ref={SidebarRef} className='w-[20%]  flex flex-col space-y-[20%] h-[100%]'>
+        <div ref={SidebarRef} className='w-[100%]  flex flex-col space-y-[20%] h-[100%]'>
             <div className='flex items-center flex-row space-x-2'>
                 <img className='w-[20%]' src={logoo} />
                 <p>Bookmarker</p>
@@ -61,10 +61,7 @@ function Sidebar() {
 
                         ))}
                     </div>
-
-
                 }
-
             </div>
             <div className='flex space-x-4 items-center'>
                 <p className='bg-[#27285C] p-4 font-bold rounded text-white'> <BsPlusLg /></p>

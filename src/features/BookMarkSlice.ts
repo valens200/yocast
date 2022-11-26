@@ -12,7 +12,11 @@ const initialState = {
     description: "",
     bookMarks: [],
   },
+  showSmallSidebar: false,
+  showUpdateForm: false,
+  ShowSingleBookMark: false,
   showForm: false,
+  selectedBookMark: {} as bookMark,
   selectedCategory: {
     name: "Design Tools",
     id: 2,
@@ -210,16 +214,36 @@ const BookMarkSclice = createSlice({
         state.showForm = false;
       }
     },
-   
+
     initilizerCategories: (state, action: PayloadAction<category[]>) => {
       state.Categories = action.payload;
     },
     createNewCatgory: (state, action: PayloadAction<category>) => {
       const Categories = state.Categories;
-      const otherCategories = state.Categories.filter((cat) => cat.name != action.payload.name);
+      const otherCategories = state.Categories.filter(
+        (cat) => cat.name != action.payload.name
+      );
       state.Categories = [...state.Categories, action.payload];
 
       localStorage.setItem("bookMarks", JSON.stringify(state.Categories));
+    },
+    setShowUpdateForm: (state, action: PayloadAction<boolean>) => {
+      const show = action.payload;
+      if (show) {
+        state.showUpdateForm = true;
+      } else {
+        state.showUpdateForm = false;
+      }
+    },
+    setShowSingleBookMark: (state, action: PayloadAction<boolean>) => {
+      if (action.payload == true) {
+        state.ShowSingleBookMark = true;
+      } else {
+        state.ShowSingleBookMark = false;
+      }
+    },
+    setSelectedBookMark: (state, action: PayloadAction<bookMark>) => {
+      state.selectedBookMark = action.payload;
     },
     addBookMap: (
       state,
@@ -228,11 +252,20 @@ const BookMarkSclice = createSlice({
       const book = state.Categories.filter(
         (cat) => cat.name == action.payload.cat
       )[0];
-      const otherBookMarkMarks = state.Categories.filter((cat) => cat.name != action.payload.cat);
+      const otherBookMarkMarks = state.Categories.filter(
+        (cat) => cat.name != action.payload.cat
+      );
       book.bookMarks.push(action.payload.bookMark);
       state.Categories = [...otherBookMarkMarks, book];
       localStorage.setItem("bookMarks", JSON.stringify(state.Categories));
       const bookMark = action.payload.bookMark;
+    },
+    setShowSmallSidebar: (state, action: PayloadAction<boolean>) => {
+      if (action.payload) {
+        state.showSmallSidebar = true;
+      } else {
+        state.showSmallSidebar = false;
+      }
     },
   },
 });
@@ -241,7 +274,11 @@ export const {
   setSelectedCategory,
   initilizerCategories,
   createNewCatgory,
+  setSelectedBookMark,
+  setShowUpdateForm,
+  setShowSingleBookMark,
   setShowForm,
   addBookMap,
+  setShowSmallSidebar,
 } = BookMarkSclice.actions;
 export const BookMarkReducer = BookMarkSclice.reducer;
