@@ -7,7 +7,6 @@ export const store = configureStore({
         bookmarks:BookMarkReducer,
     }
 })
-
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch;
 export const useAppDispatch : () => AppDispatch = useDispatch;

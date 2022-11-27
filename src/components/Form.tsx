@@ -13,9 +13,9 @@ import { BsPlus } from "react-icons/bs"
 import { useAppDispatch } from '../store'
 import Slider from '@material-ui/core'
 import { Fade } from "react-awesome-reveal";
-import { setShowForm } from '../features/BookMarkSlice'
+import { setShowForm , updateBookMarkk} from '../features/BookMarkSlice'
 import { GiCrossMark } from "react-icons/gi"
-import { addBookMap , createNewCatgory } from '../features/BookMarkSlice'
+import { addBookMap, createNewCatgory } from '../features/BookMarkSlice'
 import { category } from '../types/appTypes'
 function Form() {
     const [showCreateCategory, setShowCreateCategory] = useState(false);
@@ -44,7 +44,6 @@ function Form() {
                 break;
             case 'Link':
                 setLink(value);
-                // console.log(Link);
                 break;
             case 'Description':
                 setDescription(value);
@@ -59,25 +58,25 @@ function Form() {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const bookMark =  { id : 1, title:title, link:Link , description: Description, category: ""};
-        dispatch(addBookMap({cat:"vava" , bookMark: bookMark}));
+        const bookMark = { id: 1, title: title, link: Link, description: Description, category: "" };
+        dispatch(addBookMap({ cat: "dsfkjsfksjdhfskjdf", bookMark: bookMark }));
     }
 
-    const createCategory = (e : React.FormEvent<HTMLFormElement>) => {
+    const createCategory = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const newCategory : category = {
-          id:Categories.length + 1,
-          name:title,
-          image:"",
-          bookMarks:[]
+        const newCategory: category = {
+            id: localStorage.getItem("bookMarks") == null ? 1 : 8,
+            name: title,
+            image: "",
+            bookMarks: []
         }
         dispatch((createNewCatgory(newCategory)))
-        
+
     }
 
 
     const categories = useSelector((store: RootState) => store.bookmarks.Categories);
-    return showForm == true ? ReactDOM.createPortal(<div className='w-[100%]  text-white h-[74vh] absolute flex  fixed top-[10%] '>
+    return showForm == true ? ReactDOM.createPortal(<div className='w-[100%] z-40  text-white h-[74vh] absolute flex  fixed top-[10%] '>
         <div className='items-center text-black shadow-lg flex items-center  bg-white  md:w-[26%] mx-auto items-center h-[100%]'>
             <div className='h-[90%] flex flex-col space-y-8  w-[100%]'>
                 <div className="">
@@ -113,11 +112,11 @@ function Form() {
                                             // onChange={(e) => handleInputs(e.trgat)}
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            value={categories[0].name}
+                                            // value={categories[0].name}
                                         >
-                                            {categories.map((category, index) => (
+                                            {/* {categories.map((category, index) => (
                                                 <MenuItem>{category.name}</MenuItem>
-                                            ))}
+                                            ))} */}
                                             <MenuItem className="bg-black" onClick={() => clicked(1)}>create category  <BsPlus className='font-bold' /></MenuItem>
                                         </Select>
                                     </FormControl>
@@ -128,9 +127,7 @@ function Form() {
                                     </div>
 
                                 ))}
-
                             </div>
-
                         </form> :
                         <Fade>
                             <form onClick={(e) => createCategory(e)}>
@@ -153,11 +150,11 @@ function Form() {
                                             <Select
                                                 labelId="demo-simple-select-label"
                                                 id="demo-simple-select"
-                                                value={categories[0].name}
+                                                // value={categories[0].name}
                                             >
-                                                {categories.map((category, index) => (
+                                                {/* {categories.map((category, index) => (
                                                     <MenuItem>{category.name}</MenuItem>
-                                                ))}
+                                                ))} */}
                                                 <MenuItem >create category  <BsPlus /></MenuItem>
                                             </Select>
                                         </FormControl>

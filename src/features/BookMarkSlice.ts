@@ -1,3 +1,4 @@
+import { Category } from "@mui/icons-material";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { BiCategory } from "react-icons/bi";
 import { json } from "react-router-dom";
@@ -60,34 +61,34 @@ const initialState = {
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFHwzm3fNDJeMasDjnPorU2irF9jFpEq92zw&usqp=CAU",
       bookMarks: [
-        // {
-        //   id: 1,
-        //   title: "Youtube",
-        //   description: "Bookmark to direct me to the youtube",
-        //   link: "",
-        //   category: "",
-        // },
-        // {
-        //   id: 2,
-        //   title: "Instagram",
-        //   description: "Bookmark to direct me to the youtube",
-        //   link: "",
-        //   category: "",
-        // },
-        // {
-        //   id: 3,
-        //   title: "Mbonera Rw",
-        //   description: "Bookmark to direct me to the youtube",
-        //   link: "",
-        //   category: "",
-        // },
-        // {
-        //   id: 4,
-        //   title: "Rwanda coding academy",
-        //   description: "Bookmark to direct me to the youtube",
-        //   link: "",
-        //   category: "",
-        // },
+        {
+          id: 1,
+          title: "Youtube",
+          description: "Bookmark to direct me to the youtube",
+          link: "",
+          category: "",
+        },
+        {
+          id: 2,
+          title: "Instagram",
+          description: "Bookmark to direct me to the youtube",
+          link: "",
+          category: "",
+        },
+        {
+          id: 3,
+          title: "Mbonera Rw",
+          description: "Bookmark to direct me to the youtube",
+          link: "",
+          category: "",
+        },
+        {
+          id: 4,
+          title: "Rwanda coding academy",
+          description: "Bookmark to direct me to the youtube",
+          link: "",
+          category: "",
+        },
       ],
     },
     {
@@ -245,6 +246,7 @@ const BookMarkSclice = createSlice({
     setSelectedBookMark: (state, action: PayloadAction<bookMark>) => {
       state.selectedBookMark = action.payload;
     },
+
     addBookMap: (
       state,
       action: PayloadAction<{ cat: string; bookMark: bookMark }>
@@ -267,10 +269,67 @@ const BookMarkSclice = createSlice({
         state.showSmallSidebar = false;
       }
     },
+
+    deleteBookMark: (
+      state,
+      action: PayloadAction<{ categoryId: number; id: number }>
+    ) => {
+      const book = state.Categories.filter(
+        (cat) => cat.id == action.payload.id
+      )[0];
+      const otherBookMarkMarks = state.Categories.filter(
+        (cat) => cat.id != action.payload.id
+      );
+      book.bookMarks = book.bookMarks.filter(
+        (book) => book.id != action.payload.id
+      );
+      state.Categories = [...otherBookMarkMarks, book];
+      localStorage.setItem("bookMarks", JSON.stringify(state.Categories));
+    },
+
+    updateBookMarkk: (
+      state,
+      action: PayloadAction<{
+        categoryId: number;
+        bookMarkId: number;
+        newBookMark: bookMark;
+      }>
+    ) => {
+      const book = state.Categories.filter(
+        (cat) => cat.id == action.payload.categoryId
+      )[0];
+      const otherBookMarkMarks = state.Categories.filter(
+        (cat) => cat.id != action.payload.categoryId
+      );
+
+      let bookMarkToUpdate = book.bookMarks.filter(
+        (bookMark) => bookMark.id == action.payload.bookMarkId
+      )[0];
+      bookMarkToUpdate = action.payload.newBookMark;
+      const availableBookMark = book.bookMarks.filter(
+        (book) => book.id == action.payload.bookMarkId
+      );
+      const otherBookMarkMarksS = book.bookMarks.filter(
+        (book) => book.id != action.payload.bookMarkId
+      );
+      const bookMarkss = [...otherBookMarkMarksS, bookMarkToUpdate];
+      book.bookMarks = bookMarkss;
+      state.Categories = [...otherBookMarkMarks, book];
+      localStorage.setItem("bookMarks", JSON.stringify(state.Categories));
+    },
+    deleteCategory: (state, action: PayloadAction<{ id: number }>) => {
+      state.Categories = state.Categories.filter(
+        (Category) => Category.id != action.payload.id
+      );
+      localStorage.setItem("bookMarks", JSON.stringify(state.Categories));
+    },
   },
 });
 
 export const {
+  deleteBookMark,
+  updateBookMarkk,
+  deleteCategory,
   setSelectedCategory,
   initilizerCategories,
   createNewCatgory,

@@ -13,9 +13,9 @@ function Sidebar() {
     const dispatch = useAppDispatch();
     const showForm = useSelector((store: RootState) => store.bookmarks.showForm)
     const Categories = useSelector((store: RootState) => store.bookmarks.Categories)
-    // const bookMarkss: category[] = JSON.parse(localStorage.getItem('bookMarks'));
     const SidebarRef = useRef<HTMLDivElement>(null);
     useEffect(() => {
+        // localStorage.setItem('bookMarks', JSON.stringify(Categories));
         const addClass = () => {
             if (showForm) {
                 SidebarRef.current?.classList.add('filter');
@@ -23,12 +23,12 @@ function Sidebar() {
                 SidebarRef.current?.classList.remove('filter');
             }
         }
-        dispatch((initilizerCategories(JSON.parse(localStorage.getItem("bookMarks")))));
+        dispatch((initilizerCategories(JSON.parse(localStorage.getItem("bookMarks")!))));
         addClass();
     }, [showForm])
 
     return (
-        <div ref={SidebarRef} className='w-[100%]  flex flex-col space-y-[20%] h-[100%]'>
+        <div ref={SidebarRef} className='w-[100%]  z-100 flex flex-col space-y-[20%] h-[100%]'>
             <div className='flex items-center flex-row space-x-2'>
                 <img className='w-[20%]' src={logoo} />
                 <p>Bookmarker</p>
@@ -64,7 +64,7 @@ function Sidebar() {
                 }
             </div>
             <div className='flex space-x-4 items-center'>
-                <p className='bg-[#27285C] p-4 font-bold rounded text-white'> <BsPlusLg /></p>
+                <p onClick={() => dispatch(setShowForm(true))} className='bg-[#27285C] p-4 font-bold rounded text-white'> <BsPlusLg /></p>
                 <p>New Category...</p>
             </div>
 

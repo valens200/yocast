@@ -3,7 +3,7 @@ import { AiOutlineSearch, AiFillCaretDown, AiFillHome } from "react-icons/ai"
 import { IoNotifications } from "react-icons/io5"
 import { RootState, useAppDispatch } from '../store'
 import { useSelector } from 'react-redux'
-import { setShowForm } from '../features/BookMarkSlice'
+import { setShowForm , setShowSmallSidebar} from '../features/BookMarkSlice'
 
 function Account() {
     const selectedCategory = useSelector((store : RootState) => store.bookmarks.selectedCategory)

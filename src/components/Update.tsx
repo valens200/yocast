@@ -15,8 +15,9 @@ import Slider from '@material-ui/core'
 import { Fade } from "react-awesome-reveal";
 import { setShowForm } from '../features/BookMarkSlice'
 import { GiCrossMark } from "react-icons/gi"
-import { addBookMap , createNewCatgory } from '../features/BookMarkSlice'
+import { addBookMap, createNewCatgory, updateBookMarkk } from '../features/BookMarkSlice'
 import { category } from '../types/appTypes'
+import { useSelect } from '@mui/base'
 function Update() {
     const [showCreateCategory, setShowCreateCategory] = useState(false);
     const dispatch = useAppDispatch();
@@ -27,7 +28,10 @@ function Update() {
     const Categories = useSelector((store: RootState) => store.bookmarks.Categories)
     const showForm = useSelector((store: RootState) => store.bookmarks.showForm);
     const showUpdateForm = useSelector((store: RootState) => store.bookmarks.showUpdateForm);
-    const setSelectedBookMark : any = useSelector((store: RootState) => store.bookmarks.selectedBookMark);
+    const setSelectedBookMark: any = useSelector((store: RootState) => store.bookmarks.selectedBookMark);
+    const selectedBookMark = useSelector((store: RootState) => store.bookmarks.selectedBookMark);
+    const selectedCategory = useSelector((store: RootState) => store.bookmarks.selectedCategory);
+    const [value, setValue] = useState<string>("value")
     const clicked = (index: number) => {
         if (index == 1) {
             setShowCreateCategory(true)
@@ -58,47 +62,48 @@ function Update() {
                 console.log('no property seen')
         }
     }
-
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const updateBookMark = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const bookMark =  { id : 1, title:title, link:Link , description: Description, category: ""};
-        dispatch(addBookMap({cat:"vava" , bookMark: bookMark}));
+        const bookMark = { id: 1, title: title, link: Link, description: Description, category: "" };
+        dispatch(updateBookMarkk({ categoryId: selectedCategory.id, bookMarkId: selectedBookMark.id, newBookMark: bookMark }));
     }
 
-    const createCategory = (e : React.FormEvent<HTMLFormElement>) => {
+    const createCategory = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const newCategory : category = {
-          id:Categories.length + 1,
-          name:title,
-          image:"",
-          bookMarks:[]
+        const newCategory: category = {
+            id: Categories.length + 1,
+            name: title,
+            image: "",
+            bookMarks: []
         }
         dispatch((createNewCatgory(newCategory)))
-        
+
     }
-    const getValue = (data: string) => {
-        switch(data){
+    const getValue = (data: string): string | number => {
+        let valuee: string | number = "default";
+        switch (data) {
             case 'Title':
-                return setSelectedBookMark.title;
+                valuee = selectedBookMark.title;
                 break;
-            case 'name' : 
-                return setSelectedBookMark.name;
+            case 'name':
+                valuee = selectedBookMark.title;
                 break;
-            case 'description':
-                return setSelectedBookMark.description;
+            case 'Description':
+                valuee = selectedBookMark.description;
                 break;
             case 'id':
-                return setSelectedBookMark.id;
+                valuee = selectedBookMark.id;
+                break;
             case 'Link':
-                return setSelectedBookMark.link
+                valuee = selectedBookMark.link;
+                break;
         }
+        return valuee;
 
     }
-
-
     const categories = useSelector((store: RootState) => store.bookmarks.Categories);
-    return showUpdateForm == true ? ReactDOM.createPortal(<div className='w-[100%]  text-white h-[74vh] absolute flex  fixed top-[10%] '>
-        <div className='items-center text-black shadow-lg flex items-center  bg-white  w-[26%] mx-auto items-center h-[100%]'>
+    return showUpdateForm == true ? ReactDOM.createPortal(<div className='w-[100%] z-20  text-white h-[74vh] absolute flex  fixed top-[10%] '>
+        <div className='items-center text-black shadow-lg flex items-center  bg-white   md:w-[26%] mx-auto items-center h-[100%]'>
             <div className='h-[90%] flex flex-col space-y-8  w-[100%]'>
                 <div className="">
                     <div className='w-[20%]  float-right'>
@@ -111,28 +116,23 @@ function Update() {
                 </div>
                 <Fade>
                     {showCreateCategory == false ?
-                        <form onSubmit={((e) => handleSubmit(e))}>
+                        <form onSubmit={((e) => updateBookMark(e))}>
                             <div className='flex flex-col space-y-4'>
                                 {formData.map((data, index) => (
                                     <div className='flex w-[90%] mx-auto flex-col '>
                                         <TextField
-                                            className="h-[100%] rounded-r-0   md:w-[100%] p-4"
+                                            id="outlined"
                                             label={data.name}
-                                            type={data.type}
-                                            // value={() => getValue(data.name)}
-                                            value={setSelectedBookMark.link}
-                                            // value="vava"
                                             onChange={(e) => handleInputs(data.name, e.target.value)}
-                                            id="outlined-basic"
-                                            variant="outlined"
+                                            defaultValue={getValue(data.name)}
                                         />
+
                                     </div>
                                 ))}
                                 <div className='w-[90%] mx-auto '>
                                     <FormControl className="w-[100%]">
                                         <InputLabel id="demo-simple-select-label" className='text-black'>Category</InputLabel>
                                         <Select
-                                            // onChange={(e) => handleInputs(e.trgat)}
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
                                             value={categories[0].name}
