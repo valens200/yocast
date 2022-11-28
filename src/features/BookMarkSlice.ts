@@ -57,7 +57,7 @@ const initialState = {
   Categories: [
     {
       name: "Design Tools",
-      id: 2,
+      id: 555,
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFHwzm3fNDJeMasDjnPorU2irF9jFpEq92zw&usqp=CAU",
       bookMarks: [
@@ -129,7 +129,7 @@ const initialState = {
     },
     {
       name: "Design Tools",
-      id: 1,
+      id: 200,
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFHwzm3fNDJeMasDjnPorU2irF9jFpEq92zw&usqp=CAU",
       bookMarks: [
@@ -165,7 +165,7 @@ const initialState = {
     },
     {
       name: "Design Tools",
-      id: 1,
+      id: 400,
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFHwzm3fNDJeMasDjnPorU2irF9jFpEq92zw&usqp=CAU",
       bookMarks: [
@@ -249,13 +249,13 @@ const BookMarkSclice = createSlice({
 
     addBookMap: (
       state,
-      action: PayloadAction<{ cat: string; bookMark: bookMark }>
+      action: PayloadAction<{ cat: number; bookMark: bookMark }>
     ) => {
       const book = state.Categories.filter(
-        (cat) => cat.name == action.payload.cat
+        (cat) => cat.id == action.payload.cat
       )[0];
       const otherBookMarkMarks = state.Categories.filter(
-        (cat) => cat.name != action.payload.cat
+        (cat) => cat.id != action.payload.cat
       );
       book.bookMarks.push(action.payload.bookMark);
       state.Categories = [...otherBookMarkMarks, book];
@@ -280,9 +280,11 @@ const BookMarkSclice = createSlice({
       const otherBookMarkMarks = state.Categories.filter(
         (cat) => cat.id != action.payload.id
       );
-      book.bookMarks = book.bookMarks.filter(
+
+      const bookBookMarks = book.bookMarks.filter(
         (book) => book.id != action.payload.id
       );
+      book.bookMarks = bookBookMarks;
       state.Categories = [...otherBookMarkMarks, book];
       localStorage.setItem("bookMarks", JSON.stringify(state.Categories));
     },

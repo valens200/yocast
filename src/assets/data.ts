@@ -1,6 +1,7 @@
 import { data } from "../types/appTypes";
 
 
+export const navButtons = [{name:"Login"}, {name:"Get started"}]
 export const MenuItems = [{name:"Delete category"}, {name:"Edit category"}, {name:"more.."}]
 export const formData: data[] = [
   {

@@ -13,10 +13,12 @@ import { BsPlus } from "react-icons/bs"
 import { useAppDispatch } from '../store'
 import Slider from '@material-ui/core'
 import { Fade } from "react-awesome-reveal";
-import { setShowForm , updateBookMarkk} from '../features/BookMarkSlice'
+import { setShowForm, updateBookMarkk } from '../features/BookMarkSlice'
 import { GiCrossMark } from "react-icons/gi"
 import { addBookMap, createNewCatgory } from '../features/BookMarkSlice'
 import { category } from '../types/appTypes'
+import { toast, ToastContainer } from 'react-toastify'
+
 function Form() {
     const [showCreateCategory, setShowCreateCategory] = useState(false);
     const dispatch = useAppDispatch();
@@ -26,6 +28,7 @@ function Form() {
     const [category, setCategory] = useState("");
     const Categories = useSelector((store: RootState) => store.bookmarks.Categories)
     const showForm = useSelector((store: RootState) => store.bookmarks.showForm);
+    const selectedCategory = useSelector((store: RootState) => store.bookmarks.selectedCategory);
     const clicked = (index: number) => {
         if (index == 1) {
             setShowCreateCategory(true)
@@ -55,22 +58,34 @@ function Form() {
                 console.log('no property seen')
         }
     }
-
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const bookMark = { id: 1, title: title, link: Link, description: Description, category: "" };
-        dispatch(addBookMap({ cat: "dsfkjsfksjdhfskjdf", bookMark: bookMark }));
+        const regex = new RegExp('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?');
+        if (!regex.test(bookMark.link)) {
+            toast.error("Invalid url link")
+            return;
+        } else if (bookMark.title == "") {
+            toast.error("BookMark title can not be empty")
+
+        } else {
+            dispatch(addBookMap({ cat: selectedCategory.id, bookMark: bookMark }));
+            toast.success("bookMark added successfully")
+            dispatch(setShowForm(false))
+        }
     }
 
     const createCategory = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const newCategory: category = {
-            id: localStorage.getItem("bookMarks") == null ? 1 : 8,
+            id: localStorage.getItem("bookMarks") == null ? 1 : categories.length + 1,
             name: title,
             image: "",
             bookMarks: []
         }
         dispatch((createNewCatgory(newCategory)))
+        toast.success("Category created successfully")
+        dispatch(setShowForm(false))
 
     }
 
@@ -78,6 +93,7 @@ function Form() {
     const categories = useSelector((store: RootState) => store.bookmarks.Categories);
     return showForm == true ? ReactDOM.createPortal(<div className='w-[100%] z-40  text-white h-[74vh] absolute flex  fixed top-[10%] '>
         <div className='items-center text-black shadow-lg flex items-center  bg-white  md:w-[26%] mx-auto items-center h-[100%]'>
+
             <div className='h-[90%] flex flex-col space-y-8  w-[100%]'>
                 <div className="">
                     <div className='w-[20%]  float-right'>
@@ -88,10 +104,16 @@ function Form() {
                     <img className="w-[28%] mx-auto" src={logo} alt="" />
                     <p className='text-center'>create new book mark</p>
                 </div>
+                <div className='absolute'>
+                    <ToastContainer />
+                </div>
                 <Fade>
                     {showCreateCategory == false ?
                         <form onSubmit={((e) => handleSubmit(e))}>
-
+                            {/* 
+                            <div className='absolute'>
+                                <ToastContainer />
+                            </div> */}
                             <div className='flex flex-col space-y-4'>
                                 {formData.map((data, index) => (
                                     <div className='flex w-[90%] mx-auto flex-col '>
@@ -112,7 +134,7 @@ function Form() {
                                             // onChange={(e) => handleInputs(e.trgat)}
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            // value={categories[0].name}
+                                        // value={categories[0].name}
                                         >
                                             {/* {categories.map((category, index) => (
                                                 <MenuItem>{category.name}</MenuItem>
@@ -130,7 +152,7 @@ function Form() {
                             </div>
                         </form> :
                         <Fade>
-                            <form onClick={(e) => createCategory(e)}>
+                            <form onSubmit={(e) => createCategory(e)}>
                                 <div className='flex flex-col space-y-4'>
                                     {formData2.map((data, index) => (
                                         <div className='flex w-[90%] mx-auto flex-col '>
@@ -150,7 +172,7 @@ function Form() {
                                             <Select
                                                 labelId="demo-simple-select-label"
                                                 id="demo-simple-select"
-                                                // value={categories[0].name}
+                                            // value={categories[0].name}
                                             >
                                                 {/* {categories.map((category, index) => (
                                                     <MenuItem>{category.name}</MenuItem>

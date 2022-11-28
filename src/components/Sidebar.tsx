@@ -14,8 +14,9 @@ function Sidebar() {
     const showForm = useSelector((store: RootState) => store.bookmarks.showForm)
     const Categories = useSelector((store: RootState) => store.bookmarks.Categories)
     const SidebarRef = useRef<HTMLDivElement>(null);
+    const selectedCategory = useSelector((store: RootState) => store.bookmarks.selectedCategory);
     useEffect(() => {
-        // localStorage.setItem('bookMarks', JSON.stringify(Categories));
+        localStorage.setItem('bookMarks', JSON.stringify(Categories));
         const addClass = () => {
             if (showForm) {
                 SidebarRef.current?.classList.add('filter');
@@ -48,7 +49,7 @@ function Sidebar() {
                 {Categories == null ? null :
                     <div className='overflow-y-scroll'>
                         {Categories.map((bookMark, index) => (
-                            <div key={index} onClick={() => dispatch(setSelectedCategory(bookMark))} className='flex hover:bg-[#217AFF] items-center p-2 space-x-4 '>
+                            <div key={index} onClick={() => dispatch(setSelectedCategory(bookMark))} className= { selectedCategory.id == bookMark.id ?   'flex bg-[#217AFF] items-center p-2 space-x-4 ' : 'flex hover:bg-[#217AFF] items-center p-2 space-x-4 '} >
                                 <div className='w-[20%] flex  '>
                                     <img className='h-[100%] w-[100%1' src={bookMark.image} />
                                 </div>

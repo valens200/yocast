@@ -9,4 +9,11 @@
 .filter{
     filter: blur(4px);
 }
+.home{
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRf3Uth1fBGqf1B4AVWVgnXNgAJQ6QpUORX9qEvzuQkvIStgfvIiGBauVldgMRLK_RcT8w&usqp=CAU');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 40% 40%;
+    /* background-repeat: no-repeat; */
+}
 /* @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap"); */

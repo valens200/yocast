@@ -19,12 +19,13 @@ import SingleBookMark from './SIngleBookMark'
 import SmallSidebar from './SmallSidebar'
 import { FormControl, MenuItem, Select, InputLabel, FormLabel } from '@material-ui/core'
 import { MenuItems } from '../assets/data'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 function BookMarkList() {
     const dispatch = useAppDispatch();
     const selectedCategory = useSelector((store: RootState) => store.bookmarks.selectedCategory);
     let selectedCategory2: any = selectedCategory;
     const Categories = useSelector((store: RootState) => store.bookmarks.Categories)
-    console.log("categories ", Categories);
     const showForm = useSelector((store: RootState) => store.bookmarks.showForm);
     const bookMarkListRef = useRef<HTMLDivElement>(null);
     useEffect(() => {
@@ -49,15 +50,23 @@ function BookMarkList() {
         dispatch(setShowSingleBookMark(true))
 
     }
-    const handleClickMenu = (index : number, id : number) => {
-        if(index == 0){
-            dispatch(deleteCategory({id:id}));
-        }
+    const handleClickMenu = (index: number, id: number) => {
+        if (index == 0) {
+            if (id == undefined || id == null) {
+                toast.warning("please no category selected")
+            } else {
 
+                dispatch(deleteCategory({ id: id }));
+                toast.success("Category deleted successfully")
+            }
+        }
     }
     return (
         <div ref={bookMarkListRef} className='w-[100%] flex  flex-col space-y-[5%]  text-black p-2 rounded-3xl bg-white h-[100%]'>
             <div className='w-[96%]  mx-auto'>
+                <div className='absolute'>
+                    <ToastContainer />
+                </div>
                 <Account />
                 <Form />
                 <Update />
@@ -99,7 +108,7 @@ function BookMarkList() {
                                     <div className='flex text-[#D3D3E8] space-x-4 text-[1.2rem]'>
                                         <AiTwotoneEdit onClick={() => dispatchMethods(bookmark)} className='hover:text-black ' />
                                         <AiFillDelete onClick={() => dispatch(deleteBookMark({ categoryId: selectedCategory.id, id: bookmark.id }))} className='hover:text-black ' />
-                                        <FiUpload className='hover:text-black ' />
+                                        <a href={bookmark.link}><FiUpload className='hover:text-black ' /></a>
                                     </div>
                                 </div>
                             </div>
