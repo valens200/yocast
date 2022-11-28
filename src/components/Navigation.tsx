@@ -1,5 +1,5 @@
 import React from 'react'
-import { navButtons } from '../assets/data'
+import { navButtons, Links } from '../assets/data'
 import logoo from "../assets/images/logoo.png"
 function Navigation() {
     console.log(navButtons)
@@ -16,9 +16,14 @@ function Navigation() {
             <div className=' w-[80%] items-center mx-auto flex flex-row '>
                 <div className='flex w-[20%] items-center flex-row space-x-2'>
                     <img className='w-[20%]' src={logoo} />
-                    <p>Bookmarker</p>
+                    <p className='font-dashed font-bold text-3xl'>Bookmarker</p>
                 </div>
-                <div className='w-[60%]'>
+                <div className='w-[60%] flex flex-row justify-center space-x-5 '>
+                    {Links.map((link, index) => (
+                        <div key={index}>
+                            <p className='hover:text-[grey] hover:cursor-pointer'>{link.name}</p>
+                        </div>
+                    ))}
 
                 </div>
                 <div className='w-[20%] flex flex-row space-x-4'>

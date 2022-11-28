@@ -11,7 +11,9 @@ module.exports = {
       fontFamily: {
         libre: ['"Libre Baskerville"', ...defaultTheme.fontFamily.sans],
         loboto:['Roboto'],
-        rubik:['Rubik Marker Hatch']
+        rubik:['Rubik Marker Hatch'],
+        dashed:['Rubik Marker Hatch'],
+        Anton:['Anton']
       }
     }
   },
