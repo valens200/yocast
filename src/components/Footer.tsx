@@ -2,15 +2,16 @@ import React from 'react'
 import { footerLInks } from '../assets/data'
 import { TextField } from '@material-ui/core'
 import { Link } from 'react-router-dom'
+import logoo from "../assets/images/logo.png"
 import { BsFillArrowDownCircleFill, BsFillArrowUpCircleFill } from "react-icons/bs"
 function Footer() {
     return (
-        <div className='w-[100%] bottom-0 relative   bg-black'>
-            <div>
-
+        <div className='w-[100%] flex md:flex-row flex-col-reverse items-center bottom-0 relative   bg-black'>
+            <div className=''>
+                <img className='w-[60%]' src={logoo} alt="" />
             </div>
-            <div>
-                <div className='flex justify-between  flex-row  justify-between w-[90%] mx-auto items-center p-4'>
+            <div className='w-[80%]'>
+                <div className='flex items-center justify-between  flex-row  justify-between w-[100%] mx-auto items-center p-4'>
                     <div className='w-[80%]  mx-auto text-white md:justify-between md:space-y-0 space-y-9  md:items-center  flex flex-col md:flex-row '>
                         {footerLInks.map((link, index) => (
                             <div className='' key={index}>

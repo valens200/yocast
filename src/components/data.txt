@@ -2,3 +2,14 @@
 2.postgress
 3.Geoservices
 4.Arc GIS and Q GIS
+
+
+security password min-length 10
+ip route from subnetmask to:addess port:addess  // if you dont know sorrounding routes // it is also called network route because it is configured with network address
+
+ip route 0.0.0.0 0.0.0.0 10.10.0.1   // 0.0.0 means any neighbouring network but at certain interface
+
+
+###static host route  it is diffrent from other routes based on subnet mask. on host route we use broadcasted subnetmask inorder to reach a certain host
+
+static host route serverIP NetMask(single post ) add port to pass through

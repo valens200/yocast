@@ -6,6 +6,7 @@ import BookMarkList from './components/BookMarkList'
 import CreateBookMark from './components/CreateBookMark'
 import Landing from './pages/Landing'
 import Home from './pages/Home'
+import Register from './pages/Register'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 function App() {
   const [count, setCount] = useState(0)
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/dashboard" element={<Landing />}></Route>
         <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   )

@@ -13,7 +13,7 @@ import { BsPlus } from "react-icons/bs"
 import { useAppDispatch } from '../store'
 import Slider from '@material-ui/core'
 import { Fade } from "react-awesome-reveal";
-import { setShowForm, setShowSingleBookMark, setShowUpdateForm } from '../features/BookMarkSlice'
+import { setSelectedCategory, setShowForm, setShowSingleBookMark, setShowUpdateForm } from '../features/BookMarkSlice'
 import { GiCrossMark } from "react-icons/gi"
 import { addBookMap, createNewCatgory } from '../features/BookMarkSlice'
 import { category } from '../types/appTypes'
@@ -31,6 +31,7 @@ function SingleBookMark() {
     const setSelectedBookMark: any = useSelector((store: RootState) => store.bookmarks.selectedBookMark);
     const ShowSingleBookMark = useSelector((store: RootState) => store.bookmarks.ShowSingleBookMark);
     const selectedBookMark = useSelector((store: RootState) => store.bookmarks.selectedBookMark);
+    const selectedCategory = useSelector((store : RootState) => store.bookmarks.selectedCategory);
     console.log("selected ", selectedBookMark)
     const clicked = (index: number) => {
         if (index == 1) {
@@ -66,7 +67,7 @@ function SingleBookMark() {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const bookMark = { id: 1, title: title, link: Link, description: Description, category: "" };
-        dispatch(addBookMap({ cat: "vava", bookMark: bookMark }));
+        dispatch(addBookMap({ cat: selectedCategory.id, bookMark: bookMark }));
     }
 
     const createCategory = (e: React.FormEvent<HTMLFormElement>) => {
@@ -102,6 +103,7 @@ function SingleBookMark() {
         dispatch(setSelectedBookMark(data));
         dispatch(setShowUpdateForm(true))
     }
+    
     const categories = useSelector((store: RootState) => store.bookmarks.Categories);
     return ShowSingleBookMark == true ? ReactDOM.createPortal(<div className='w-[100%]  text-white h-[50vh] absolute flex  fixed top-[10%] '>
         <div className='items-center  text-black shadow-lg bg-white flex flex-col space-y-4 items-center  bg-white  md:w-[30%] mx-auto items-center h-[100%]'>

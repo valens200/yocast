@@ -1,5 +1,5 @@
 import React from 'react'
-import logoo from "../assets/images/logoo.png"
+import logoo from "../assets/images/logo.png"
 import Navigation from '../components/Navigation'
 import { navButtons } from '../assets/data'
 import Footer from '../components/Footer'
@@ -10,13 +10,14 @@ import { incrementCount, decrementCount } from '../features/Counting'
 import { BsFillArrowRightCircleFill, BsFillArrowLeftCircleFill } from "react-icons/bs"
 import ServiceSvg from '../components/ServiceSvg'
 import { Fade } from 'react-awesome-reveal'
+import SmallNavigation from '../components/SmallNavigation'
 function Home() {
     const dispatch = useAppDispatch();
     const getClass = (index: number) => {
         if (index == 1) {
-            return "text-white bg-black  h-[5vh] w-[35%] rounded-full";
+            return "text-white bg-black hover:bg-white hover:text-black hover:border  h-[5vh] w-[35%] rounded-full";
         } else {
-            return ""
+            return "hover:text-[grey]"
         }
     }
 
@@ -36,6 +37,7 @@ function Home() {
         <div className="h-screen  space-y-10">
             <div className=' w-[100%] h-[6vh] '>
                 <Navigation />
+                <SmallNavigation />
             </div>
             <div className='md:w-[50%] w-[95%] mx-auto flex flex-col items-center   h-[40%]  text-center   text-black'>
                 <div className='h-[90%] items-center flex  '>
@@ -58,7 +60,7 @@ function Home() {
             <div className='md:h-[55vh] flex flex-col items-center  mb-[20vh] bg-black'>
                 <h1 className='text-center  text-white p-4 text-3xl font-bold font-loboto'>Our services</h1>
                 <div className='flex items-center  mt-5 flex-col  md:flex-row w-[60%] text-white space-x-20 mx-auto'>
-                    <div className= ' w-[95%] md:w-[50%]'>
+                    <div className=' w-[95%] md:w-[50%]'>
                         <ServiceSvg />
                     </div>
                     <div className=' w-[95%] md:w-[50%] flex flex-col space-y-4'>
@@ -79,7 +81,7 @@ function Home() {
                         <Fade >
                             <div className='hover:shadow-xl rounded  p-3'>
                                 {index % 2 == 0 ? <div className='flex flex-col md:space-y-0 space-y-10 md:flex-row space-x-9' key={index}>
-                                    <div  className='md:mt-0 mt-9 md:mb-0'>
+                                    <div className='md:mt-0 mt-9 md:mb-0'>
                                         <h1 className='font-bold p-y-2 font-loboto text-2xl' >{guide.action}</h1>
                                         <p>{guide.text}</p>
                                     </div>
@@ -88,7 +90,7 @@ function Home() {
                                     <div className='flex  flex-col-reverse md:flex-row md:space-y-0 space-y-10 md:space-x-9' key={index}>
 
                                         <img className='md:w-[40%]' src={guide.image} />
-                                        <div className='md:mt-0 mt-9 md:mb-0'> 
+                                        <div className='md:mt-0 mt-9 md:mb-0'>
                                             <h1 className='font-bold p-y-2 font-loboto text-2xl' >{guide.action}</h1>
                                             <p>{guide.text}</p>
                                         </div>

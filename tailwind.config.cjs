@@ -13,7 +13,8 @@ module.exports = {
         loboto:['Roboto'],
         rubik:['Rubik Marker Hatch'],
         dashed:['Rubik Marker Hatch'],
-        Anton:['Anton']
+        Anton:['Anton'],
+        dancing:['Dancing Script']
       }
     }
   },

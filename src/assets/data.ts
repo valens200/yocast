@@ -4,7 +4,16 @@ import createBookMark from "../assets/images/addbookmark.png";
 import createCategory from "../assets/images/createCategory.png";
 import deleteCatgory from "../assets/images/deleteCatgory.png";
 
-
+export const inputFields = [
+  {
+    name: "Email",
+    type: "email",
+  },
+  {
+    name: "UserName",
+    type: "text",
+  },
+];
 export const footerLInks = [
   {
     title: "QUick Links",
@@ -52,27 +61,6 @@ export const footerLInks = [
       },
     ],
   },
-  // {
-  //   title: "",
-  //   links: [
-  //     {
-  //       name: "Trade Assurance",
-  //       link: "",
-  //     },
-  //     {
-  //       name: "Your orders",
-  //       link: "About",
-  //     },
-  //     {
-  //       name: "Delivery Rates & Shipping policies",
-  //       link: "products",
-  //     },
-  //     {
-  //       name: "Returns & Refunding",
-  //       link: "",
-  //     },
-  //   ],
-  // },
 
   {
     title: "Get help",
@@ -101,23 +89,22 @@ export const footerLInks = [
   },
 ];
 
-
 export const useGuideLine = [
   {
-    action:"Primary Dashboard",
+    action: "Primary Dashboard",
     id: 1,
     image: home,
     text: "No one shall be subjected to arbitrary arrest, detention or exile. Everyone is entitled in full equality to a fair and public hearing by an independent and impartial tribunal, in the determination of his rights and obligations and of any criminal charge against him. No one shall be subjected to arbitrary interference with his privacy, family, home or correspondence, nor to attacks upon his honour and reputation. Everyone has the right to the protection of the law against such interference or attacks.",
   },
   {
-    action:"Create new Category",
+    action: "Create new Category",
     id: 3,
     image: createCategory,
     text: "No one shall be subjected to arbitrary arrest, detention or exile. Everyone is entitled in full equality to a fair and public hearing by an independent and impartial tribunal, in the determination of his rights and obligations and of any criminal charge against him. No one shall be subjected to arbitrary interference with his privacy, family, home or correspondence, nor to attacks upon his honour and reputation. Everyone has the right to the protection of the law against such interference or attacks.",
   },
   {
     id: 2,
-    action:"Create a bookMark",
+    action: "Create a bookMark",
     image: createBookMark,
     text: "No one shall be subjected to arbitrary arrest, detention or exile. Everyone is entitled in full equality to a fair and public hearing by an independent and impartial tribunal, in the determination of his rights and obligations and of any criminal charge against him. No one shall be subjected to arbitrary interference with his privacy, family, home or correspondence, nor to attacks upon his honour and reputation. Everyone has the right to the protection of the law against such interference or attacks.",
   },
@@ -127,7 +114,10 @@ export const Links = [
   { name: "contacts" },
   { name: "About" },
 ];
-export const navButtons = [{ name: "Login" }, { name: "Get started" }];
+export const navButtons = [
+  { id: 0, name: "Login" },
+  { id: 1, name: "Get started" },
+];
 export const MenuItems = [
   { name: "Delete category" },
   { name: "Edit category" },

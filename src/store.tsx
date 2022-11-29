@@ -3,12 +3,14 @@ import { useDispatch } from "react-redux";
 import { BookMarkReducer } from "./features/BookMarkSlice";
 import { UserReducer } from "./features/UserSlice";
 import { CountingReducer } from "./features/Counting";
+import { pageReducer } from "./features/pageSlice";
 
 export const store = configureStore({
     reducer: {
         bookmarks: BookMarkReducer,
         user: UserReducer,
-        count:CountingReducer
+        count:CountingReducer,
+        page:pageReducer
     }
 })
 export type RootState = ReturnType<typeof store.getState>
