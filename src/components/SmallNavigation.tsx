@@ -45,13 +45,13 @@ function SmallNavigation(): React.ReactPortal | null {
 
                 <div className='flex flex-col space-y-4 '>
                     {Links.map((link, index) => (
-                        <Slide>
+                        <Slide key={index}>
                             <a key={index} href={"/" + link.name}><p className={getClass2(link.name)} key={index}>{link.name}</p></a>
                         </Slide>
                     ))}
                     <div className='w-[20%] md:flex hidden text-black flex-col space-x-4'>
                         {navButtons.map((btn, index) => (
-                            <button className={getClass(index)} key={index}>{btn.name}</button>
+                            <button  className={getClass(index)} key={index}>{btn.name}</button>
                         ))}
                     </div>
                 </div>

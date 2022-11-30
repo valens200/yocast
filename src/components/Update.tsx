@@ -119,7 +119,7 @@ function Update() {
                         <form onSubmit={((e) => updateBookMark(e))}>
                             <div className='flex flex-col space-y-4'>
                                 {formData.map((data, index) => (
-                                    <div className='flex w-[90%] mx-auto flex-col '>
+                                    <div key={index} className='flex w-[90%] mx-auto flex-col '>
                                         <TextField
                                             id="outlined"
                                             label={data.name}
@@ -145,7 +145,7 @@ function Update() {
                                     </FormControl>
                                 </div>
                                 {inputsData.map((data, index) => (
-                                    <div className='w-[90%] rounded bg-black text-white  text-center font-bold  h-[5vh] mx-auto'>
+                                    <div key={index} className='w-[90%] rounded bg-black text-white  text-center font-bold  h-[5vh] mx-auto'>
                                         <input onClick={() => clicked(index)} type="submit" value={data.name} className='w-[100%] h-[100%]' />
                                     </div>
 
@@ -158,7 +158,7 @@ function Update() {
                             <form onClick={(e) => createCategory(e)}>
                                 <div className='flex flex-col space-y-4'>
                                     {formData2.map((data, index) => (
-                                        <div className='flex w-[90%] mx-auto flex-col '>
+                                        <div key={index} className='flex w-[90%] mx-auto flex-col '>
                                             <TextField
                                                 className="h-[100%] rounded-r-0   md:w-[100%] p-4"
                                                 label={data.name}
@@ -185,7 +185,7 @@ function Update() {
                                         </FormControl>
                                     </div>
                                     {inputsData2.map((data, index) => (
-                                        <div className='w-[90%] rounded bg-black text-white  text-center font-bold  h-[5vh] mx-auto'>
+                                        <div key={index} className='w-[90%] rounded bg-black text-white  text-center font-bold  h-[5vh] mx-auto'>
                                             <input onClick={() => back(index)} type={data.type} value={data.name} className='w-[100%] h-[100%]' />
                                         </div>
                                     ))}
@@ -195,7 +195,6 @@ function Update() {
                             </form>
                         </Fade>
                     }
-
                 </Fade>
             </div>
 

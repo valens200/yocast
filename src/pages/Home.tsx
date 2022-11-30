@@ -11,6 +11,7 @@ import { BsFillArrowRightCircleFill, BsFillArrowLeftCircleFill } from "react-ico
 import ServiceSvg from '../components/ServiceSvg'
 import { Fade } from 'react-awesome-reveal'
 import SmallNavigation from '../components/SmallNavigation'
+import { Link } from 'react-router-dom'
 function Home() {
     const dispatch = useAppDispatch();
     const getClass = (index: number) => {
@@ -32,7 +33,6 @@ function Home() {
     const feedbacks = useSelector((store: RootState) => store.user.feedbacks);
     const count = useSelector((store: RootState) => store.count.count)
 
-    console.log(feedbacks.length)
     return (
         <div className="h-screen  space-y-10">
             <div className=' w-[100%] h-[6vh] '>
@@ -51,7 +51,9 @@ function Home() {
                         </div>
                         <div className='flex  justify-center flex-row space-x-4'>
                             {navButtons.map((btn, index) => (
-                                <button className={getClass(index)} >{btn.name}</button>
+                                <Link to="/dashboard" className={getClass(index)}>
+                                    <button key={index}  >{btn.name}</button>
+                                </Link>
                             ))}
                         </div>
                     </div>
@@ -78,7 +80,7 @@ function Home() {
                 <h1 className='font-loboto text-center'>How to use this bookmarker ? </h1>
                 <div className='md:w-[60%] w-[95%] mx-auto flex flex-col space-y-[10%]'>
                     {useGuideLine.map((guide, index) => (
-                        <Fade >
+                        <Fade key={index}>
                             <div className='hover:shadow-xl rounded  p-3'>
                                 {index % 2 == 0 ? <div className='flex flex-col md:space-y-0 space-y-10 md:flex-row space-x-9' key={index}>
                                     <div className='md:mt-0 mt-9 md:mb-0'>
@@ -111,7 +113,7 @@ function Home() {
                     </div>
                     <div className=' w-[90%] hover:shadow-xl  p-2 flex flex-row border mx-auto h-[100%]'>
                         {feedbacks.map((feedback, index) => (
-                            <Fade>
+                            <Fade key={index}>
                                 <div className=' flex flex-col justify-between h-[100%]'>
                                     {index == count && <div>
                                         <div className=' mx-auto flex items-center '>
