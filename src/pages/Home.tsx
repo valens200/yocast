@@ -16,7 +16,7 @@ function Home() {
     const dispatch = useAppDispatch();
     const getClass = (index: number) => {
         if (index == 1) {
-            return "text-white bg-black hover:bg-white hover:text-black hover:border  h-[5vh] w-[35%] rounded-full";
+            return "text-white bg-black hover:bg-white hover:text-black hover:border  h-[5vh] w-[33%] rounded-full";
         } else {
             return "hover:text-[grey]"
         }
@@ -51,9 +51,11 @@ function Home() {
                         </div>
                         <div className='flex  justify-center flex-row space-x-4'>
                             {navButtons.map((btn, index) => (
-                                <Link to="/dashboard" className={getClass(index)}>
-                                    <button key={index}  >{btn.name}</button>
-                                </Link>
+                                <div  className={getClass(index)}>
+                                    <Link to="/dashboard" >
+                                        <button key={index} className="w-[100%] h-[100%]" >{btn.name}</button>
+                                    </Link>
+                                </div>
                             ))}
                         </div>
                     </div>
