@@ -28,7 +28,7 @@ const initialState = {
         id: 1,
         title: "Youtube",
         description: "Bookmark to direct me to the youtube",
-        link: "",
+        link: "https://www.youtube.com/watch?v=T1L-s7PNVcs",
         category: "",
       },
       {
@@ -36,21 +36,21 @@ const initialState = {
         title: "Instagram",
         description: "Bookmark to direct me to the youtube",
         link: "",
-        category: "",
+        category: "https://www.instagram.com/",
       },
       {
         id: 3,
         title: "Mbonera Rw",
         description: "Bookmark to direct me to the youtube",
         link: "",
-        category: "",
+        category: "http://mbonera.live/",
       },
       {
         id: 4,
         title: "Rwanda coding academy",
         description: "Bookmark to direct me to the youtube",
         link: "",
-        category: "",
+        category: "https://www.rp.ac.rw/news-detail/rwanda-coding-academy-receives-its-first-students",
       },
     ],
   },
@@ -99,28 +99,28 @@ const initialState = {
       bookMarks: [
         {
           id: 1,
-          title: "",
+          title: "Youtube",
           description: "Bookmark to direct me to the youtube",
           link: "",
           category: "",
         },
         {
           id: 2,
-          title: "",
+          title: "Instagram",
           description: "Bookmark to direct me to the youtube",
           link: "",
           category: "",
         },
         {
           id: 3,
-          title: "",
+          title: "Mbonera Rw",
           description: "Bookmark to direct me to the youtube",
           link: "",
           category: "",
         },
         {
           id: 4,
-          title: "",
+          title: "Rwanda coding academy",
           description: "Bookmark to direct me to the youtube",
           link: "",
           category: "",
@@ -135,28 +135,28 @@ const initialState = {
       bookMarks: [
         {
           id: 1,
-          title: "",
+          title: "Youtube",
           description: "Bookmark to direct me to the youtube",
           link: "",
           category: "",
         },
         {
           id: 2,
-          title: "",
+          title: "Instagram",
           description: "Bookmark to direct me to the youtube",
           link: "",
           category: "",
         },
         {
           id: 3,
-          title: "",
+          title: "Mbonera Rw",
           description: "Bookmark to direct me to the youtube",
           link: "",
           category: "",
         },
         {
           id: 4,
-          title: "",
+          title: "Rwanda coding academy",
           description: "Bookmark to direct me to the youtube",
           link: "",
           category: "",
@@ -171,28 +171,28 @@ const initialState = {
       bookMarks: [
         {
           id: 1,
-          title: "",
+          title: "Youtube",
           description: "Bookmark to direct me to the youtube",
           link: "",
           category: "",
         },
         {
           id: 2,
-          title: "",
+          title: "Instagram",
           description: "Bookmark to direct me to the youtube",
           link: "",
           category: "",
         },
         {
           id: 3,
-          title: "",
+          title: "Mbonera Rw",
           description: "Bookmark to direct me to the youtube",
           link: "",
           category: "",
         },
         {
           id: 4,
-          title: "",
+          title: "Rwanda coding academy",
           description: "Bookmark to direct me to the youtube",
           link: "",
           category: "",
@@ -224,6 +224,7 @@ const BookMarkSclice = createSlice({
       const otherCategories = state.Categories.filter(
         (cat) => cat.name != action.payload.name
       );
+      action.payload.image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFHwzm3fNDJeMasDjnPorU2irF9jFpEq92zw&usqp=CAU";
       state.Categories = [...state.Categories, action.payload];
 
       localStorage.setItem("bookMarks", JSON.stringify(state.Categories));

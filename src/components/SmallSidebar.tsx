@@ -12,6 +12,7 @@ import { bookMark } from '../types/appTypes'
 import { category } from '../types/appTypes'
 import ReactDOM from 'react-dom'
 import { Slide, Fade } from 'react-awesome-reveal'
+import { setShowNavigation } from '../features/pageSlice'
 function SmallSidebar() {
     const dispatch = useAppDispatch();
     const showForm = useSelector((store: RootState) => store.bookmarks.showForm)
@@ -29,6 +30,11 @@ function SmallSidebar() {
         dispatch((initilizerCategories(JSON.parse(localStorage.getItem("bookMarks")!))));
         addClass();
     }, [showForm])
+
+    const dispatchMethods = (bookMark : category) => {
+        dispatch(setShowSmallSidebar(false))
+        dispatch(setSelectedCategory(bookMark))
+    }
 
     return showSmallSidebar == false ? null : ReactDOM.createPortal(<div ref={SidebarRef} className='w-[100%]  p-4 absolute bg-black  text-white -translate-y-[100vh] md:hidden flex flex-col space-y-[20%] h-[100%]'>
         <Fade>
@@ -58,7 +64,7 @@ function SmallSidebar() {
                     <div className='overflow-y-scroll'>
                         <Slide>
                             {Categories.map((bookMark, index) => (
-                                <div key={index} onClick={() => dispatch(setSelectedCategory(bookMark))} className='flex hover:bg-[#217AFF] items-center p-2 space-x-4 '>
+                                <div key={index} onClick={() => dispatchMethods(bookMark)} className='flex hover:bg-[#217AFF] items-center p-2 space-x-4 '>
                                     <div className='w-[20%] flex  '>
                                         <img className='h-[100%] w-[100%1' src={bookMark.image} />
                                     </div>
