@@ -35,7 +35,7 @@ function Navigation() {
                 </div>
                 <div className='w-[20%] md:flex hidden flex-row space-x-4'>
                     {navButtons.map((btn, index) => (
-                        <Link ke={index} to="/dashboard">
+                        <Link key={index} to="/dashboard">
                             <button  className={getClass(index)}>{btn.name}</button>
                         </Link>
                     ))}
