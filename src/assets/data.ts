@@ -177,3 +177,20 @@ export const inputsData2: data[] = [
     type: "button",
   },
 ];
+
+
+
+export const formInputs = [
+  {
+    name:"FullName",
+    type:"text"
+  },
+  {
+    name:"Username",
+    type:"text",
+  },
+  {
+    name:"Email",
+    type:"email"
+  }
+]

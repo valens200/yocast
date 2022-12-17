@@ -11,15 +11,15 @@ function Account() {
     
     return (
         <div   className='w-[100%]  flex flex-row  justify-between mt-8 mx-auto'>
-            <div className='w-[80%]'>
-                <div className='bg-[grey] rounded-full md:w-[40%] h-[5vh]  relative flex flex-row justify-between'>
-                    <input type="text" className='bg-[#D3D3E8] focus:outline-0 rounded-full p-4 w-[100%] h-[100%]' placeholder="Search ...." />
-                    <AiOutlineSearch className='w-[10%] text-[grey] right-3 mt-2 text-[2.5rem] absolute' />
+            <div className='w-[80%]  max-[673px]:w-[90%]'>
+                <div className='bg-[grey] rounded-full  max-[673px]:h-[80%]  max-[673px]:w-[100%] md:w-[40%] h-[5vh]  relative flex flex-row justify-between'>
+                    <input type="text" className='bg-[#D3D3E8] focus:outline-0 rounded-full p-4 w-[100%]  h-[100%]' placeholder="Search ...." />
+                    <AiOutlineSearch className='w-[10%] text-[grey]  right-3 mt-2  max-[673px]:hidden text-[2.5rem] absolute' />
                 </div>
             </div>
             <div className='flex justify-end  float-right flex-row'>
                 <div className='flex  items-center space-x-4 flex-row ' >
-                    <AiFillHome className='text-[1.5rem] text-[#D3D3E8]' />
+                    <AiFillHome className='text-[1.5rem]  max-[673px]:hidden text-[#D3D3E8]' />
                     <p className='text-[1.5rem] text-[#D3D3E8]'> <IoNotifications /> </p>
                     <span className='translate-x-[2vw] absolute text-[black]  bg-white border shadow-lg rounded-full font-bold'>10</span> 
                 </div>

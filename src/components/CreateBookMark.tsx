@@ -8,7 +8,7 @@ function CreateBookMark() {
     const dispatch = useAppDispatch();
     return ReactDOM.createPortal(<div className='w-[100%] text-white h-[10vh] absolute   flex  fixed top-[80%] '>
         <div className='items-center w-[80%] mx-auto items-center h-[100%] flex   justify-end'>
-            <div onClick={ () => dispatch(setShowForm(true))} className='md:w-[5%] w-[20%]   text-center items-center   flex justify-center rounded-full  bg-black float-right  h-[75%]'>
+            <div onClick={ () => dispatch(setShowForm(true))} className='  max-[673px]:w-[17%]   md:w-[5%] w-[20%]   text-center items-center   flex justify-center rounded-full  bg-black float-right  h-[75%]'>
                 <BsPlusLg className='text-[white] text-3xl  text-center main  ' />
             </div>
         </div>

@@ -11,6 +11,7 @@ import { setShowForm } from '../features/BookMarkSlice'
 import { bookMark } from '../types/appTypes'
 import { category } from '../types/appTypes'
 import ReactDOM from 'react-dom'
+import { Link } from 'react-router-dom'
 import { Slide, Fade } from 'react-awesome-reveal'
 import { setShowNavigation } from '../features/pageSlice'
 function SmallSidebar() {
@@ -41,7 +42,8 @@ function SmallSidebar() {
             <div className='flex items-center flex-row space-x-2'>
                 <div className='flex'>
                     <img className='w-[20%]' src={logoo} />
-                    <p>Bookmarker</p>
+                    <Link to="/"><p>Bookmarker</p></Link>
+                   
                 </div>
                 <div className='w-[20%]  float-right'>
                     <GiCrossMark className="font-bold text-2xl" onClick={() => dispatch(setShowSmallSidebar(false))} />

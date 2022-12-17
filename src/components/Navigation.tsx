@@ -19,8 +19,9 @@ function Navigation() {
         <div className='w-[100%] border border-x-0 border-t-0 h-[100%] flex items-center mt-5'>
             <div className=' w-[80%] items-center mx-auto justify-between flex flex-row '>
                 <div className='flex w-[20%] items-center flex-row space-x-2'>
+               
                     <img className='w-[20%]' src={logoo} />
-                    <p className='font-dancing font-bold text-3xl'>Bookmarker</p>
+                    <Link to="/"><p className='font-dancing font-bold text-3xl'>Bookmarker</p></Link>
                 </div>
                 <div className='w-[60%] md:flex hidden items-center flex-row justify-center space-x-5 '>
                     {Links.map((link, index) => (

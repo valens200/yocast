@@ -9,6 +9,7 @@ import { setSelectedCategory, initilizerCategories } from '../features/BookMarkS
 import { setShowForm } from '../features/BookMarkSlice'
 import { bookMark, category } from '../types/appTypes'
 import { setShowNavigation } from '../features/pageSlice'
+import { Link } from 'react-router-dom'
 function Sidebar() {
     const dispatch = useAppDispatch();
     const showForm = useSelector((store: RootState) => store.bookmarks.showForm)
@@ -34,10 +35,10 @@ function Sidebar() {
     }
 
     return (
-        <div ref={SidebarRef} className='w-[100%]  z-100 flex flex-col space-y-[20%] h-[100%]'>
+        <div ref={SidebarRef} className='w-[100%] z-100 flex flex-col space-y-[20%] h-[100%]'>
             <div className='flex items-center flex-row space-x-2'>
                 <img className='w-[20%]' src={logoo} />
-                <p>Bookmarker</p>
+                <Link to="/"><p>Bookmarker</p></Link>
             </div>
             <div className='flex border p-4 border-x-0 border-t-0 w-[96%] mx-auto  flex-col space-y-5'>
                 <div className='flex items-center  space-x-4 flex-row'>
