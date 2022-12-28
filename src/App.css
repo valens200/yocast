@@ -3,6 +3,17 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.sidebar{
+    z-index: 100;
+}
+.right-sidebar {
+    z-index: 0.3;
+}
+.nav{
+    z-index: 100;
+}
+
 .main{
     color: white;
 }

@@ -12,9 +12,9 @@ module.exports = {
         libre: ['"Libre Baskerville"', ...defaultTheme.fontFamily.sans],
         loboto:['Roboto'],
         rubik:['Rubik Marker Hatch'],
-        dashed:['Rubik Marker Hatch'],
         Anton:['Anton'],
-        dancing:['Dancing Script']
+        dancing:['Dancing Script'],
+        poppins:['Poppins']
       }
     }
   },

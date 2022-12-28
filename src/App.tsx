@@ -1,19 +1,21 @@
 import { useState } from 'react'
 import './App.css'
-import Landing from './pages/Landing'
-import Home from './pages/Home'
-import Register from './pages/Register'
+import Home from './pages/dashboards/Home'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Project from './components/Project'
-import Login from './pages/Login'
+import Podcasts from './pages/dashboards/Podcasts'
+import CreatePodcast from './pages/dashboards/CreatePodcast'
+import Clients from './pages/dashboards/Clients'
+import For04 from './pages/dashboards/For04'
 function App() {
   return (
     <Router >
       <Routes>
-        <Route path="/dashboard" element={<Landing />}></Route>
         <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/podcasts" element={<Podcasts />} />
+        <Route path="/clients" element={<Clients />} />
+        <Route path='/create_podcast' element={<CreatePodcast />} />
+        <Route path='*' element={<For04 />} />
+        <Route path='/*' element={<For04 />} />
       </Routes>
     </Router>
   )
