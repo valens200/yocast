@@ -79,7 +79,21 @@ function Home() {
                 <div className='w-[100%]  flex flex-row   justify-between h-[82%]'>
                     <div className='md:w-[85%] w-[100%]  md:space-y-[2%] space-y-[8%] flex flex-col text-white '>
                         <div className=''>
-                            <div className='h-[10vh] w-[95%]'>
+                            <div className=' md:h-[10vh] h-[15vh] md:p-0 p-4 md:items-center md:space-y-0 space-y-4 mx-auto flex md:flex-row flex-col justify-start md:justify-between  w-[90%] md:w-[95%]'>
+                                <div className='md:w-[40%]'>
+                                    <h1 className={ isDarkMode ? ' text-[#CDED4DA] font-poppins':' text-[#495057]  font-poppins'}>Good morning Master M</h1>
+                                    <p className='text-[#878A99] font-poppins font-sans text-[0.80rem]'>Here's what's happening with your store today.</p>
+                                </div>
+                                <div className='flex h-[100%]   md:items-center md:w-[60%] w-[100%] justify-start md:justify-end space-x-2'>
+                                    <div className='flex md:w-[80%] w-[50%] h-[100%]  md:h-[40%] md:justify-end '>
+                                        <input className={isDarkMode ? "bg-[#262A2F] rounded-l  w-[90%] md:w-[50%]":"bg-[#FFFFFF] rounded-l  w-[90%] md:w-[50%]"} type="text" name="" id="" />
+                                        <button className={ isDarkMode ? 'bg-[#405189] rounded-r w-[10%]':'bg-[#405189] rounded-r w-[10%]'}></button>
+                                    </div>
+                                    <div className=' w-[50%] md:w-[20%] flex h-[100%] md:h-[40%] space-x-2'>
+                                        <Link className='text-[#0ab39c]  h-[100%] rounded w-[90%] md:w-[80%] bg-[#0AB39C1A] flex justify-center items-center font-bold' to="/create_podcast"><button>Add Podcast</button></Link>
+                                        <button className='bg-[#405189] w-[10%] md:block hidden rounded-r w-[20%] invisible h-[100%]'></button>
+                                    </div>
+                                </div>
 
                             </div>
                         </div>

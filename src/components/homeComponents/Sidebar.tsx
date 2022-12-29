@@ -12,12 +12,11 @@ function Sidebar() {
     const isDarkMode = useSelector((store: RootState) => store.page.isDarkMode);
     const getSidebarClass = (): String => {
         if (showSidebar) {
-            return  isDarkMode ?  "w-[50%]  flex sidebar  flex-col space-y-10 text-white  font-sans fixed top-0    bottom-0 bg-[#212529]   h-[100%]" : "w-[50%]  flex sidebar  flex-col space-y-10 text-white  font-sans fixed top-0    bottom-0 bg-[#838fb9]   h-[100%]"
+            return  isDarkMode ?  "md:w-[13.6%]  w-[50%] flex sidebar  flex-col space-y-10 text-white  font-sans fixed top-0    bottom-0 bg-[#212529]   h-[100%]" : "w-[50%] md:w-[13.6%]  flex sidebar  flex-col space-y-10 text-white  font-sans fixed top-0    bottom-0 bg-[#838fb9]   h-[100%]"
         }
         return isDarkMode === true ?  "w-[13.6%] md:block sidebar hidden  flex  flex-col space-y-10 text-white  font-sans  fixed top-0   bottom-0  bg-[#212529]  h-[100%]" : "w-[13.6%] md:block sidebar hidden  flex text-[#838fb9] flex-col space-y-10  font-sans  fixed top-0   bottom-0  bg-[#405189]  h-[100%]"
     }
-    // #838fb9
-    // text-[#838fb9] 
+
     const dispatch = useDispatch();
     return ReactDOM.createPortal(
         <div onClick={()=> dispatch(setShowSidebar("hide"))} className={getSidebarClass().toString()}>
@@ -28,7 +27,7 @@ function Sidebar() {
                 <Slide>
                     <ul className='flex  h-[90%] flex-col space-y-5'>
                         {sidebarLinks.map((link, index) => (
-                            <Link to={link.link.toString()}> <li className={ isDarkMode ?  'hover:text-white  text-[0.80rem] hover:cursor-pointer' : 'hover:text-white  text-[0.80rem] text-[#838fb9] hover:cursor-pointer'} key={index}>{link.title}</li></Link>
+                            <Link key={index} to={link.link.toString()}> <li className={ isDarkMode ?  'hover:text-white  text-[0.80rem] hover:cursor-pointer' : 'hover:text-white  text-[0.80rem] text-[#838fb9] hover:cursor-pointer'} key={index}>{link.title}</li></Link>
                         ))}
                     </ul>
 
@@ -37,7 +36,7 @@ function Sidebar() {
             <div className='h-[10%] w-[60%] mx-auto'>
                 <ul className='flex  h-[90%] flex-col space-y-7'>
                     {bottomSidebarLinks.map((link, index) => (
-                        <Link to="/main"><li className='hover:text-white hover:cursor-pointer' key={index}>{link.title}</li></Link>
+                        <Link key={index} to="/main"><li className='hover:text-white hover:cursor-pointer' key={index}>{link.title}</li></Link>
                     ))}
                 </ul>
             </div>

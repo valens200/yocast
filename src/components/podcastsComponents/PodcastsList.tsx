@@ -28,7 +28,7 @@ function PodcastsList() {
                         <p>CATEGORIES</p>
                         <div className='flex flex-col space-y-2 text-[0.89rem] text-[grey]'>
                             {podcastsCategories.map((Category, index) => (
-                                <div className='flex flex-row justify-between'>
+                                <div key={index} className='flex flex-row justify-between'>
                                     <p className={getClass(Category.selected)}>{Category.category}</p>
                                     <p className={ isDarkMode ? 'bg-[#2A2F34] text-[9px] text-[#878A99] items-center flex justify-center w-[7%] text-center rounded-full':'bg-[#F3F6F9]  items-center flex justify-center text-[9px] text-[#405189] w-[7%] text-center rounded-full'}>{Category.availablePodcasts}</p>
                                 </div>

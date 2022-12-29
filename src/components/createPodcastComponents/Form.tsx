@@ -18,7 +18,7 @@ function Form() {
         if (inputField.type === "select") {
             return <select className={isDarkMode ? 'w-[100%]  border border-[0.1px]  border-[#32383e] rounded  pl-3 focus:outline-0 bg-[#2a2f34] h-[100%]':'w-[100%]  border border-[0.1px]  border-[#32383e] rounded  pl-3 focus:outline-0 bg-white h-[100%]'} name="select">
                 {inputField.options?.map((option, index) => (
-                    <option>{option}</option>
+                    <option key={index}>{option}</option>
                 ))}
                 <option value="main">main</option>
             </select>

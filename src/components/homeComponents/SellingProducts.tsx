@@ -14,7 +14,7 @@ function SellingProducts() {
               <p className='font-poppins font-sans text-[#7c7f90]  text-[0.90rem]'>Best Selling Products</p>
               {/* bg-[#262A2F]  */}
               <div className={ ' w-[100%] md:w-[50%] h-[100%]  flex justify-end'}>
-                <select name="sort" className={ isDarkMode ? 'w-[30%]  text-[#7c7f90] bg-[#262A2F]  text-center rounded text-[0.80rem] h-[90%]' : 'w-[30%] text-center rounded text-[0.80rem] h-[90%]'} value="SORT" id="sort">
+                <select onChange={()=> console.log("")} name="sort" className={ isDarkMode ? 'w-[30%]  text-[#7c7f90] bg-[#262A2F]  text-center rounded text-[0.80rem] h-[90%]' : 'w-[30%] text-center rounded text-[0.80rem] h-[90%]'} value="SORT" id="sort">
                   <option className='text-start' value="Last day">Last day</option>
                   <option className='text-start' value="Last month">Last month</option>
                   <option className='text-start' value="Last six months">Last month</option>
@@ -43,7 +43,7 @@ function SellingProducts() {
             </thead>
             <tbody className='text-[0.80rem] font-poppins text-[#212529] font-sans'>
               {availablePodcasts.map((podcast, index) => (
-                <tr className={ isDarkMode ? "bg-[#212529] text-[#7c7f90]  h-[8vh] hover:border-0 hover:bg-[#212529] border-[0.1px]  border-[#32383e]   border-x-0 border-t-0 ":"bg-white  hover:bg-[#f3f3f9] border-b dark:bg-gray-800 dark:border-gray-700"}>
+                <tr key={index} className={ isDarkMode ? "bg-[#212529] text-[#7c7f90]  h-[8vh] hover:border-0 hover:bg-[#212529] border-[0.1px]  border-[#32383e]   border-x-0 border-t-0 ":"bg-white  hover:bg-[#f3f3f9] border-b dark:bg-gray-800 dark:border-gray-700"}>
                   <td scope="row" className="py-4 px-6 font-medium text-gray-900 w-[10%] dark:text-white">
                     <img src={podcast.cover} className="w-[30%] h-[30%]  rounded " alt="activity  title image" />
                   </td>
