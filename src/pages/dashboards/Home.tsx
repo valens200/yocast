@@ -79,7 +79,7 @@ function Home() {
             </div>
             <div className='md:w-[86.4%] w-[100%]  h-[100%]'>
                 <div className='h-[12%] nav z-100 sticky top-0 w-[100%]  right-4'>
-                    <Navbar />
+                    <Navbar name={"ADMIN"} />
                 </div>
                 <div className='w-[100%]  flex flex-row   justify-between h-[82%]'>
                     <div className='md:w-[85%] w-[100%]  md:space-y-[2%] space-y-[8%] flex flex-col text-white '>

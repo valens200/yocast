@@ -12,7 +12,8 @@ import { setIsDarkMode } from '../../features/pageSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useSelect } from '@mui/base'
 import { RootState } from '../../store'
-function Navbar() {
+import postcss from 'postcss'
+function Navbar(props) {
     const icons = [<HiOutlineSquares2X2 />,
     <BsBag />,
     <TbFocusCentered />,
@@ -79,7 +80,7 @@ function Navbar() {
             <div className={isDarkMode ? 'bg-[#212529] sticky  top-0 w-[100%] h-[40%]' : 'bg-white border border-x-0 border-b-0 sticky  top-0 w-[100%] h-[40%]'}>
                 <div className='flex font-poppins font-sans flex-row justify-between items-center  h-[100%] w-[97%] mx-auto'>
                     <div className='w-[90%]'>
-                        <h1 className='font-bold font-poppins font-sans uppercase'>admin</h1>
+                        <h1 className='font-bold font-poppins font-sans uppercase'>{props.name}</h1>
                     </div>
                     <div className='flex text-[0.90rem]  font-poppins font-sans flex-row w-[10%] justify-between'>
                         <p className='md:text-white text-[#7c7f90]'>Yocast</p>

@@ -36,7 +36,7 @@ function Subscriptions() {
         </div>
         <div className='md:w-[86.4%]  w-[100%] h-[100%]'>
             <div className='h-[12%] nav z-100 sticky top-0 w-[100%]  right-4'>
-                <Navbar />
+                <Navbar name="Subscriptions" />
             </div>
             {/* bg-[#f3f3f9] */}
             {fethed == false ? <Loading />: <div>

@@ -57,7 +57,7 @@ function For04() {
             </div>
             <div className='md:w-[86.4%] w-[100%]  h-[100%]'>
                 <div className='h-[12%] nav z-100 sticky top-0 w-[100%]  right-4'>
-                    <Navbar />
+                    <Navbar  name="under development"  />
                 </div>
                 {fethed === false ? <Loading /> : <div className='w-[100%]   flex flex-row  justify-between h-[100%]'>
                     <div className='w-[100%]   flex flex flex-col space-y-1 text-white h-screen h-screen'>

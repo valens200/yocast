@@ -105,11 +105,11 @@ export const sidebarLinks: sidebarLinksType[] = [
     link: "/podcasts",
   },
   {
-    title: "Products Details",
+    title: "Podcast Details",
     link: "details",
   },
   {
-    title: "Create Product",
+    title: "Create Podcast",
     link: "/create_podcast",
   },
   {

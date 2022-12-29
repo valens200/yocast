@@ -26,11 +26,11 @@ function Podcasts() {
     const dispatch = useAppDispatch();
     return <div className={  isDarkMode ? "h-screen w-[100%]  flex flex-row  overflow-y-scroll bg-[#1a1d21]" : "h-screen w-[100%]  flex flex-row  overflow-y-scroll bg-[#f3f3f9]"}>
         <div className='w-[13.6%] md:block hidden sticky top-0 relative bottom-0   h-[100%]'>
-            <Sidebar />
+            <Sidebar/>
         </div>
         <div className='md:w-[86.4%]  h-[100%]'>
             <div className='h-[12%] nav z-100 sticky top-0 w-[100%]  right-4'>
-                <Navbar />
+                <Navbar  name="PODCASTS"  />
             </div>
             {fethed == false ? <Loading />: <div>
                 <div className='w-[100%]   flex  items-center  h-screen'>
