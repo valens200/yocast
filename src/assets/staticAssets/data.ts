@@ -22,6 +22,9 @@ import { Category } from "@mui/icons-material";
 //     + 250 781 589 686
 // @Israel
 
+
+export const tableHeaders = [" Podcast Title", " Category", " Length", "Likes", "Views", "Created At"]
+export const ordersTableHeders = ["OrderId", "Customer", "Podcast", "Amount", "Status"]
 const getSidebarFormDivs = (): sidebarFormType[] => {
   const podcastsCategories = useSelector(
     (store: RootState) => store.podcasts.podcastsCategories

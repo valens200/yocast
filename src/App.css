@@ -1,30 +1,33 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
-.sidebar{
-    z-index: 100;
+.sidebar {
+  z-index: 100;
 }
 .right-sidebar {
-    z-index: 0.3;
+  z-index: 0.3;
 }
-.nav{
-    z-index: 100;
+::-webkit-scrollbar {
+  background-color: rgba(128, 128, 128, 0.26);
+  width: 7px;
+  height: 20%;
+}
+.nav {
+  z-index: 100;
 }
 
-.main{
-    color: white;
+.main {
+  color: white;
 }
-.filter{
-    filter: blur(4px);
+.filter {
+  filter: blur(4px);
 }
-.home{
-    background-image: url('https://cdn.dribbble.com/users/1845235/screenshots/4284392/media/fef22f50a9f566ecea3805b458dc656c.jpg?compress=1&resize=450x338&vertical=top');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: 40% 40%;
-    /* background-repeat: no-repeat; */
+.home {
+  background-image: url("https://cdn.dribbble.com/users/1845235/screenshots/4284392/media/fef22f50a9f566ecea3805b458dc656c.jpg?compress=1&resize=450x338&vertical=top");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 40% 40%;
+  /* background-repeat: no-repeat; */
 }
 /* @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap"); */

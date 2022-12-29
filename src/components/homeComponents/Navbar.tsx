@@ -40,7 +40,7 @@ function Navbar() {
                         <div className='md:w-[30%] md:block hidden h-[55%]'>
                             <input type="text" className={ isDarkMode ? 'bg-[#1a1d21] focus:outline-0 text-[0.80rem] rounded pl-3 h-[100%] w-[100%]' :  'bg-[#f3f3f9] focus:outline-0 text-[0.80rem] rounded pl-3 h-[100%] w-[100%]'} placeholder='search....' />
                         </div>
-                    </div>
+                    </div>  
                     <div className='md:w-[30%] w-[70%] justify-between items-center flex-row flex'>
                         <div className='w-[48%]'>
                             <ul className='flex flex-row space-x-3'>

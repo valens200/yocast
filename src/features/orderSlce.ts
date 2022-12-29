@@ -59,6 +59,16 @@ const initialState = {
         podcastTitle:"Waruziko radio rwanda",
         amount:"34343$",
         stattus:"paid",
+    },
+    {
+        orderId:"VE433",
+        customer:{
+            customerName:"Alex smith",
+            customerAvatar:"http://127.0.0.1:5501/assets/images/users/avatar-1.jpg"
+        },
+        podcastTitle:"Waruziko radio rwanda",
+        amount:"34343$",
+        stattus:"paid",
     }
 
   ]

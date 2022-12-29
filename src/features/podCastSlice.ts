@@ -14,6 +14,28 @@ const initialState = {
       views: 1000,
       createdAt: "1-12-2000",
     },
+      {
+      name: "WARUZIKO KURI RADIO RWANDA TARIKI YA 5 main activities",
+      cover:
+        "https://production.listennotes.com/podcasts/radio-rwanda-radio-rwanda-YAI7sMdZQ1z-Qx5K1DS2GuR.300x300.jpg",
+      description: "new podcasts about waruziko and gentil gedeo staffs",
+      length: "45:34:90",
+      time: "year ago",
+      likes: 450,
+      views: 1000,
+      createdAt: "1-12-2000",
+    },
+      {
+      name: "WARUZIKO KURI RADIO RWANDA TARIKI YA 5 main activities",
+      cover:
+        "https://production.listennotes.com/podcasts/radio-rwanda-radio-rwanda-YAI7sMdZQ1z-Qx5K1DS2GuR.300x300.jpg",
+      description: "new podcasts about waruziko and gentil gedeo staffs",
+      length: "45:34:90",
+      time: "year ago",
+      likes: 450,
+      views: 1000,
+      createdAt: "1-12-2000",
+    },
     {
       name: "WARUZIKO KURI RADIO RWANDA TARIKI YA 5 main activities",
       cover:

@@ -58,12 +58,12 @@ function Home() {
             <div className='w-[13.6%] md:block hidden sticky top-0 relative bottom-0   h-[100%]'>
                 <Sidebar />
             </div>
-            <div className='w-[86.4%]  h-[100%]'>
+            <div className='md:w-[86.4%] w-[100%]  h-[100%]'>
                 <div className='h-[12%] nav z-100 sticky top-0 w-[100%]  right-4'>
                     <Navbar />
                 </div>
                 <div className='w-[100%]   flex flex-row  justify-between h-[100%]'>
-                    <div className='w-[85%]   flex flex flex-col space-y-1 text-white h-screen md:h-[190vh]'>
+                    <div className='md;w-[85%] w-[100%]   flex flex flex-col space-y-1 text-white h-screen md:h-[190vh]'>
                         <div className='h-[7%]'>
                             <div className='h-[100%] w-[95%]'>
 
