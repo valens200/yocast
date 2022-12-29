@@ -1,11 +1,21 @@
 //All variable types of the project
 
+import { ReactNode } from "react";
 
- export type podcastsCategoryType = {
-      category: String,
-      availablePodcasts: number,
-      selected: boolean,
-    }
+export type cardType = {
+  title: String;
+  percentage: String;
+  value: number;
+  backgroundColor: String;
+  view: String;
+  icon: ReactNode;
+};
+
+export type podcastsCategoryType = {
+  category: String;
+  availablePodcasts: number;
+  selected: boolean;
+};
 
 export type inputFieldType = {
   placeholder: String;
@@ -14,16 +24,16 @@ export type inputFieldType = {
 };
 
 export type sidebarFormInputType = {
-    label:String,
-    type:String,
-    placeholder:String,
-    options:String[]
-}
+  label: String;
+  type: String;
+  placeholder: String;
+  options: String[];
+};
 
 export type sidebarFormType = {
-    title:String,
-    inputs: sidebarFormInputType[]
-}
+  title: String;
+  inputs: sidebarFormInputType[];
+};
 
 export type activityType = {
   title: String;

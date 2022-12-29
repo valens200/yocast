@@ -26,8 +26,12 @@ function Home() {
     const recentActivities = useSelector((store: RootState) => store.recentActivities.activities);
     const podcasts = useSelector((store: RootState) => store.podcasts.podcasts);
     const clientsReviews = useSelector((store: RootState) => store.podcasts.reviews)
+    const [counter, setCounter ] = useState(0);
     const lengthSample: number = "WARUZIKO KURI RADIO RWANDA TARIKI YA 5".length;
     const isDarkMode = useSelector((store: RootState) => store.page.isDarkMode);
+
+  
+
     setTimeout(() => {
         setFetched(true);
     }, 1000)
@@ -48,7 +52,7 @@ function Home() {
             footRef.current?.classList.remove("hidden")
         }
 
-    }, [])
+    })
 
     //displaying images associated with on actitivity
 
@@ -71,6 +75,7 @@ function Home() {
         <div className={isDarkMode ? "h-screen w-[100%]  flex flex-row  overflow-y-scroll bg-[#1a1d21]" : "h-screen w-[100%]  flex flex-row  overflow-y-scroll bg-[#f3f3f9]"}>
             <div className='w-[13.6%] md:block hidden sticky top-0 relative bottom-0   h-[100%]'>
                 <Sidebar />
+               
             </div>
             <div className='md:w-[86.4%] w-[100%]  h-[100%]'>
                 <div className='h-[12%] nav z-100 sticky top-0 w-[100%]  right-4'>
