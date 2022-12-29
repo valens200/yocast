@@ -37,8 +37,8 @@ function Form() {
 
     const config = {
         style: {
-            background: '#2a2f34',
-            color: '#212529',
+            backgroundColor: 'white',
+            color: '#2a2f34',
             
         },
     };
