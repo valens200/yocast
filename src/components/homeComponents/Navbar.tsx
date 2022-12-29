@@ -1,12 +1,12 @@
 import React from 'react'
 import { HiMenuAlt1 } from "react-icons/hi"
 import { GrHomeRounded } from "react-icons/gr"
-import { BsBag } from 'react-icons/bs'
+import { BsBag, BsMoon } from 'react-icons/bs'
 import { HiOutlineSquares2X2 } from "react-icons/hi2"
 import { GiSquare } from "react-icons/gi"
 import { IoMoonOutline, IoSunnyOutline } from "react-icons/io5"
-import {IoMdNotificationsOutline} from 'react-icons/io'
-import {TbFocusCentered} from "react-icons/tb"
+import { IoMdNotificationsOutline } from 'react-icons/io'
+import { TbFocusCentered } from "react-icons/tb"
 import { setShowSidebar } from '../../features/pageSlice'
 import { setIsDarkMode } from '../../features/pageSlice'
 import { useDispatch, useSelector } from 'react-redux'
@@ -20,17 +20,17 @@ function Navbar() {
     <IoMdNotificationsOutline />];
     const dispatch = useDispatch();
     const isDarkMode = useSelector((store: RootState) => store.page.isDarkMode);
-    const getClass = (index : number) => {
-        if(index == 2){
+    const getClass = (index: number) => {
+        if (index == 2) {
             return "absolute text-[white] bg-[#405189]  h-[20%] font-bold w-[5%]  md:w-[1.3vw] -translate-y-9 translate-x-[40%] text-center rounded-full text-[0.70rem]"
-        }else if(index == 4){
+        } else if (index == 4) {
             return "absolute text-[white] bg-[red] h-[20%] font-bold w-[5%]  md:w-[1.3vw]    -translate-y-9 translate-x-[40%] text-center rounded-full text-[0.70rem]"
-        }else {
+        } else {
             return "absolute  hidden -translate-y-10 translate-x-[100%]  text-[0.70rem]"
         }
-    } 
+    }
     return (
-        <div className={ isDarkMode === true ? 'w-[100%] text-white font-sans   bg-[#2a2f34] h-[100%]' : 'w-[100%] text-black font-sans   bg-white h-[100%]'}>
+        <div className={isDarkMode === true ? 'w-[100%] text-white font-sans   bg-[#2a2f34] h-[100%]' : 'w-[100%] text-black font-sans   bg-white h-[100%]'}>
             <div className='h-[60%]    w-[100%]'>
                 <div className='flex flex-row h-[100%] items-center  justify-between w-[98%] mx-auto' >
                     <div className='  w-[30%] md:w-[70%] flex h-[100%] space-x-4 items-center flex-row '>
@@ -38,15 +38,29 @@ function Navbar() {
                             <HiMenuAlt1 onClick={() => dispatch(setShowSidebar("show"))} className='text-3xl' />
                         </div>
                         <div className='md:w-[30%] md:block hidden h-[55%]'>
-                            <input type="text" className={ isDarkMode ? 'bg-[#1a1d21] focus:outline-0 text-[0.80rem] rounded pl-3 h-[100%] w-[100%]' :  'bg-[#f3f3f9] focus:outline-0 text-[0.80rem] rounded pl-3 h-[100%] w-[100%]'} placeholder='search....' />
+                            <input type="text" className={isDarkMode ? 'bg-[#1a1d21] focus:outline-0 text-[0.80rem] rounded pl-3 h-[100%] w-[100%]' : 'bg-[#f3f3f9] focus:outline-0 text-[0.80rem] rounded pl-3 h-[100%] w-[100%]'} placeholder='search....' />
                         </div>
-                    </div>  
+                    </div>
                     <div className='md:w-[30%] w-[70%] justify-between items-center flex-row flex'>
                         <div className='w-[48%]'>
                             <ul className='flex flex-row space-x-3'>
-                                {icons.map((icon, index) => (
-                                    <li  onClick={() => dispatch(setIsDarkMode("white"))} className='text-2xl hover:bg-[#405189] p-2 rounded-full hover:cursor-pointer' key={index}>{icon} <p className={getClass(index)}>23</p></li>
-                                ))}
+                                {icons.map((icon, index) => {
+                                    if (index == 3) {
+                                        if (isDarkMode) {
+                                            return (
+                                                <li onClick={() => dispatch(setIsDarkMode("white"))} className='text-2xl hover:bg-[#405189] p-2 rounded-full hover:cursor-pointer' key={index}>{icon} <p className={getClass(index)}>23</p></li>
+                                            )
+                                        }
+                                        return (
+                                            <li onClick={() => dispatch(setIsDarkMode("dark"))} className='text-2xl hover:bg-[#405189] p-2 rounded-full hover:cursor-pointer' key={index}><BsMoon /><p className={getClass(index)}>23</p></li>
+                                        )
+                                    }
+                                    return (
+                                        <li onClick={() => dispatch(setIsDarkMode("main"))} className='text-2xl hover:bg-[#405189] p-2 rounded-full hover:cursor-pointer' key={index}>{icon} <p className={getClass(index)}>23</p></li>
+
+                                    )
+
+                                })}
                             </ul>
                         </div>
                         <div className='flex bg-[#B3B6B7 ] h-[100%]  w-[40%] justify-end space-x-3  font-poppins  flex-row'>
@@ -61,7 +75,7 @@ function Navbar() {
                     </div>
                 </div>
             </div>
-            <div className={ isDarkMode ?  'bg-[#212529] sticky  top-0 w-[100%] h-[40%]' : 'bg-white border border-x-0 border-b-0 sticky  top-0 w-[100%] h-[40%]'}>
+            <div className={isDarkMode ? 'bg-[#212529] sticky  top-0 w-[100%] h-[40%]' : 'bg-white border border-x-0 border-b-0 sticky  top-0 w-[100%] h-[40%]'}>
                 <div className='flex font-poppins font-sans flex-row justify-between items-center  h-[100%] w-[97%] mx-auto'>
                     <div className='w-[90%]'>
                         <h1 className='font-bold font-poppins font-sans uppercase'>admin</h1>

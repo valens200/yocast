@@ -24,7 +24,8 @@ import { Category } from "@mui/icons-material";
 
 
 export const tableHeaders = [" Podcast Title", " Category", " Length", "Likes", "Views", "Created At"]
-export const ordersTableHeders = ["OrderId", "Customer", "Podcast", "Amount", "Status"]
+export const ordersTableHeders = ["OrderId", , "Podcast", "Customer", "Amount", "Status"]
+export const subscriptionTableHeaders = ["SubscriptionId", "Subscription Owner", "transaction Id", "Payment method", "price", "currency","Desactivation Date","Created", "Updated"]
 const getSidebarFormDivs = (): sidebarFormType[] => {
   const podcastsCategories = useSelector(
     (store: RootState) => store.podcasts.podcastsCategories
@@ -120,8 +121,8 @@ export const sidebarLinks: sidebarLinksType[] = [
     link: "/*",
   },
   {
-    title: "Clients",
-    link: "/clients",
+    title: "Subscriptions",
+    link: "/subscriptions",
   },
   {
     title: "Sellers",

@@ -10,10 +10,10 @@ function SellingProducts() {
       <div className={isDarkMode ? 'w-[100%]  bg-[#212529]  items-center flex  h-[100%]' : 'w-[100%] items-center flex h-[100%]'}>
         <div className="overflow-x-auto podcasts h-[90%] relative shadow-md sm:rounded-lg">
           <div className={ isDarkMode ? ' bg-[#212529] flex items-center text-[#212529] h-[18%] dark:bg-gray-700':' bg-white flex items-center text-[#212529] h-[18%] dark:bg-gray-700'}>
-            <div className='w-[95%] font-poppins font-sans  h-[50%] flex justify-between mx-auto'>
+            <div className='w-[95%] font-poppins font-sans  h-[90%] md:h-[50%] flex md:flex-row flex-col justify-between mx-auto'>
               <p className='font-poppins font-sans text-[#7c7f90]  text-[0.90rem]'>Best Selling Products</p>
               {/* bg-[#262A2F]  */}
-              <div className={'w-[50%] h-[100%]  flex justify-end'}>
+              <div className={ ' w-[100%] md:w-[50%] h-[100%]  flex justify-end'}>
                 <select name="sort" className={ isDarkMode ? 'w-[30%]  text-[#7c7f90] bg-[#262A2F]  text-center rounded text-[0.80rem] h-[90%]' : 'w-[30%] text-center rounded text-[0.80rem] h-[90%]'} value="SORT" id="sort">
                   <option className='text-start' value="Last day">Last day</option>
                   <option className='text-start' value="Last month">Last month</option>
@@ -35,7 +35,6 @@ function SellingProducts() {
                       <a href="#"><svg xmlns="http://www.w3.org/2000/svg" className="ml-1 w-3 h-3" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z" /></svg></a>
                     </div>
                   </th>
-
                 ))}
                 <th scope="col" className="py-3 px-6">
                   <span className="sr-only">Edit</span>
@@ -44,7 +43,7 @@ function SellingProducts() {
             </thead>
             <tbody className='text-[0.80rem] font-poppins text-[#212529] font-sans'>
               {availablePodcasts.map((podcast, index) => (
-                <tr className={ isDarkMode ? "bg-[#212529] text-[#7c7f90]  hover:bg-[#f3f3f9] hover:bg-[#212529] border-[0.1px]  border-[#32383e]   border-x-0 border-t-0 ":"bg-white  hover:bg-[#f3f3f9] border-b dark:bg-gray-800 dark:border-gray-700"}>
+                <tr className={ isDarkMode ? "bg-[#212529] text-[#7c7f90]  h-[8vh] hover:border-0 hover:bg-[#212529] border-[0.1px]  border-[#32383e]   border-x-0 border-t-0 ":"bg-white  hover:bg-[#f3f3f9] border-b dark:bg-gray-800 dark:border-gray-700"}>
                   <td scope="row" className="py-4 px-6 font-medium text-gray-900 w-[10%] dark:text-white">
                     <img src={podcast.cover} className="w-[30%] h-[30%]  rounded " alt="activity  title image" />
                   </td>
@@ -70,7 +69,6 @@ function SellingProducts() {
                     <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                   </td>
                 </tr>
-
               ))}
             </tbody>
           </table>

@@ -1,4 +1,6 @@
-import React from 'react'
+
+// author valens NIYONSENGA
+import React, { useRef } from 'react'
 import logoo from "../assets/images/logo.png"
 import { RootState, useAppDispatch } from '../../store'
 import { useSelector } from 'react-redux'
@@ -37,6 +39,18 @@ function Home() {
             return "hover:text-[grey]"
         }
     }
+    //handling the bottom footer
+    const footRef = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+        if (footRef.current?.getBoundingClientRect().bottom == 0) {
+            console.log("value" + footRef.current?.getBoundingClientRect().bottom)
+        } else {
+            footRef.current?.classList.remove("hidden")
+        }
+
+    }, [])
+
+    //displaying images associated with on actitivity
 
     const getImages = (activity: activityType) => {
         let div;
@@ -52,9 +66,9 @@ function Home() {
         return div;
     }
     return fethed == false ? (
-      <Loading />
+        <Loading />
     ) : (
-        <div className={ isDarkMode ?  "h-screen w-[100%]  flex flex-row  overflow-y-scroll bg-[#1a1d21]" : "h-screen w-[100%]  flex flex-row  overflow-y-scroll bg-[#f3f3f9]"}>
+        <div className={isDarkMode ? "h-screen w-[100%]  flex flex-row  overflow-y-scroll bg-[#1a1d21]" : "h-screen w-[100%]  flex flex-row  overflow-y-scroll bg-[#f3f3f9]"}>
             <div className='w-[13.6%] md:block hidden sticky top-0 relative bottom-0   h-[100%]'>
                 <Sidebar />
             </div>
@@ -62,31 +76,39 @@ function Home() {
                 <div className='h-[12%] nav z-100 sticky top-0 w-[100%]  right-4'>
                     <Navbar />
                 </div>
-                <div className='w-[100%]   flex flex-row  justify-between h-[100%]'>
-                    <div className='md;w-[85%] w-[100%]   flex flex flex-col space-y-1 text-white h-screen md:h-[190vh]'>
-                        <div className='h-[7%]'>
-                            <div className='h-[100%] w-[95%]'>
+                <div className='w-[100%]  flex flex-row   justify-between h-[82%]'>
+                    <div className='md:w-[85%] w-[100%]  md:space-y-[2%] space-y-[8%] flex flex-col text-white '>
+                        <div className=''>
+                            <div className='h-[10vh] w-[95%]'>
 
                             </div>
                         </div>
-                        <AnalyticsCards />
-                        <div className='h-[20%] w-[95%] mx-auto'>
-                            <Charts />
+                        <div className='h-[90vh]'>
+                            <AnalyticsCards />
                         </div>
-                        <div className='h-[25%] w-[95%] mx-auto'>
+                        <div className='w-[95%] h-[100%] mx-auto flex md:flex-row  md:space-y-0  space-y-10 flex-col md:justify-between '>
+                            <div className={isDarkMode ? 'md:w-[65%]  bg-[#212529] h-[40vh]' : 'md:w-[65%]  bg-white h-[40vh]'}>
+
+                            </div>
+                            <div className={isDarkMode ? 'md:w-[34%]  bg-[#212529] h-[100%]' : 'md:w-[34%]  bg-white h-[40vh]'}>
+
+                            </div>
+                        </div>
+                        <div className='w-[95%] mx-auto  h-[40vh] md:mt-0 mt-[20%]'>
                             <SellingProducts />
                         </div>
-                        <div className='h-[30%] w-[95%] mx-auto'>
+                        <div className='h-[100%]'>
                             <Orders />
                         </div>
-                        <div className='w-[100%] h-[3%] bottom-0  '>
+                        <div ref={footRef} className='sticky md:hidden bottom-0'>
                             <Footer />
                         </div>
                     </div>
-                    <div className={ isDarkMode ? 'w-[15%] md:block hidden  sticky right-sidebar bg-[#212529]  text-white   z-20 ' : 'w-[15%] md:block hidden  sticky right-sidebar bg-white  text-white   z-20 '}>
+                    <div className={isDarkMode ? 'w-[15%] md:block hidden  sticky right-sidebar bg-[#212529]  text-white   z-20 ' : 'w-[15%] md:block hidden  sticky right-sidebar bg-white  text-white   z-20 '}>
                         <div className='w-[95%] flex flex-col space-y-5  mx-auto p-2 mt-4 overflow-y-scroll h-[34%]'>
                             <h1 className='text-[grey] font-poppins font-sans font-bold  text-[0.90rem]'>RECENT ACTIVITIES</h1>
                             <div className=' flex w-[100%] flex-col space-y-9'>
+                                {/* displaying all activities  */}
                                 {recentActivities.map((activity, index) => (
                                     <div className='w-[100%]' key={index}>
                                         <div className='flex space-x-2 w-[100%]'>
@@ -104,6 +126,7 @@ function Home() {
                                                 <p>{activity.description}</p>
                                                 {
                                                     activity.descriptionImage[0] == "" ? null :
+                                                        //calling the function to get images associated with an activity if there are
                                                         getImages(activity)
                                                 }
                                                 <p>{activity.time}</p>
@@ -115,7 +138,7 @@ function Home() {
                             </div>
                         </div>
                         <div className='w-[100%]  mx-auto'>
-                            <div className={ isDarkMode ? 'w-[95%]  bg-[#212529] mx-auto p-4 font-sans font-poppins flex flex-col space-y-8' : 'w-[95%] text-[#212529] fontpoppins font-sans  bg-white  mx-auto p-4 flex flex-col space-y-8'}>
+                            <div className={isDarkMode ? 'w-[95%]  bg-[#212529] mx-auto p-4 font-sans font-poppins flex flex-col space-y-8' : 'w-[95%] text-[#212529] fontpoppins font-sans  bg-white  mx-auto p-4 flex flex-col space-y-8'}>
                                 <h1 className="font-poppins font-sans text-[0.80rem] font-bold text-[grey]">TOP 10 PODCASTS</h1>
                                 <div>
 
@@ -164,17 +187,17 @@ function Home() {
                                 </div>
                                 <div className='flex flex-col space-y-4'>
                                     <p className="font-poppins text-[0.80rem] font-bold text-[grey]">CUSTOMER REVIEWS</p>
-                                    <p className={ isDarkMode ? ' text-end text-white  bg-[#2a2f34] p-2 rounded font-sans font-poppins text-[0.80rem]' : 'text-end text-white  bg-[#f3f3f9] text-[#212529] font-sans font-poppins p-2 rounded font-poppins text-[0.80rem]'}>4.5 out of 5</p>
+                                    <p className={isDarkMode ? ' text-end text-white  bg-[#2a2f34] p-2 rounded font-sans font-poppins text-[0.80rem]' : 'text-end text-white  bg-[#f3f3f9] text-[#212529] font-sans font-poppins p-2 rounded font-poppins text-[0.80rem]'}>4.5 out of 5</p>
                                     <p className="font-poppins text-[0.80rem] font-bold text-[grey]">Tatal 4.4k reviews</p>
                                     <CustomerProgress />
                                 </div>
-                                <div className={ isDarkMode ? ' p-4 flex flex-col space-y-5 w-[100%] mx-auto bg-[#2a2f34]' : ' p-4 flex  text-[#212529] flex-col bg-[#f3f3f9]  space-y-5 w-[100%] mx-auto '}>
+                                <div className={isDarkMode ? ' p-4 flex flex-col space-y-5 w-[100%] mx-auto bg-[#2a2f34]' : ' p-4 flex  text-[#212529] flex-col bg-[#f3f3f9]  space-y-5 w-[100%] mx-auto '}>
                                     <div className='flex items-center  justify-center w-[80%] mx-auto'>
                                         <img className='' src='http://127.0.0.1:5501/assets/images/giftbox.png' />
                                     </div>
                                     <h1 className='text-center'>Invite New Customer</h1>
                                     <p className='text-[0.80rem] font-poppins text-[grey] text-center '>Refer a new seller to us and earn $100 per refer</p>
-                                    <button className={ isDarkMode ? 'bg-[#405189] rounded-full w-[80%] mx-auto font-poppins font-sans h-[4vh]' : 'bg-[#405189] text-white font-sans rounded-full w-[80%] mx-auto font-poppins h-[4vh]'}><span className='w-[40%] bg-[blue] text-[blue] mr-1 rounded-full h-[100%]'>iks</span><span>Invite Now</span></button>
+                                    <button className={isDarkMode ? 'bg-[#405189] rounded-full w-[80%] mx-auto font-poppins font-sans h-[4vh]' : 'bg-[#405189] text-white font-sans rounded-full w-[80%] mx-auto font-poppins h-[4vh]'}><span className='w-[40%] bg-[blue] text-[blue] mr-1 rounded-full h-[100%]'>iks</span><span>Invite Now</span></button>
                                 </div>
 
                             </div>

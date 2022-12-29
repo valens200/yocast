@@ -14,7 +14,7 @@ import ClientsTable from '../../components/clientsComponents/ClientsTable'
 import PodcastsList from '../../components/podcastsComponents/PodcastsList'
 import { setIsDarkMode } from '../../features/pageSlice'
 import Loading from '../../components/homeComponents/Loading'
-function Clients() {
+function Subscriptions() {
     const [fethed, setFetched] = useState<Boolean>(false);
     const podcastsCategories = useSelector((store: RootState) => store.podcasts.podcastsCategories);
     const showSidebar = useSelector((store: RootState) => store.page.showSidebar);
@@ -56,4 +56,4 @@ function Clients() {
     </div>
 }
 
-export default Clients
+export default Subscriptions

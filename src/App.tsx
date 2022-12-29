@@ -4,7 +4,7 @@ import Home from './pages/dashboards/Home'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Podcasts from './pages/dashboards/Podcasts'
 import CreatePodcast from './pages/dashboards/CreatePodcast'
-import Clients from './pages/dashboards/Clients'
+import Subscriptions from './pages/dashboards/Subscriptions'
 import For04 from './pages/dashboards/For04'
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/podcasts" element={<Podcasts />} />
-        <Route path="/clients" element={<Clients />} />
+        <Route path="/subscriptions" element={<Subscriptions />} />
         <Route path='/create_podcast' element={<CreatePodcast />} />
         <Route path='*' element={<For04 />} />
         <Route path='/*' element={<For04 />} />
