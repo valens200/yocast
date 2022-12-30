@@ -6,6 +6,7 @@ import { BiDollarCircle, BiUserCircle, BiWallet } from "react-icons/bi"
 const initialState = {
   showSidebar: false,
   isDarkMode: true,
+  next:false,
   count: 0,
   showSmallNavigation: false,
   analyticsCards: [
@@ -77,9 +78,18 @@ const pageSlice = createSlice({
       card.value = card.value < card.count ?  card.value + 1 : card.value
       ))
       state.analyticsCards = analyticsCards;
+    },
+    setNext: (state, action: PayloadAction<boolean>) => {
+      if(action.payload == true){
+        state.next = true;
+      }else if(action.payload == false){
+        state.next = false;
+      }else{
+        state.next = state.next;
+      }
     }
   }
 });
 
-export const { setShowSidebar, setIsDarkMode, initialCardValues } = pageSlice.actions;
+export const { setShowSidebar, setIsDarkMode, initialCardValues,setNext } = pageSlice.actions;
 export const pageReducer = pageSlice.reducer;

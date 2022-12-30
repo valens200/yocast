@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useSelect } from '@mui/base'
 import { RootState } from '../../store'
 import postcss from 'postcss'
-function Navbar(props) {
+function Navbar(props: { name: string  }) {
     const icons = [<HiOutlineSquares2X2 />,
     <BsBag />,
     <TbFocusCentered />,

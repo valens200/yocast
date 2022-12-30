@@ -2,7 +2,7 @@ import { data } from "../../types/appTypes";
 import createBookMark from "../assets/images/addbookmark.png";
 import createCategory from "../assets/images/createCategory.png";
 import deleteCatgory from "../assets/images/deleteCatgory.png";
-import React from 'react'
+import React from "react";
 import {
   sidebarLinksType,
   inputFieldType,
@@ -22,10 +22,55 @@ import { Category } from "@mui/icons-material";
 //     + 250 781 589 686
 // @Israel
 
-
-export const tableHeaders = [" Podcast Title", " Category", " Length", "Likes", "Views", "Created At"]
-export const ordersTableHeders = ["OrderId", , "Podcast", "Customer", "Amount", "Status"]
-export const subscriptionTableHeaders = ["SubscriptionId", "Subscription Owner", "transaction Id", "Payment method", "price", "currency","Desactivation Date","Created", "Updated"]
+export const FormInputs = [
+  {
+    name: "Email",
+    type: "email",
+  },
+  {
+    name: "Password",
+    type:"password"
+  },
+  {
+    name: "FullName",
+    type:"text"
+  },
+  {
+    name: "UserName",
+    type:"text"
+  },
+  {
+    name: "Nationality",
+    type:"text"
+  },
+];
+export const tableHeaders = [
+  " Podcast Title",
+  " Category",
+  " Length",
+  "Likes",
+  "Views",
+  "Created At",
+];
+export const ordersTableHeders = [
+  "OrderId",
+  ,
+  "Podcast",
+  "Customer",
+  "Amount",
+  "Status",
+];
+export const subscriptionTableHeaders = [
+  "SubscriptionId",
+  "Subscription Owner",
+  "transaction Id",
+  "Payment method",
+  "price",
+  "currency",
+  "Desactivation Date",
+  "Created",
+  "Updated",
+];
 const getSidebarFormDivs = (): sidebarFormType[] => {
   const podcastsCategories = useSelector(
     (store: RootState) => store.podcasts.podcastsCategories
@@ -91,7 +136,6 @@ const getSidebarFormDivs = (): sidebarFormType[] => {
   ];
 
   return sidebarFormDivs;
-
 };
 
 export default getSidebarFormDivs;

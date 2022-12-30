@@ -42,8 +42,6 @@ function Form() {
             
         },
     };
-
-
     return (
         <div className={isDarkMode === true ? 'w-[100%] font-poppins flex md:flex-row flex-col space-y-4 md:space-y-0  justify-between text-[0.80rem] h-[100%]' : 'w-[100%] text-[#212529] font-poppins flex md:flex-row flex-col space-y-4 md:space-y-0  justify-between text-[0.80rem] h-[100%]'}>
             <div className={isDarkMode === true ? 'md:w-[67%] flex  items-center  bg-[#212529] h-[100%] font-sans md:h-[90%]' : 'md:w-[67%] flex  items-center  bg-white  h-[100%] font-sans md:h-[90%]'}>
@@ -62,7 +60,7 @@ function Form() {
                             <div className='flex h-[10%]'>
                                 <h1 className='text-[0.90rem]'>Product Description</h1>
                             </div>
-                            <div className='h-[90%] jodit w-[100%]'>
+                            <div className='h-[90%]  w-[100%]'>
                                 <JoditReact  config={config}  defaultValue="Hi" />
                                 {/* // <input placeholder='' className={isDarkMode ? 'bg-[#2a2f34] focus:outline-0 fous:border focus:border-[#32383e] pl-4  w-[100%] h-[100%]' : 'bg-white border focus:outline-0 fous:border focus:border-[#32383e] pl-4  w-[100%] h-[100%]'} type="text" /> */}
                             </div>

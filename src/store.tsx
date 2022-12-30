@@ -6,6 +6,8 @@ import { podcastReducer } from "./features/podCastSlice";
 import { customerReducer } from "./features/customerSlice";
 import { orderReducer } from "./features/orderSlce";
 import { clientsReducer } from "./features/clientsSlice";
+import { authenticationReducer } from "./features/authenticationSlice";
+import { userReducer } from "./features/userSlice";
 
 export const store = configureStore({
     reducer: {
@@ -14,7 +16,9 @@ export const store = configureStore({
         podcasts:podcastReducer,
         customers:customerReducer,
         orders:orderReducer,
-        subscriptions:clientsReducer
+        subscriptions:clientsReducer,
+        authentication:authenticationReducer,
+        user:userReducer
     }
 })
 export type RootState = ReturnType<typeof store.getState>

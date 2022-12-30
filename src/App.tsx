@@ -6,11 +6,17 @@ import Podcasts from './pages/dashboards/Podcasts'
 import CreatePodcast from './pages/dashboards/CreatePodcast'
 import Subscriptions from './pages/dashboards/Subscriptions'
 import For04 from './pages/dashboards/For04'
+import Login from './pages/authentication/Login'
+import Signup from './pages/authentication/Signup'
+import ResetPassword from './pages/authentication/ResetPassword'
 function App() {
   return (
     <Router >
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/auth/reset_password"  element={<ResetPassword />}/>
+        <Route path='/auth/signup' element={<Signup />} />
+        <Route path='/' element={<Login />} />
+        <Route path="/dashboard" element={<Home />} />
         <Route path="/podcasts" element={<Podcasts />} />
         <Route path="/subscriptions" element={<Subscriptions />} />
         <Route path='/create_podcast' element={<CreatePodcast />} />

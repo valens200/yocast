@@ -16,7 +16,13 @@
 .nav {
   z-index: 100;
 }
+.textfield{
+  color: white;
 
+}
+.textfield:focus{
+  outline: 0;
+}
 .main {
   color: white;
 }
