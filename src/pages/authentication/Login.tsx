@@ -27,9 +27,10 @@ function Login() {
                         </div>
                     </div>
                     <div className='w-[100%] h-[60%] flex flex-col space-y-4  mx-auto'>
+                    {/* bg-[#f3f3f9] */}
                         {FormInputs.slice(0, 2).map((input, index) => (
                             <div className='w-[80%] mx-auto'>
-                                <TextField placeholder={input.name} sx={{ input: { color: '#0ab39c' } }} className='w-[100%] textfield text-[white] focus:outline-0' type={input.type} label={input.name} variant="outlined" />
+                                <TextField  placeholder={input.name} sx={{ input: { color: '#0ab39c' } }} className={ isDarkMode ? 'w-[100%] bg-[#1a1d21]  textfield text-[white] focus:outline-0':'w-[100%] textfield  bg-[#f3f3f9]  text-[white] focus:outline-0'} type={input.type} label={input.name} variant="outlined" />
                             </div>
                         ))}
                         <div className='w-[80%] font-poppins font-sans flex justify-end mx-auto h-[10%]'>
