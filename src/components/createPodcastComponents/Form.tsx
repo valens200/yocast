@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import getSidebarFormDivs from '../../assets/staticAssets/data'
 import { inputFieldType } from '../../types/appTypes';
 import { useSelector } from 'react-redux';
@@ -6,10 +6,20 @@ import { RootState } from '../../store';
 import JoditEditor from 'jodit-react';
 import JoditReact from "jodit-react-ts";
 import 'jodit/build/jodit.min.css';
+import { useDropzone } from 'react-dropzone'
+
 function Form() {
     const sidebarFormDivs = getSidebarFormDivs();
     const isDarkMode = useSelector((store: RootState) => store.page.isDarkMode);
     const [value, setValue] = useState<string>();
+    const { getRootProps, getInputProps, acceptedFiles } =
+        useDropzone({});
+
+    const files = acceptedFiles.map((file) => (
+        <li key={file.size}>
+            {file.name} - {file.size} 
+        </li>
+    )); 
 
     // bg-[#f3f3f9]
     const getDivClass = (index: number): String => {
@@ -39,7 +49,7 @@ function Form() {
         style: {
             backgroundColor: 'white',
             color: '#2a2f34',
-            
+
         },
     };
     return (
@@ -48,10 +58,7 @@ function Form() {
                 <div className='flex w-[95%]  mx-auto  h-[95%]'>
                     <div className=' w-[100%] w-[100%]  flex-col space-y-8 md:space-y-5 h-[100%]'>
                         <div className=' flex w-[100%] h-[20%]  md:h-[10%] flex-col space-y-2 mx-auto'>
-                            <div className='flex'>
-                                <h1 className='text-[0.90rem]'>Product Title</h1>
 
-                            </div>
                             <div className='md:h-[35%] h-[50%] w-[100%]'>
                                 <input placeholder='Enter product title' className={isDarkMode ? 'bg-[#262A2F] border border-[0.1px]  border-[#32383e]   focus:outline-0 fous:border focus:border-[#32383e] pl-4  w-[100%] h-[100%]' : 'bg-white border border-[0.1px]  border-[#32383e]   focus:outline-0 fous:border focus:border-[#32383e] pl-4  w-[100%] h-[100%]'} type="text" />
                             </div>
@@ -61,7 +68,7 @@ function Form() {
                                 <h1 className='text-[0.90rem]'>Product Description</h1>
                             </div>
                             <div className='h-[90%]  w-[100%]'>
-                                <JoditReact  config={config}  defaultValue="Hi" />
+                                <JoditReact config={config} defaultValue="Hi" />
                                 {/* // <input placeholder='' className={isDarkMode ? 'bg-[#2a2f34] focus:outline-0 fous:border focus:border-[#32383e] pl-4  w-[100%] h-[100%]' : 'bg-white border focus:outline-0 fous:border focus:border-[#32383e] pl-4  w-[100%] h-[100%]'} type="text" /> */}
                             </div>
                         </div>
@@ -70,8 +77,27 @@ function Form() {
                                 <h1 className='text-[0.90rem]'>Podcast File</h1>
                                 <p className='text-[#7c7f90]'>Drag &amp; drop the podcast file here</p>
                             </div>
-                            <div className='h-[90%] w-[100%]'>
-                                <input placeholder='Drop files here or click to upload.' className={isDarkMode ? ' text-center text-[1rem] bg-[#212529]  border-[0.1px]  border-[#32383e] border-dashed  text-[#CED4DA]   focus:outline-0 fous:border focus:border-[#32383e] pl-4  w-[100%] h-[100%]' : ' text-center text-[#495057] text-[1rem] bg-white  border-[0.1px]  border-[#32383e] border-dashed  text-[#CED4DA]   focus:outline-0 fous:border focus:border-[#32383e] pl-4  w-[100%] h-[100%]'} type="text" />
+                            <div className='h-[90%] image-upload w-[100%]'>
+                                <label htmlFor="file-input" className={isDarkMode ? ' text-center text-[1rem]  flex justify-center items-center bg-[#212529]  border-[0.1px]  border-[#32383e] border-dashed  text-[#CED4DA]   focus:outline-0 fous:border  focus:border-[#32383e] pl-4  w-[100%] h-[100%]' : ' text-center text-[#495057] flex justify-center items-center text-[1rem] bg-white  border-[0.1px]  border-[#32383e] border-dashed  text-[#CED4DA]   focus:outline-0 fous:border items-center  focus:border-[#32383e] pl-4  w-[100%] h-[100%]'}>
+                                    Drop files here or click to upload
+                                </label>
+                                <input
+                                    className='hidden'
+                                    id="file-input"
+                                    type="file"
+                                />
+                            </div>
+                            <div className={isDarkMode ? ' text-center text-[1rem]  flex justify-center items-center bg-[#212529]  border-[0.1px]  border-[#32383e] border-dashed  text-[#CED4DA]   focus:outline-0 fous:border  focus:border-[#32383e] pl-4  w-[100%] h-[100%]' : ' text-center text-[#495057] flex justify-center items-center text-[1rem] bg-white  border-[0.1px]  border-[#32383e] border-dashed  text-[#CED4DA]   focus:outline-0 fous:border items-center  focus:border-[#32383e] pl-4  w-[100%] h-[100%]'}>
+                                <div className="container">
+                                    <div {...getRootProps({ className: "dropzone" })}>
+                                        <input id='file-input' {...getInputProps()} />
+                                        <label htmlFor="file-input">Drag 'n' drop some files here</label>
+                                    </div>
+                                    <aside>
+                                        <ul>{files}</ul>
+                                    </aside>
+                                </div>
+
                             </div>
                         </div>
                         <div className='flex w-[99%] h-[10%]   items-center justify-end'>

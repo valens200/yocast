@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../../store'
 import AuthNavigation from '../../components/authenticationComponents/AuthNavigation'
 import Footer from '../../components/homeComponents/Footer'
+import Header from '../../components/authenticationComponents/Header'
 function Signup() {
     const next = useSelector((store: RootState) => store.page.next);
     const isDarkMode = useSelector((store: RootState) => store.page.isDarkMode);
@@ -22,7 +23,7 @@ function Signup() {
                     <div className=" p-5 flex  text-white space-y-2 flex-col justify-center text-center">
                         <img className='w-[20%]  flex mx-auto' src={logo} alt="" />
                         <div className='flex flex-col space-y-3'>
-                            <h1 className={ isDarkMode ? 'text-3xl uppercase font-poppins font-bold' : 'text-3xl text-black uppercase font-poppins font-bold'}>yocast</h1>
+                            <Header />
                             <div className={isDarkMode ? 'text-[0.80rem] font-poppins font-sans' : 'text-[0.80rem] text-black font-poppins font-sans'}>
                                 <p>Sign up with your  <span className='text-[#0ab39c] mx-2 underline'>Yocast</span>  </p>
                                 <p> to start managing your podcasts.</p>

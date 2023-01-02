@@ -26,15 +26,15 @@ function Home() {
     const recentActivities = useSelector((store: RootState) => store.recentActivities.activities);
     const podcasts = useSelector((store: RootState) => store.podcasts.podcasts);
     const clientsReviews = useSelector((store: RootState) => store.podcasts.reviews)
-    const [counter, setCounter ] = useState(0);
+    const [counter, setCounter] = useState(0);
+    const [main, setMain] = useState(0);
     const lengthSample: number = "WARUZIKO KURI RADIO RWANDA TARIKI YA 5".length;
     const isDarkMode = useSelector((store: RootState) => store.page.isDarkMode);
-
-  
-
     setTimeout(() => {
         setFetched(true);
     }, 1000)
+
+
     const dispatch = useAppDispatch();
     const getClass = (index: number) => {
         if (index == 1) {
@@ -45,14 +45,7 @@ function Home() {
     }
     //handling the bottom footer
     const footRef = useRef<HTMLDivElement>(null);
-    useEffect(() => {
-        if (footRef.current?.getBoundingClientRect().bottom == 0) {
-            console.log("value" + footRef.current?.getBoundingClientRect().bottom)
-        } else {
-            footRef.current?.classList.remove("hidden")
-        }
-
-    })
+    const activityRef = useRef<HTMLDivElement>(null);
 
     //displaying images associated with on actitivity
 
@@ -82,16 +75,16 @@ function Home() {
                 </div>
                 <div className='w-[100%]  flex flex-row   justify-between h-[82%]'>
                     <div className='md:w-[85%] w-[100%]  md:space-y-[2%] space-y-[8%] flex flex-col text-white '>
-                        <div className=''>
+                        <div className='font-poppins font-sans'>
                             <div className=' md:h-[10vh] h-[15vh] md:p-0 p-4 md:items-center md:space-y-0 space-y-4 mx-auto flex md:flex-row flex-col justify-start md:justify-between  w-[90%] md:w-[95%]'>
-                                <div className='md:w-[40%]'>
-                                    <h1 className={ isDarkMode ? ' text-[#CDED4DA] font-poppins':' text-[#495057]  font-poppins'}>Good morning Master M</h1>
+                                <div className='md:w-[40%] font-poppins font-sans'>
+                                    <h1 className={isDarkMode ? ' text-[#CDED4DA] font-poppins font-sans' : ' text-[#495057]  font-sans font-poppins'}>Good morning Master M</h1>
                                     <p className='text-[#878A99] font-poppins font-sans text-[0.80rem]'>Here's what's happening with your store today.</p>
                                 </div>
                                 <div className='flex h-[100%]   md:items-center md:w-[60%] w-[100%] justify-start md:justify-end space-x-2'>
                                     <div className='flex md:w-[80%] w-[50%] h-[100%]  md:h-[40%] md:justify-end '>
-                                        <input className={isDarkMode ? "bg-[#262A2F] rounded-l  w-[90%] md:w-[50%]":"bg-[#FFFFFF] rounded-l  w-[90%] md:w-[50%]"} type="text" name="" id="" />
-                                        <button className={ isDarkMode ? 'bg-[#405189] rounded-r w-[10%]':'bg-[#405189] rounded-r w-[10%]'}></button>
+                                        <input className={isDarkMode ? "bg-[#262A2F] rounded-l  w-[90%] md:w-[50%]" : "bg-[#FFFFFF] rounded-l  w-[90%] md:w-[50%]"} type="text" name="" id="" />
+                                        <button className={isDarkMode ? 'bg-[#405189] rounded-r w-[10%]' : 'bg-[#405189] rounded-r w-[10%]'}></button>
                                     </div>
                                     <div className=' w-[50%] md:w-[20%] flex h-[100%] md:h-[40%] space-x-2'>
                                         <Link className='text-[#0ab39c]  h-[100%] rounded w-[90%] md:w-[80%] bg-[#0AB39C1A] flex justify-center items-center font-bold' to="/create_podcast"><button>Add Podcast</button></Link>
@@ -123,9 +116,9 @@ function Home() {
                         </div>
                     </div>
                     <div className={isDarkMode ? 'w-[15%] md:block hidden  sticky right-sidebar bg-[#212529]  text-white   z-20 ' : 'w-[15%] md:block hidden  sticky right-sidebar bg-white  text-white   z-20 '}>
-                        <div className='w-[95%] flex flex-col space-y-5  mx-auto p-2 mt-4 overflow-y-scroll h-[34%]'>
+                        <div className='w-[95%] overflow-y-scroll flex flex-col space-y-5  mx-auto p-2 mt-4 overflow-y-scroll h-[34%]'>
                             <h1 className='text-[grey] font-poppins font-sans font-bold  text-[0.90rem]'>RECENT ACTIVITIES</h1>
-                            <div className=' flex w-[100%] flex-col space-y-9'>
+                            <div ref={activityRef} className='flex w-[100%] flex-col space-y-9'>
                                 {/* displaying all activities  */}
                                 {recentActivities.map((activity, index) => (
                                     <div className='w-[100%]' key={index}>
@@ -135,11 +128,11 @@ function Home() {
                                                     <img src={activity.titleImage.toString()} className="w-[100%] h-[100%] rounded-full" alt="activity  title image" />
                                                 </div>}
                                             </div>
-                                            <h1 className='text-[0.80rem] font-loboto font-sans'>{activity.title.length > lengthSample ? activity.title.substring(lengthSample) + "...." : activity.title}</h1>
+                                            <h1 className='text-[0.80rem]  font-poppins font-sans'>{activity.title.length > lengthSample ? activity.title.substring(lengthSample) + "...." : activity.title}</h1>
                                         </div>
                                         <div className='flex  space-x-6 h-[100%] w-[80%] mx-auto   border-y-0 border-r-0'>
                                             <div className='border border-[0.01rem] border-[grey] h-[100%]  border-dashed border-y-0 border-r-0'></div>
-                                            <div className='text-[grey] text-[0.90rem]'>
+                                            <div className='text-[grey] font-poppins font-sans text-[0.90rem]'>
 
                                                 <p>{activity.description}</p>
                                                 {
@@ -182,7 +175,7 @@ function Home() {
                                     ))}
                                 </div>
                                 <h1 className='text-center text-[grey] underline hover:text-white hover:cursor-pointer '>Vew all podcasts</h1>
-                                <p className="font-poppins text-[0.80rem] font-bold text-[grey]">PODCASTS REVIEWS</p>
+                                <p className="font-poppins text-[0.80rem]  font-sans font-bold text-[grey]">PODCASTS REVIEWS</p>
                                 <div className='h-[23vh] hover:cursor-pointer overflow-y-scroll'>
                                     {clientsReviews.map((activity, index) => (
                                         <div className='w-[100%] border border-dashed border-[grey] p-2 h-[10vh]' key={index}>
@@ -204,7 +197,7 @@ function Home() {
                                     ))}
                                 </div>
                                 <div className='flex flex-col space-y-4'>
-                                    <p className="font-poppins text-[0.80rem] font-bold text-[grey]">CUSTOMER REVIEWS</p>
+                                    <p className="font-poppins text-[0.80rem] font-sans font-bold text-[grey]">CUSTOMER REVIEWS</p>
                                     <p className={isDarkMode ? ' text-end text-white  bg-[#2a2f34] p-2 rounded font-sans font-poppins text-[0.80rem]' : 'text-end text-white  bg-[#f3f3f9] text-[#212529] font-sans font-poppins p-2 rounded font-poppins text-[0.80rem]'}>4.5 out of 5</p>
                                     <p className="font-poppins text-[0.80rem] font-bold text-[grey]">Tatal 4.4k reviews</p>
                                     <CustomerProgress />
