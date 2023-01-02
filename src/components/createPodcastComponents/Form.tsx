@@ -77,16 +77,6 @@ function Form() {
                                 <h1 className='text-[0.90rem]'>Podcast File</h1>
                                 <p className='text-[#7c7f90]'>Drag &amp; drop the podcast file here</p>
                             </div>
-                            <div className='h-[90%] image-upload w-[100%]'>
-                                <label htmlFor="file-input" className={isDarkMode ? ' text-center text-[1rem]  flex justify-center items-center bg-[#212529]  border-[0.1px]  border-[#32383e] border-dashed  text-[#CED4DA]   focus:outline-0 fous:border  focus:border-[#32383e] pl-4  w-[100%] h-[100%]' : ' text-center text-[#495057] flex justify-center items-center text-[1rem] bg-white  border-[0.1px]  border-[#32383e] border-dashed  text-[#CED4DA]   focus:outline-0 fous:border items-center  focus:border-[#32383e] pl-4  w-[100%] h-[100%]'}>
-                                    Drop files here or click to upload
-                                </label>
-                                <input
-                                    className='hidden'
-                                    id="file-input"
-                                    type="file"
-                                />
-                            </div>
                             <div className={isDarkMode ? ' text-center text-[1rem]  flex justify-center items-center bg-[#212529]  border-[0.1px]  border-[#32383e] border-dashed  text-[#CED4DA]   focus:outline-0 fous:border  focus:border-[#32383e] pl-4  w-[100%] h-[100%]' : ' text-center text-[#495057] flex justify-center items-center text-[1rem] bg-white  border-[0.1px]  border-[#32383e] border-dashed  text-[#CED4DA]   focus:outline-0 fous:border items-center  focus:border-[#32383e] pl-4  w-[100%] h-[100%]'}>
                                 <div className="container">
                                     <div {...getRootProps({ className: "dropzone" })}>
