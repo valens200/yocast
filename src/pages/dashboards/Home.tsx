@@ -21,7 +21,19 @@ import SellingProducts from '../../components/homeComponents/SellingProducts'
 import Orders from '../../components/homeComponents/Orders'
 import Footer from '../../components/homeComponents/Footer'
 import Loading from '../../components/homeComponents/Loading'
+import { useNavigate } from 'react-router-dom'
+import { initializeLoggedInUser } from '../../features/userSlice'
 function Home() {
+    const user = JSON.parse(localStorage.getItem("user")!);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        dispatch(initializeLoggedInUser(user))
+        if(!user || user == "" || user == null){
+            navigate("/")
+        }
+    }, [user])
+
     const [fethed, setFetched] = useState<Boolean>(false);
     const recentActivities = useSelector((store: RootState) => store.recentActivities.activities);
     const podcasts = useSelector((store: RootState) => store.podcasts.podcasts);
@@ -33,8 +45,6 @@ function Home() {
     setTimeout(() => {
         setFetched(true);
     }, 1000)
-
-
     const dispatch = useAppDispatch();
     const getClass = (index: number) => {
         if (index == 1) {

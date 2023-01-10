@@ -1,5 +1,5 @@
 import { TextField } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import logo from "../../assets/images/logo.png"
 import { FormInputs } from '../../assets/staticAssets/data'
 import { Link } from 'react-router-dom'
@@ -7,16 +7,54 @@ import AuthNavigation from '../../components/authenticationComponents/AuthNaviga
 import Footer from '../../components/homeComponents/Footer'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../store'
+import { baseUrl } from '../../assets/staticAssets/data'
 import Header from '../../components/authenticationComponents/Header'
 import FirstInputs from '../../components/authenticationComponents/FirstInputs'
 import { initializeUser } from '../../features/userSlice'
 import { useAppDispatch } from '../../store'
+import { useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios'
 function Login() {
     const numbers = [1, 2, 3, 4];
     const dispatch = useAppDispatch();
     const isDarkMode = useSelector((store: RootState) => store.page.isDarkMode);
+    const userToLogin = useSelector((store: RootState) => store.user.user);
+    const navigate = useNavigate();
+    const login = () => {
+        const inputs = [userToLogin.Email, userToLogin.Password];
+        if (userToLogin.Password === "" || userToLogin.Password == null) {
+            toast.error("Password is required, can not be empty");
+            return;
+        }
+        for (let i = 0; i < inputs.length; i++) {
+            if (inputs[i] == "" || inputs[i] == null) {
+                toast.error("All the fields are  required, can not be empty");
+                return;
+            }
+        }
+        axios.post(baseUrl + "/signin", {
+            email: userToLogin.Email,
+            password: userToLogin.Password,
+        }).then((response) => {
+            localStorage.setItem("user",  JSON.stringify(response.data.user))
+            toast.success("You loggedin successfully")
+            if (response.data.statusCode === 200) {
+                navigate("/dashboard")
+            }
+        }).catch((error) => {
+            if(error.response.data.error.statusCode == 400){
+                toast.error("invalid email or password")
+            }else{
+                toast.info("Internal server error")
+            }
+        })
+    }
+
     return (
         <div className='h-screen font-poppins font-sans  flex-col  flex items-center'>
+            <ToastContainer />
             <div className='h-[98%] flex flex-col space-y-9 items-center justify-center w-[100%]'>
                 <div className='flex flex-col'>
                     <img className='w-[20%]  flex mx-auto' src={logo} alt="" />
@@ -34,17 +72,17 @@ function Login() {
                             <h1 className='text-[#405189]'>Welcome Back !</h1>
                             <p className='text-[#878A99] font-poppins font-sans' >Sign in to continue to Yocast.</p>
                         </div>
-                        <form className="h-[90%]  flex flex-col space-y-3 w-[100%] ">
+                        <form onSubmit={(e) => e.preventDefault()} className="h-[90%]  flex flex-col space-y-3 w-[100%] ">
                             {FormInputs.slice(1, 4).map((input, index) => {
                                 if (input.name == 'Password') {
                                     return (
-                                        <div className='h-[18%] w-[95%] mx-auto '>
+                                        <div key={index} className='h-[18%] w-[95%] mx-auto '>
                                             <div className='h-[10%] flex justify-between'>
                                                 <p className='text-start font-poppins font-sans text-[0.90rem]  text-[#212529]'>{input.name} <span className='text-[#F06548]' >*</span></p>
                                                 <p className='text-start font-poppins font-sans text-[0.90rem]  text-[#878A99]'>Forgot password</p>
                                             </div>
                                             <div className='mt-8 w-[100%]  h-[53%]'>
-                                                <input onChange={(e) => dispatch(initializeUser({ key: input.name, value: e.target.value }))} type="text" className='h-[100%]  text-[#878A99] border text-[0.80rem] pl-3 focus:outline-0  w-[100%]' placeholder={"Enter " + input.name} />
+                                                <input onChange={(e) => dispatch(initializeUser({ key: input.name, value: e.target.value }))} type={input.type} className='h-[100%]  text-[#878A99] border text-[0.80rem] pl-3 focus:outline-0  w-[100%]' placeholder={"Enter " + input.name} />
                                             </div>
                                         </div>
                                     )
@@ -59,8 +97,8 @@ function Login() {
                                     </div>
                                 )
                             })}
-                            <div className='h-[19%] flex items-center  w-[95%] mx-auto'>
-                                <Link className='bg-[#0ab39c]  h-[50%] w-[100%] rounded   text-center  text-[#fff] hover:bg-[#099885]' to="/dashboard"><button className='bg-[#0ab39c] text-center items-center font-bold  h-[80%] w-[100%] rounded  text-[#fff] hover:bg-[#099885]'>Signin</button></Link>
+                            <div className='h-[15%] flex items-center  w-[95%] mx-auto'>
+                                <button onClick={login} className='bg-[#0ab39c] text-center items-center font-bold  h-[80%] w-[100%] rounded  text-[#fff] hover:bg-[#099885]'>Signin</button>
                             </div>
                             <div className=' flex w-[95%] mx-auto'>
                                 <div className='border-[0.01rem]  h-[20%] border-t-0 border-x-0  border-dashed  w-[35%]'>

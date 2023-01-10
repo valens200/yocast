@@ -1,14 +1,25 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
+type user = {
+        type:String,
+        names: String,
+        email: String,
+        country: String,
+        password: String
+}
 const initialState = {
     user:{
         FullName:"",
         Email:"",
         Country:"",
         Password:""
-
-    }
-
+    },
+    loggedInUser:{
+        type:"",
+        names: "",
+        email: "",
+        country: "",
+        password: ""
+    }as user,
 }
 const userSlice = createSlice({
     name:"authentication",
@@ -22,7 +33,6 @@ const userSlice = createSlice({
                     state.user.FullName = value;
                 case 'Email':
                     state.user.Email = value;
-                    console.log(state.user.Email)
                 case 'Country':
                     state.user.Country = value;
                 case 'Password':
@@ -30,9 +40,13 @@ const userSlice = createSlice({
                 default:
                     state.user.Password = state.user.Password;
             }
+        },
+        initializeLoggedInUser : (state, action: PayloadAction<user>) => {
+            state.loggedInUser = action.payload
+            
         }
     }
 })
 
 export const userReducer = userSlice.reducer;
-export const {initializeUser} = userSlice.actions
+export const {initializeUser, initializeLoggedInUser} = userSlice.actions
