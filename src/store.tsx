@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import { pageReducer } from "./features/pageSlice";
 import { recentActivityReducer } from "./features/recentActivitySlice";
@@ -11,15 +11,18 @@ import { userReducer } from "./features/userSlice";
 
 export const store = configureStore({
     reducer: {
-        page:pageReducer,
-        recentActivities:recentActivityReducer,
-        podcasts:podcastReducer,
-        customers:customerReducer,
-        orders:orderReducer,
-        subscriptions:clientsReducer,
-        authentication:authenticationReducer,
-        user:userReducer
-    }
+        page: pageReducer,
+        recentActivities: recentActivityReducer,
+        podcasts: podcastReducer,
+        customers: customerReducer,
+        orders: orderReducer,
+        subscriptions: clientsReducer,
+        authentication: authenticationReducer,
+        user: userReducer
+    },
+    middleware: getDefaultMiddleware => getDefaultMiddleware({
+        serializableCheck:false,
+    })
 })
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch;

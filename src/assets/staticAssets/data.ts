@@ -13,35 +13,25 @@ import { BsFillDice4Fill } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { Category } from "@mui/icons-material";
-//links used on sidebar
-// IVainqueur
-// 11: 41 AM
-//     + 250 791 023 745
-// @Tresor_13
-// 11: 42
-//     + 250 781 589 686
-// @Israel
 
+
+export const baseUrl = "http://localhost:5000"
 export const FormInputs = [
+  {
+    name: "FullName",
+    type: "text",
+  },
   {
     name: "Email",
     type: "email",
   },
   {
+    name: "Country",
+    type: "text",
+  },
+  {
     name: "Password",
-    type:"password"
-  },
-  {
-    name: "FullName",
-    type:"text"
-  },
-  {
-    name: "UserName",
-    type:"text"
-  },
-  {
-    name: "Nationality",
-    type:"text"
+    type: "password",
   },
 ];
 export const tableHeaders = [
@@ -54,7 +44,6 @@ export const tableHeaders = [
 ];
 export const ordersTableHeders = [
   "OrderId",
-  ,
   "Podcast",
   "Customer",
   "Amount",
@@ -157,25 +146,10 @@ export const sidebarLinks: sidebarLinksType[] = [
     link: "/create_podcast",
   },
   {
-    title: "Orders",
-    link: "/*",
-  },
-  {
-    title: "Order details",
-    link: "/*",
-  },
-  {
     title: "Subscriptions",
     link: "/subscriptions",
   },
-  {
-    title: "Sellers",
-    link: "/*",
-  },
-  {
-    title: "Seller details",
-    link: "/*",
-  },
+ 
 ];
 
 export const inputFields: inputFieldType[] = [

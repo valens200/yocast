@@ -1,7 +1,16 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type initialStateType = {};
 const initialState = {
+  podcast: {
+    title: "",
+    status: "",
+    visiblity: "",
+    publishSchedure: "",
+    category: "",
+    longDescription: "",
+    shortDescription: "",
+  },
   availablePodcasts: [
     {
       name: "WARUZIKO KURI RADIO RWANDA TARIKI YA 5 main activities",
@@ -14,7 +23,7 @@ const initialState = {
       views: 1000,
       createdAt: "1-12-2000",
     },
-      {
+    {
       name: "WARUZIKO KURI RADIO RWANDA TARIKI YA 5 main activities",
       cover:
         "https://production.listennotes.com/podcasts/radio-rwanda-radio-rwanda-YAI7sMdZQ1z-Qx5K1DS2GuR.300x300.jpg",
@@ -25,7 +34,7 @@ const initialState = {
       views: 1000,
       createdAt: "1-12-2000",
     },
-      {
+    {
       name: "WARUZIKO KURI RADIO RWANDA TARIKI YA 5 main activities",
       cover:
         "https://production.listennotes.com/podcasts/radio-rwanda-radio-rwanda-YAI7sMdZQ1z-Qx5K1DS2GuR.300x300.jpg",
@@ -157,7 +166,22 @@ const initialState = {
       selected: false,
     },
     {
-      category: "Political",
+      category: "Business",
+      availablePodcasts: 34,
+      selected: false,
+    },
+    {
+      category: "Arts",
+      availablePodcasts: 34,
+      selected: false,
+    },
+    {
+      category: "Music",
+      availablePodcasts: 34,
+      selected: false,
+    },
+    {
+      category: "Society",
       availablePodcasts: 34,
       selected: false,
     },
@@ -167,8 +191,33 @@ const initialState = {
 const podcastSlice = createSlice({
   name: "podcast",
   initialState,
-  reducers: {},
+  reducers: {
+    initializePodCast: (
+      state,
+      action: PayloadAction<{ action: String; value: String }>
+    ) => {
+      const whatTobeModified = action.payload.action;
+      switch (whatTobeModified) {
+        case "title":
+          state.podcast.title = action.payload.value.toString();
+          console.log("value", state.podcast.title) 
+        case "stattus":
+          state.podcast.title = action.payload.value.toString();
+        case "visibility":
+          state.podcast.visiblity = action.payload.value.toString();
+        case "publishSchedure":
+          state.podcast.publishSchedure = action.payload.value.toString();
+
+        case "category":
+          state.podcast.category = action.payload.value.toString();
+        case "longDescription":
+          state.podcast.longDescription = action.payload.value.toString();
+        case "shortDescription":
+          state.podcast.shortDescription = action.payload.value.toString();
+      }
+    },
+  },
 });
 
-export const {} = podcastSlice.actions;
+export const {initializePodCast} = podcastSlice.actions;
 export const podcastReducer = podcastSlice.reducer;

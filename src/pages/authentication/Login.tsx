@@ -8,46 +8,85 @@ import Footer from '../../components/homeComponents/Footer'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../store'
 import Header from '../../components/authenticationComponents/Header'
+import FirstInputs from '../../components/authenticationComponents/FirstInputs'
+import { initializeUser } from '../../features/userSlice'
+import { useAppDispatch } from '../../store'
 function Login() {
+    const numbers = [1, 2, 3, 4];
+    const dispatch = useAppDispatch();
     const isDarkMode = useSelector((store: RootState) => store.page.isDarkMode);
     return (
-        <div className={isDarkMode ? 'h-screen font-poppins font-sans  flex-col  flex items-center  bg-[#1a1d21] ' : 'h-screen font-poppins font-sans  flex-col  flex items-center  bg-[white] '}>
-            <div className='h-[5%] w-[100%]'>
-                <AuthNavigation />
-            </div>
-            <div className='h-[95%] flex items-center justify-center w-[100%]'>
-                <div className={isDarkMode ? 'md:w-[30%]  w-[95%] rounded   bg-[#212529] h-[60%] mx-auto mx-auto' : 'md:w-[30%]  w-[95%] rounded   bg-[#f3f3f9] h-[60%] mx-auto mx-auto'}>
-                    <div className=" p-5 flex  text-white space-y-2 flex-col justify-center text-center">
-                        <img className='w-[20%]  flex mx-auto' src={logo} alt="" />
-                        <div className='flex flex-col space-y-3'>
-                            <Header />
-                            <div className={isDarkMode ? 'text-[0.80rem] font-poppins font-sans' : 'text-[0.80rem] text-black font-poppins font-sans'}>
-                                <p>Sign in with your  <span className='text-[#0ab39c] font-sans mx-2 underline'>Yocast</span> account </p>
-                                <p> to start listening</p>
-                            </div>
+        <div className='h-screen font-poppins font-sans  flex-col  flex items-center'>
+            <div className='h-[98%] flex flex-col space-y-9 items-center justify-center w-[100%]'>
+                <div className='flex flex-col'>
+                    <img className='w-[20%]  flex mx-auto' src={logo} alt="" />
+                    <div className='flex flex-col space-y-3'>
+                        <Header />
+                        <div className='text-[0.80rem] text-center font-poppins font-sans' >
+                            <p>Sign in with your  <span className='text-[#0ab39c] font-sans mx-2 underline'>Yocast</span> account </p>
+                            <p> to start listening</p>
                         </div>
                     </div>
-                    <div className='w-[100%] h-[60%] flex flex-col space-y-4  mx-auto'>
-                    {/* bg-[#f3f3f9] */}
-                        {FormInputs.slice(0, 2).map((input, index) => (
-                            <div className='w-[80%] mx-auto'>
-                                <TextField  placeholder={input.name} sx={{ input: { color: '#0ab39c' } }} className={ isDarkMode ? 'w-[100%] bg-[#1a1d21]  textfield text-[white] focus:outline-0':'w-[100%] textfield  bg-[#f3f3f9]  text-[white] focus:outline-0'} type={input.type} label={input.name} variant="outlined" />
+                </div>
+                <div className='md:w-[25%]  text-black flex items-center shadow-xl border w-[95%] flex rounded    h-[58%]  mx-auto ' >
+                    <div className="flex  w-[90%] mx-auto  h-[90%]  space-y-5 flex-col text-center">
+                        <div className='text-black  h-[10%]'>
+                            <h1 className='text-[#405189]'>Welcome Back !</h1>
+                            <p className='text-[#878A99] font-poppins font-sans' >Sign in to continue to Yocast.</p>
+                        </div>
+                        <form className="h-[90%]  flex flex-col space-y-3 w-[100%] ">
+                            {FormInputs.slice(1, 4).map((input, index) => {
+                                if (input.name == 'Password') {
+                                    return (
+                                        <div className='h-[18%] w-[95%] mx-auto '>
+                                            <div className='h-[10%] flex justify-between'>
+                                                <p className='text-start font-poppins font-sans text-[0.90rem]  text-[#212529]'>{input.name} <span className='text-[#F06548]' >*</span></p>
+                                                <p className='text-start font-poppins font-sans text-[0.90rem]  text-[#878A99]'>Forgot password</p>
+                                            </div>
+                                            <div className='mt-8 w-[100%]  h-[53%]'>
+                                                <input onChange={(e) => dispatch(initializeUser({ key: input.name, value: e.target.value }))} type="text" className='h-[100%]  text-[#878A99] border text-[0.80rem] pl-3 focus:outline-0  w-[100%]' placeholder={"Enter " + input.name} />
+                                            </div>
+                                        </div>
+                                    )
+                                }
+                                if (index == 1) {
+                                    return null;
+                                }
+                                return (
+                                    <div key={index} className='w-[95%]  flex flex-col  mx-auto space-y-2  h-[18%]'>
+                                        <label className='text-start font-poppins font-sans text-[0.90rem]  text-[#212529]' htmlFor="">{input.name} <span className='text-[#F06548]' >*</span></label>
+                                        <input onChange={(e) => dispatch(initializeUser({ key: input.name, value: e.target.value }))} type="text" className='h-[100%] text-[#878A99] border text-[0.80rem] pl-3 focus:outline-0  w-[100%]' placeholder={"Enter " + input.name} />
+                                    </div>
+                                )
+                            })}
+                            <div className='h-[19%] flex items-center  w-[95%] mx-auto'>
+                                <Link className='bg-[#0ab39c]  h-[50%] w-[100%] rounded   text-center  text-[#fff] hover:bg-[#099885]' to="/dashboard"><button className='bg-[#0ab39c] text-center items-center font-bold  h-[80%] w-[100%] rounded  text-[#fff] hover:bg-[#099885]'>Signin</button></Link>
                             </div>
-                        ))}
-                        <div className='w-[80%] font-poppins font-sans flex justify-end mx-auto h-[10%]'>
-                            <Link to="/auth/reset_password"><p className='text-[0.80rem] text-[#0ab39c] underline hover:text-white hover:cursor-pointer'>Forgot password</p></Link>
-                          </div>
-                        <div className='w-[80%] h-[14%]  mx-auto'>
-                            <button className='bg-[#0ab39c]  h-[100%] w-[100%] rounded  text-[#fff] hover:bg-[#099885]'>Login</button>
-                        </div>
-                        <div className='w-[80%] font-poppins font-sans text-[0.80rem] text-[#7c7f90]  text-center mx-auto'>
-                            Don't have an account? Create one in our mobile app, or take a look at   <Link to="/auth/signup"><span className='text text-[#0ab39c]'>yocast signup</span></Link>.
-                        </div>
+                            <div className=' flex w-[95%] mx-auto'>
+                                <div className='border-[0.01rem]  h-[20%] border-t-0 border-x-0  border-dashed  w-[35%]'>
+                                </div>
+                                <div className='w-[30%]'>
+                                    <p>Sign in with</p>
+                                </div>
+                                <div className='w-[35%] h-[20%] border-t-0 border-x-0 border-[0.01rem] border-dashed'>
+                                </div>
+                            </div>
+                            <div className='h-[19%] flex  justify-center   w-[50%] mx-auto'>
+                                {numbers.map((nrb, index) => (
+                                    <div className='w-[20%] h-[60%] bg-black border'></div>
+                                ))}
+                            </div>
+
+                        </form>
+
                     </div>
 
                 </div>
+                <div className=' flex w-[95%] mx-auto'>
+                    <p className='text-center w-[100%] text-[0.80rem]'>Don't have an account ? <Link to="/auth/signup"><span className='text-[#405189] font-bold hover:cursor-pointer underline ml-1'>signup</span></Link></p>
+                </div>
             </div>
-            <div className='w-[100%]'>
+            <div className='w-[100%] h-[2%]'>
                 <Footer />
             </div>
         </div>

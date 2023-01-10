@@ -31,7 +31,6 @@ function AnalyticsCards() {
             clearTimeout(timer)
         }
     }, [count])
-
     return (
         <div className='text-white items-center md:space-y-0 space-y-6  font-poppins  md:h-[100%] flex flex-col md:flex-row justify-between md:w-[95%] w-[90%]  mx-auto '>
             {analyticsCards.map((card, index) => (

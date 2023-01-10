@@ -13,6 +13,9 @@
   width: 7px;
   height: 20%;
 }
+/* .main{
+  rotate: 160deg;
+} */
 .nav {
   z-index: 100;
 }
