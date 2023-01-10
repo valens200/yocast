@@ -4,7 +4,7 @@ import { RootState, useAppDispatch } from '../../store'
 import { useSelector } from 'react-redux'
 import { BsFillArrowRightCircleFill, BsFillArrowLeftCircleFill } from "react-icons/bs"
 import { Fade } from 'react-awesome-reveal'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import Sidebar from '../../components/homeComponents/Sidebar'
 import { set } from 'immer/dist/internal'
@@ -14,7 +14,17 @@ import ClientsTable from '../../components/clientsComponents/ClientsTable'
 import PodcastsList from '../../components/podcastsComponents/PodcastsList'
 import { setIsDarkMode } from '../../features/pageSlice'
 import Loading from '../../components/homeComponents/Loading'
+import { initializeLoggedInUser } from '../../features/userSlice'
 function Subscriptions() {
+    const user = JSON.parse(localStorage.getItem("user")!);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        dispatch(initializeLoggedInUser(user))
+        if(!user || user == "" || user == null){
+            navigate("/")
+        }
+    }, [user])
     const [fethed, setFetched] = useState<Boolean>(false);
     const podcastsCategories = useSelector((store: RootState) => store.podcasts.podcastsCategories);
     const showSidebar = useSelector((store: RootState) => store.page.showSidebar);

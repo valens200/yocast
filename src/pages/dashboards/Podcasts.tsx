@@ -4,7 +4,7 @@ import { RootState, useAppDispatch } from '../../store'
 import { useSelector } from 'react-redux'
 import { BsFillArrowRightCircleFill, BsFillArrowLeftCircleFill } from "react-icons/bs"
 import { Fade } from 'react-awesome-reveal'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import Sidebar from '../../components/homeComponents/Sidebar'
 import { set } from 'immer/dist/internal'
@@ -14,8 +14,18 @@ import Footer from '../../components/homeComponents/Footer'
 import { dialogClasses } from '@mui/material'
 import PodcastsList from '../../components/podcastsComponents/PodcastsList'
 import Loading from '../../components/homeComponents/Loading'
+import { initializeLoggedInUser } from '../../features/userSlice'
 
 function Podcasts() {
+    const user = JSON.parse(localStorage.getItem("user")!);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        dispatch(initializeLoggedInUser(user))
+        if(!user || user == "" || user == null){
+            navigate("/")
+        }
+    }, [user])
     const [fethed, setFetched] = useState<Boolean>(false);
     const podcastsCategories = useSelector((store: RootState) => store.podcasts.podcastsCategories);
     const isDarkMode = useSelector((store: RootState) => store.page.isDarkMode);

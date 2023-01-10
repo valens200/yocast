@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useSelect } from '@mui/base'
 import { RootState, store } from '../../store'
 import postcss from 'postcss'
-function Navbar(props: { name: string  }) {
+function Navbar(props: { name: string }) {
     const loggedInUser = useSelector((store: RootState) => store.user.loggedInUser);
     const icons = [<HiOutlineSquares2X2 />,
     <BsBag />,
@@ -38,7 +38,7 @@ function Navbar(props: { name: string  }) {
                     <div className='  w-[30%] md:w-[70%] flex h-[100%] space-x-4 items-center flex-row '>
                         <div className='flex text-[grey]     flex-row space-x-8'>
                             <HiMenuAlt1 onClick={() => dispatch(setShowSidebar("show"))} className='text-3xl md:hidden' />
-                            <HiMenuAlt1  className='text-3xl md:block hidden' />
+                            <HiMenuAlt1 className='text-3xl md:block hidden' />
                         </div>
                         <div className='md:w-[30%] md:block hidden h-[55%]'>
                             <input type="text" className={isDarkMode ? 'bg-[#1a1d21] focus:outline-0 text-[0.80rem] rounded pl-3 h-[100%] w-[100%]' : 'bg-[#f3f3f9] focus:outline-0 text-[0.80rem] rounded pl-3 h-[100%] w-[100%]'} placeholder='search....' />
@@ -51,7 +51,7 @@ function Navbar(props: { name: string  }) {
                                     if (index == 3) {
                                         if (isDarkMode) {
                                             return (
-                                                <li  onClick={() => dispatch(setIsDarkMode("white"))} className='text-2xl hover:bg-[#405189] p-2 rounded-full hover:cursor-pointer' key={index}>{icon} <p className={getClass(index)}>23</p></li>
+                                                <li onClick={() => dispatch(setIsDarkMode("white"))} className='text-2xl hover:bg-[#405189] p-2 rounded-full hover:cursor-pointer' key={index}>{icon} <p className={getClass(index)}>23</p></li>
                                             )
                                         }
                                         return (

@@ -29,7 +29,7 @@ function Form() {
     }
     const getInput = (inputField: inputFieldType, divTitle: String) => {
         if (inputField.type === "select") {
-            return <select onChange={(e) => dispatch(initializePodCast({action:divTitle, value:e.target.value}))} className={isDarkMode ? 'w-[100%]  border border-[0.1px]  border-[#32383e] rounded  pl-3 focus:outline-0 bg-[#2a2f34] h-[100%]' : 'w-[100%]  border border-[0.1px]  border-[#32383e] rounded  pl-3 focus:outline-0 bg-white h-[100%]'} name="select">
+            return <select onChange={(e) => dispatch(initializePodCast({ key: divTitle, value: e.target.value }))} className={isDarkMode ? 'w-[100%]  border border-[0.1px]  border-[#32383e] rounded  pl-3 focus:outline-0 bg-[#2a2f34] h-[100%]' : 'w-[100%]  border border-[0.1px]  border-[#32383e] rounded  pl-3 focus:outline-0 bg-white h-[100%]'} name="select">
                 {inputField.options?.map((option, index) => (
                     <option key={index}>{option}</option>
                 ))}
@@ -39,9 +39,8 @@ function Form() {
         } else if (inputField.type === "button") {
             return <button className='w-[100%] bg-[#405189] rounded hover:bg-[#364574] text-[#fff] h-[100%]'>Filters</button>
         } else {
-            return <input onChange={(e) => dispatch(initializePodCast({ action: divTitle, value: e.target.value.toString() }))} className={isDarkMode ? 'bg-[#2a2f34] border border-[0.1px]  border-[#32383e]  rounded focus:outline-0 fous:border focus:border-[#32383e] pl-4  w-[100%] h-[100%]' : 'bg-white border border-[0.1px]  border-[#32383e]  rounded focus:outline-0 fous:border focus:border-[#32383e] pl-4  w-[100%] h-[100%]'} placeholder={inputField.placeholder.toString()} type={inputField.type.toString()} />
+            return <input onChange={(e) => dispatch(initializePodCast({ key: divTitle, value: e.target.value.toString() }))} className={isDarkMode ? 'bg-[#2a2f34] border border-[0.1px]  border-[#32383e]  rounded focus:outline-0 fous:border focus:border-[#32383e] pl-4  w-[100%] h-[100%]' : 'bg-white border border-[0.1px]  border-[#32383e]  rounded focus:outline-0 fous:border focus:border-[#32383e] pl-4  w-[100%] h-[100%]'} placeholder={inputField.placeholder.toString()} type={inputField.type.toString()} />
         }
-
     }
     const config = {
         style: {
@@ -51,12 +50,12 @@ function Form() {
     };
     return (
         <div className={isDarkMode === true ? 'w-[100%] font-poppins flex md:flex-row flex-col space-y-4 md:space-y-0  justify-between text-[0.80rem] h-[100%]' : 'w-[100%] text-[#212529] font-poppins flex md:flex-row flex-col space-y-4 md:space-y-0  justify-between text-[0.80rem] h-[100%]'}>
-            <div className={isDarkMode === true ? 'md:w-[67%] flex  items-center  bg-[#212529] h-[100%] font-sans md:h-[50%]' : 'md:w-[67%] flex  items-center  bg-white  h-[100%] font-sans md:h-[90%]'}>
+            <div className={isDarkMode === true ? 'md:w-[67%] flex  items-center  bg-[#212529] h-[100%] font-sans md:h-[60%]' : 'md:w-[67%] flex  items-center  bg-white  h-[100%] font-sans md:h-[60%]'}>
                 <div className='flex w-[95%]  mx-auto  h-[95%]'>
                     <div className=' w-[100%] w-[100%]  flex-col space-y-8 md:space-y-5 h-[100%]'>
                         <div className=' flex w-[100%] h-[20%]  md:h-[10%] flex-col space-y-2 mx-auto'>
                             <div className='md:h-[100%] h-[100%] w-[100%]'>
-                                <input placeholder='Enter product title' className={isDarkMode ? 'bg-[#262A2F] border border-[0.1px]  border-[#32383e]   focus:outline-0 fous:border focus:border-[#32383e] pl-4  w-[100%] h-[100%]' : 'bg-white border border-[0.1px]  border-[#32383e]   focus:outline-0 fous:border focus:border-[#32383e] pl-4  w-[100%] h-[100%]'} type="text" />
+                                <input placeholder='Enter product title' className={isDarkMode ? 'bg-[#262A2F] border border-[0.1px]  border-[#32383e]   focus:outline-0 fous:border focus:border-[#32383e] pl-4  w-[100%] h-[75%]' : 'bg-white border border-[0.1px]  border-[#32383e]   focus:outline-0 fous:border focus:border-[#32383e] pl-4  w-[100%] h-[75%]'} type="text" />
                             </div>
                         </div>
                         {/* <div className='w-[100%] flex  h-[30%]  flex-col space-y-2 mx-auto'>
@@ -68,12 +67,26 @@ function Form() {
                         {/* // <input placeholder='' className={isDarkMode ? 'bg-[#2a2f34] focus:outline-0 fous:border focus:border-[#32383e] pl-4  w-[100%] h-[100%]' : 'bg-white border focus:outline-0 fous:border focus:border-[#32383e] pl-4  w-[100%] h-[100%]'} type="text" /> */}
                         {/* </div> */}
                         {/* </div> */}
-                        <div className='w-[100%] flex  space-y-2 h-[70%]   flex-col space-y-2 mx-auto'>
+                        <div className='w-[100%] flex  space-y-2 h-[30%]   flex-col space-y-10 mx-auto'>
+                            <div className='flex  flex-col h-[10%]'>
+                                <h1 className='text-[0.90rem]'>Podcast phumbnail or cover image</h1>
+                                <p className='text-[#7c7f90]'>Drag &amp; drop the podcast cover image here</p>
+                            </div>
+                            <div className={isDarkMode ? ' text-center text-[1rem]  flex justify-center items-center bg-[#212529]  border-[0.1px]  border-[#32383e] border-dashed  text-[#CED4DA]   focus:outline-0 fous:border  focus:border-[#32383e] pl-4  w-[100%] h-[80%]' : ' text-center text-[#495057] flex justify-center items-center text-[1rem] bg-white  border-[0.1px]  border-[#32383e] border-dashed  text-[#CED4DA]   focus:outline-0 fous:border items-center  focus:border-[#32383e] pl-4  w-[100%] h-[80%]'}>
+                                <div className="container">
+                                    <div {...getRootProps({ className: "dropzone" })}>
+                                        <input id='file-input' {...getInputProps()} />
+                                        <label htmlFor="file-input">Drag 'n' drop the cover image  here</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='w-[100%] flex  space-y-2 h-[40%]   flex-col space-y-6 mx-auto'>
                             <div className='flex  flex-col h-[10%]'>
                                 <h1 className='text-[0.90rem]'>Podcast File</h1>
                                 <p className='text-[#7c7f90]'>Drag &amp; drop the podcast file here</p>
                             </div>
-                            <div className={isDarkMode ? ' text-center text-[1rem]  flex justify-center items-center bg-[#212529]  border-[0.1px]  border-[#32383e] border-dashed  text-[#CED4DA]   focus:outline-0 fous:border  focus:border-[#32383e] pl-4  w-[100%] h-[80%]' : ' text-center text-[#495057] flex justify-center items-center text-[1rem] bg-white  border-[0.1px]  border-[#32383e] border-dashed  text-[#CED4DA]   focus:outline-0 fous:border items-center  focus:border-[#32383e] pl-4  w-[100%] h-[100%]'}>
+                            <div className={isDarkMode ? ' text-center text-[1rem]  flex justify-center items-center bg-[#212529]  border-[0.1px]  border-[#32383e] border-dashed  text-[#CED4DA]   focus:outline-0 fous:border  focus:border-[#32383e] pl-4  w-[100%] h-[80%]' : ' text-center text-[#495057] flex justify-center items-center text-[1rem] bg-white  border-[0.1px]  border-[#32383e] border-dashed  text-[#CED4DA]   focus:outline-0 fous:border items-center  focus:border-[#32383e] pl-4  w-[100%] h-[80%]'}>
                                 <div className="container">
                                     <div {...getRootProps({ className: "dropzone" })}>
                                         <input id='file-input' {...getInputProps()} />
@@ -102,7 +115,7 @@ function Form() {
                                         <div className='flex h-[10%]'>
                                             <h1 className='text-[0.90rem] text-[#7c7f90]'>{input.label}</h1>
                                         </div>
-                                        {getInput(input, div.title)}
+                                        {getInput(input, input.label)}
                                     </div>
                                 ))}
                             </div>

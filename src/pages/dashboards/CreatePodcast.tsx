@@ -4,7 +4,7 @@ import { RootState, useAppDispatch } from '../../store'
 import { useSelector } from 'react-redux'
 import { BsFillArrowRightCircleFill, BsFillArrowLeftCircleFill } from "react-icons/bs"
 import { Fade } from 'react-awesome-reveal'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import Sidebar from '../../components/homeComponents/Sidebar'
 import { set } from 'immer/dist/internal'
@@ -14,7 +14,17 @@ import Form from '../../components/createPodcastComponents/Form'
 
 import Footer from '../../components/homeComponents/Footer'
 import Loading from '../../components/homeComponents/Loading'
+import { initializeLoggedInUser } from '../../features/userSlice'
 function CreateProduct() {
+    const user = JSON.parse(localStorage.getItem("user")!);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        dispatch(initializeLoggedInUser(user))
+        if(!user || user == "" || user == null){
+            navigate("/")
+        }
+    }, [user])
     const [fethed, setFetched] = useState<Boolean>(false);
     const recentActivities = useSelector((store: RootState) => store.recentActivities.activities);
     const podcasts = useSelector((store: RootState) => store.podcasts.podcasts);

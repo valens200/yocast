@@ -23,7 +23,7 @@ function Sidebar() {
         <div onClick={() => dispatch(setShowSidebar("hide"))} className={getSidebarClass().toString()}>
             <div className='h-[10%] w-[100%] flex  flex-col items-center mt-4  '>
                 <img className='w-[30%]  flex mx-auto' src={logo} alt="yocast logo" />
-                <Link className={isDarkMode ? 'text-center  font-poppins font-sans font-bold   text-3xl' : 'text-center text-white  font-poppins font-sans font-bold   text-3xl'} to="/"><h1 >YOCAST</h1></Link>
+                <Link className={isDarkMode ? 'text-center  font-poppins font-sans font-bold   text-3xl' : 'text-center text-white  font-poppins font-sans font-bold   text-3xl'} to="/dashboard"><h1 >YOCAST</h1></Link>
             </div>
             <div className={isDarkMode ? 'w-[60%] flex items-center h-[70%] mx-auto text-[#7c7f90]':'w-[60%] flex items-center h-[70%] hover:text-white mx-auto text-[#ABB9E8]'}>
                 <Slide>

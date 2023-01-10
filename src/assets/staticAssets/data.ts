@@ -15,6 +15,8 @@ import { RootState } from "../../store";
 import { Category } from "@mui/icons-material";
 
 
+const user = JSON.parse(localStorage.getItem("user")!);
+export  const lengthSample: number = "WARUZIKO KURI RADIO RWANDA TARIKI YA 5".length;
 export const baseUrl = "http://localhost:5000"
 export const FormInputs = [
   {
@@ -139,7 +141,7 @@ export const sidebarLinks: sidebarLinksType[] = [
   },
   {
     title: "Podcast Details",
-    link: "details",
+    link: "/details",
   },
   {
     title: "Create Podcast",

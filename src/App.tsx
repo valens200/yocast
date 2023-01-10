@@ -9,19 +9,20 @@ import For04 from './pages/dashboards/For04'
 import Login from './pages/authentication/Login'
 import Signup from './pages/authentication/Signup'
 import ResetPassword from './pages/authentication/ResetPassword'
+import PodcastDetails from './pages/dashboards/PodcastDetails'
 function App() {
   return (
     <Router >
       <Routes>
-        <Route path="/auth/reset_password"  element={<ResetPassword />}/>
+        <Route path="/auth/reset_password" element={<ResetPassword />} />
         <Route path='/auth/signup' element={<Signup />} />
         <Route path='/' element={<Login />} />
         <Route path="/dashboard" element={<Home />} />
         <Route path="/podcasts" element={<Podcasts />} />
         <Route path="/subscriptions" element={<Subscriptions />} />
         <Route path='/create_podcast' element={<CreatePodcast />} />
-        <Route path='*' element={<For04 />} />
-        <Route path='/*' element={<For04 />} />
+        {/* <Route path='*' element={<For04 />} /> */}
+        <Route path='/details' element={<PodcastDetails />} />
       </Routes>
     </Router>
   )

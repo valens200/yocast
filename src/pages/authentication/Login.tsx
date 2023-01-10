@@ -19,6 +19,7 @@ import axios from 'axios'
 function Login() {
     const numbers = [1, 2, 3, 4];
     const dispatch = useAppDispatch();
+    const [loggedin, setLoggedIn ] = useState<boolean>(false);
     const isDarkMode = useSelector((store: RootState) => store.page.isDarkMode);
     const userToLogin = useSelector((store: RootState) => store.user.user);
     const navigate = useNavigate();
@@ -38,6 +39,7 @@ function Login() {
             email: userToLogin.Email,
             password: userToLogin.Password,
         }).then((response) => {
+            setLoggedIn(true)
             localStorage.setItem("user",  JSON.stringify(response.data.user))
             toast.success("You loggedin successfully")
             if (response.data.statusCode === 200) {
