@@ -115,12 +115,12 @@ function Home() {
 
                             </div>
                         </div>
-                        <div className='w-[95%] mx-auto  h-[40vh] md:mt-0 mt-[20%]'>
+                        <div className='w-[95%] mx-auto  h-[80vh] md:mt-0 mt-[20%]'>
                             <SellingProducts />
                         </div>
-                        <div className='h-[100%]'>
+                        {/* <div className='h-[100%]'>
                             <Orders />
-                        </div>
+                        </div> */}
                         <div ref={footRef} className='sticky md:hidden bottom-0'>
                             <Footer />
                         </div>
@@ -162,7 +162,6 @@ function Home() {
                             <div className={isDarkMode ? 'w-[95%]  bg-[#212529] mx-auto p-4 font-sans font-poppins flex flex-col space-y-8' : 'w-[95%] text-[#212529] fontpoppins font-sans  bg-white  mx-auto p-4 flex flex-col space-y-8'}>
                                 <h1 className="font-poppins font-sans text-[0.80rem] font-bold text-[grey]">TOP 10 PODCASTS</h1>
                                 <div>
-
                                     {podcasts.map((activity, index) => (
                                         <div className='w-[100%] h-[10vh]' key={index}>
                                             <div className='flex space-x-2 w-[100%]'>

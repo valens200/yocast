@@ -14,10 +14,11 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { Category } from "@mui/icons-material";
 
-
 const user = JSON.parse(localStorage.getItem("user")!);
-export  const lengthSample: number = "WARUZIKO KURI RADIO RWANDA TARIKI YA 5".length;
-export const baseUrl = "http://localhost:5000"
+export const cloudinaryUrl =
+  "https://api.cloudinary.com/v1_1/rwanda-sdfcoding-fdsacademy/image/upload";
+export const lengthSample: number = "WARUZIKO KURI RADIO RWANDA ".length;
+export const baseUrl = "http://localhost:5000";
 export const FormInputs = [
   {
     name: "FullName",
@@ -37,12 +38,12 @@ export const FormInputs = [
   },
 ];
 export const tableHeaders = [
+  "",
   " Podcast Title",
   " Category",
-  " Length",
   "Likes",
   "Views",
-  "Created At",
+  "Created",
 ];
 export const ordersTableHeders = [
   "OrderId",
@@ -151,7 +152,6 @@ export const sidebarLinks: sidebarLinksType[] = [
     title: "Subscriptions",
     link: "/subscriptions",
   },
- 
 ];
 
 export const inputFields: inputFieldType[] = [

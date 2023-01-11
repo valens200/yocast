@@ -71,12 +71,7 @@ function For04() {
                 </div>
                 {fethed === false ? <Loading /> : <div className='w-[100%]   flex flex-row  justify-between h-[100%]'>
                     <div className='w-[100%]   flex flex flex-col space-y-1 text-white h-screen h-screen'>
-                        <div className='h-[7%]'>
-                            <div className='h-[100%] w-[95%]'>
-
-                            </div>
-                        </div>
-                        <div className='h-[90%] w-[95%] mx-auto'>
+                        <div className=' h-[100%] md:h-[90%] w-[95%] mx-auto'>
                             <Orders />
                         </div>
                         <div className='w-[100%] h-[3%] bottom-0  '>

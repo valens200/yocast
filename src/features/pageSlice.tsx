@@ -4,6 +4,7 @@ import { FaPortrait, FaBalanceScaleLeft } from "react-icons/fa"
 import { BiDollarCircle, BiUserCircle, BiWallet } from "react-icons/bi"
 
 const initialState = {
+  showBackDrop:false,
   showSidebar: false,
   isDarkMode: true,
   next:false,
@@ -20,7 +21,7 @@ const initialState = {
       icon: <BiDollarCircle />
     },
     {
-      title: "ORDERS",
+      title: "SUBSCRIPTIONS",
       percentage: " -3.57 %",
       value: 0,
       count: 169,
@@ -72,6 +73,15 @@ const pageSlice = createSlice({
         state.showSidebar = state.showSidebar;
       }
     },
+    setShowBackDrop: (state, action: PayloadAction<String>) => {
+      const whatToDO = action.payload;
+      if(whatToDO == 'show'){
+        state.showBackDrop = true;
+      }else{
+        state.showBackDrop = false;
+      }
+
+    },
     initialCardValues: (state, action: PayloadAction<null>) => {
       const analyticsCards = state.analyticsCards;
       analyticsCards.forEach((card) => (
@@ -91,5 +101,5 @@ const pageSlice = createSlice({
   }
 });
 
-export const { setShowSidebar, setIsDarkMode, initialCardValues,setNext } = pageSlice.actions;
+export const { setShowSidebar,  setShowBackDrop ,setIsDarkMode, initialCardValues,setNext } = pageSlice.actions;
 export const pageReducer = pageSlice.reducer;

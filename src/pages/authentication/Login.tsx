@@ -15,9 +15,14 @@ import { useAppDispatch } from '../../store'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {ImFacebook2} from 'react-icons/im'
+import {FcGoogle} from 'react-icons/fc'
+import {GrLinkedin} from 'react-icons/gr'
+import {BsInstagram} from 'react-icons/bs'
 import axios from 'axios'
 function Login() {
     const numbers = [1, 2, 3, 4];
+    const icons = [<ImFacebook2 className='w-[100%] h-[100%] text-[#0ab39c]' />, <FcGoogle  className='w-[100%] h-[100%] text-[#0ab39c]'/>,<GrLinkedin className='w-[100%] h-[100%] text-[#0ab39c]' />, <BsInstagram className='w-[100%] h-[100%] text-[#0ab39c]' />]
     const dispatch = useAppDispatch();
     const [loggedin, setLoggedIn ] = useState<boolean>(false);
     const isDarkMode = useSelector((store: RootState) => store.page.isDarkMode);
@@ -112,8 +117,10 @@ function Login() {
                                 </div>
                             </div>
                             <div className='h-[19%] flex  justify-center   w-[50%] mx-auto'>
-                                {numbers.map((nrb, index) => (
-                                    <div className='w-[20%] h-[60%] bg-black border'></div>
+                                {icons.map((icon, index) => (
+                                    <div key={index} className='w-[20%]  hover:cursor-pointer h-[60%] border'>
+                                        <p className='w-[100%] h-[100%]'>{icon}</p>
+                                    </div>
                                 ))}
                             </div>
 

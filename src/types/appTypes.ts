@@ -17,6 +17,15 @@ export type podcastsCategoryType = {
   selected: boolean;
 };
 
+export type File = {
+  path: String;
+  lastModified: String;
+  lastModifiedDate: Object;
+  name: String;
+  size: number;
+  type: String;
+  webkitRelativePath: String;
+};
 export type inputFieldType = {
   placeholder: String;
   type: String;

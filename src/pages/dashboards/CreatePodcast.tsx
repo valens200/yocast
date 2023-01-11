@@ -11,12 +11,13 @@ import { set } from 'immer/dist/internal'
 import Navbar from '../../components/homeComponents/Navbar'
 import { activityType } from '../../types/appTypes'
 import Form from '../../components/createPodcastComponents/Form'
-
 import Footer from '../../components/homeComponents/Footer'
 import Loading from '../../components/homeComponents/Loading'
 import { initializeLoggedInUser } from '../../features/userSlice'
+import { setShowBackDrop } from '../../features/pageSlice'
 function CreateProduct() {
     const user = JSON.parse(localStorage.getItem("user")!);
+   
     const navigate = useNavigate();
 
     useEffect(() => {

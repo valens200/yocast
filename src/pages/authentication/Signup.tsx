@@ -16,13 +16,18 @@ import { baseUrl } from '../../assets/staticAssets/data'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom'
-function Signup() { 
+import {ImFacebook2} from 'react-icons/im'
+import {FcGoogle} from 'react-icons/fc'
+import {GrLinkedin} from 'react-icons/gr'
+import {BsInstagram} from 'react-icons/bs'
+function Signup() {
     const numbers = [1, 2, 3, 4];
     const dispatch = useAppDispatch();
     const Navigate = useNavigate();
     const [message, setMessage] = useState("");
     const isDarkMode = useSelector((store: RootState) => store.page.isDarkMode);
     const userToregister = useSelector((store: RootState) => store.user.user);
+    const icons = [<ImFacebook2 className='w-[100%] h-[100%] text-[#0ab39c]' />, <FcGoogle  className='w-[100%] h-[100%] text-[#0ab39c]'/>,<GrLinkedin className='w-[100%] h-[100%] text-[#0ab39c]' />, <BsInstagram className='w-[100%] h-[100%] text-[#0ab39c]' />]
     const registerUser = () => {
         const inputs = [userToregister.FullName, userToregister.Email, userToregister.Country, userToregister.Password];
         for (let i = 0; i < inputs.length; i++) {
@@ -41,7 +46,7 @@ function Signup() {
                 } else if (i === 2) {
                     toast.error("Country is required, can not be empty");
                     return;
-                } else if (i + 1 === 3) {
+                } else if (i + 1 === 3) {   
                     toast.error("Password is required , can not be empty");
                     return;
                 } else {
@@ -57,7 +62,7 @@ function Signup() {
         }).then((response) => {
             console.log(response.data.message);
             localStorage.setItem("username", response.data.user.names);
-            localStorage.setItem("user",  JSON.stringify(response.data.user));
+            localStorage.setItem("user", JSON.stringify(response.data.user));
             localStorage.setItem("token", response.data.user.token.token)
             Navigate("/dashboards")
         }).catch((error) => {
@@ -110,8 +115,10 @@ function Signup() {
                                 </div>
                             </div>
                             <div className='h-[19%] flex  justify-center   w-[50%] mx-auto'>
-                                {numbers.map((nrb, index) => (
-                                    <div key={index} className='w-[20%] h-[60%] bg-black border'></div>
+                                {icons.map((icon, index) => (
+                                    <div key={index} className='w-[20%] hover:cursor-pointer h-[60%] border'>
+                                        <p className='w-[100%] h-[100%]'>{icon}</p>
+                                    </div>
                                 ))}
                             </div>
 

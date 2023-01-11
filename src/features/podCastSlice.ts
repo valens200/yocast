@@ -2,8 +2,9 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type initialStateType = {};
 const initialState = {
+  categoryClicked:false,
   selectedPodcast: {
-    category:"Politics",
+    category: "Politics",
     coverImages: [
       "data:image/jpeg;base64,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",
       "data:image/jpeg;base64,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",
@@ -18,7 +19,7 @@ const initialState = {
     price: 700,
     url: "https://yocast-api.nextreflexe.com/videos/podcasts/2021-08-26T11:11:45.357ZBEST OF MOSSAD 15-18- HACIYE UWAMBAYE MU BITERO BYO GUHITANA ABATEGETSI.mp4",
     updatedAt: "2021-08-26T11:11:47.003Z",
-    createdAt: "2021-08-26T11:11:47.003Z"
+    createdAt: "2021-08-26T11:11:47.003Z",
   },
   podcast: {
     title: "",
@@ -34,10 +35,13 @@ const initialState = {
   availablePodcasts: [
     {
       name: "WARUZIKO KURI RADIO RWANDA TARIKI YA 5 main activities",
-      cover:
+      category: "political",
+      cover: [
         "https://production.listennotes.com/podcasts/radio-rwanda-radio-rwanda-YAI7sMdZQ1z-Qx5K1DS2GuR.300x300.jpg",
+      ],
       description: "new podcasts about waruziko and gentil gedeo staffs",
       length: "45:34:90",
+      isFree: false,
       time: "year ago",
       likes: 450,
       views: 1000,
@@ -45,58 +49,163 @@ const initialState = {
     },
     {
       name: "WARUZIKO KURI RADIO RWANDA TARIKI YA 5 main activities",
-      cover:
+      category: "Religous",
+      price: 700,
+      url: "https://yocast-api.nextreflexe.com/videos/podcasts/2021-08-26T11:11:45.357ZBEST OF MOSSAD 15-18- HACIYE UWAMBAYE MU BITERO BYO GUHITANA ABATEGETSI.mp4",
+      cover: [
         "https://production.listennotes.com/podcasts/radio-rwanda-radio-rwanda-YAI7sMdZQ1z-Qx5K1DS2GuR.300x300.jpg",
+      ],
       description: "new podcasts about waruziko and gentil gedeo staffs",
       length: "45:34:90",
       time: "year ago",
       likes: 450,
       views: 1000,
-      createdAt: "1-12-2000",
+      updatedAt: "2021-08-26T11:11:47.003Z",
+      createdAt: "2021-08-26T11:11:47.003Z",
     },
     {
       name: "WARUZIKO KURI RADIO RWANDA TARIKI YA 5 main activities",
-      cover:
+      category: "Geographical",
+      price: 700,
+      url: "https://yocast-api.nextreflexe.com/videos/podcasts/2021-08-26T11:11:45.357ZBEST OF MOSSAD 15-18- HACIYE UWAMBAYE MU BITERO BYO GUHITANA ABATEGETSI.mp4",
+      cover: [
         "https://production.listennotes.com/podcasts/radio-rwanda-radio-rwanda-YAI7sMdZQ1z-Qx5K1DS2GuR.300x300.jpg",
+      ],
       description: "new podcasts about waruziko and gentil gedeo staffs",
       length: "45:34:90",
       time: "year ago",
       likes: 450,
       views: 1000,
-      createdAt: "1-12-2000",
+      updatedAt: "2021-08-26T11:11:47.003Z",
+      createdAt: "2021-08-26T11:11:47.003Z",
     },
     {
       name: "WARUZIKO KURI RADIO RWANDA TARIKI YA 5 main activities",
-      cover:
+      category: "Geographical",
+      price: 700,
+      url: "https://yocast-api.nextreflexe.com/videos/podcasts/2021-08-26T11:11:45.357ZBEST OF MOSSAD 15-18- HACIYE UWAMBAYE MU BITERO BYO GUHITANA ABATEGETSI.mp4",
+      cover: [
         "https://production.listennotes.com/podcasts/radio-rwanda-radio-rwanda-YAI7sMdZQ1z-Qx5K1DS2GuR.300x300.jpg",
+      ],
       description: "new podcasts about waruziko and gentil gedeo staffs",
       length: "45:34:90",
       time: "year ago",
       likes: 450,
       views: 1000,
-      createdAt: "1-12-2000",
+      updatedAt: "2021-08-26T11:11:47.003Z",
+      createdAt: "2021-08-26T11:11:47.003Z",
     },
     {
       name: "WARUZIKO KURI RADIO RWANDA TARIKI YA 5 main activities",
-      cover:
+      category: "Geographical",
+      price: 700,
+      url: "https://yocast-api.nextreflexe.com/videos/podcasts/2021-08-26T11:11:45.357ZBEST OF MOSSAD 15-18- HACIYE UWAMBAYE MU BITERO BYO GUHITANA ABATEGETSI.mp4",
+      cover: [
         "https://production.listennotes.com/podcasts/radio-rwanda-radio-rwanda-YAI7sMdZQ1z-Qx5K1DS2GuR.300x300.jpg",
+      ],
       description: "new podcasts about waruziko and gentil gedeo staffs",
       length: "45:34:90",
       time: "year ago",
       likes: 450,
       views: 1000,
-      createdAt: "1-12-2000",
+      updatedAt: "2021-08-26T11:11:47.003Z",
+      createdAt: "2021-08-26T11:11:47.003Z",
     },
     {
       name: "WARUZIKO KURI RADIO RWANDA TARIKI YA 5 main activities",
-      cover:
+      category: "Society",
+      price: 700,
+      url: "https://yocast-api.nextreflexe.com/videos/podcasts/2021-08-26T11:11:45.357ZBEST OF MOSSAD 15-18- HACIYE UWAMBAYE MU BITERO BYO GUHITANA ABATEGETSI.mp4",
+      cover: [
         "https://production.listennotes.com/podcasts/radio-rwanda-radio-rwanda-YAI7sMdZQ1z-Qx5K1DS2GuR.300x300.jpg",
+      ],
       description: "new podcasts about waruziko and gentil gedeo staffs",
       length: "45:34:90",
       time: "year ago",
       likes: 450,
       views: 1000,
-      createdAt: "1-12-2000",
+      updatedAt: "2021-08-26T11:11:47.003Z",
+      createdAt: "2021-08-26T11:11:47.003Z",
+    },
+    {
+      name: "WARUZIKO KURI RADIO RWANDA TARIKI YA 5 main activities",
+      category: "Society",
+      price: 700,
+      url: "https://yocast-api.nextreflexe.com/videos/podcasts/2021-08-26T11:11:45.357ZBEST OF MOSSAD 15-18- HACIYE UWAMBAYE MU BITERO BYO GUHITANA ABATEGETSI.mp4",
+      cover: [
+        "https://production.listennotes.com/podcasts/radio-rwanda-radio-rwanda-YAI7sMdZQ1z-Qx5K1DS2GuR.300x300.jpg",
+      ],
+      description: "new podcasts about waruziko and gentil gedeo staffs",
+      length: "45:34:90",
+      time: "year ago",
+      likes: 450,
+      views: 1000,
+      updatedAt: "2021-08-26T11:11:47.003Z",
+      createdAt: "2021-08-26T11:11:47.003Z",
+    },
+    {
+      name: "WARUZIKO KURI RADIO RWANDA TARIKI YA 5 main activities",
+      category: "Society",
+      price: 700,
+      url: "https://yocast-api.nextreflexe.com/videos/podcasts/2021-08-26T11:11:45.357ZBEST OF MOSSAD 15-18- HACIYE UWAMBAYE MU BITERO BYO GUHITANA ABATEGETSI.mp4",
+      cover: [
+        "https://production.listennotes.com/podcasts/radio-rwanda-radio-rwanda-YAI7sMdZQ1z-Qx5K1DS2GuR.300x300.jpg",
+      ],
+      description: "new podcasts about waruziko and gentil gedeo staffs",
+      length: "45:34:90",
+      time: "year ago",
+      likes: 450,
+      views: 1000,
+      updatedAt: "2021-08-26T11:11:47.003Z",
+      createdAt: "2021-08-26T11:11:47.003Z",
+    },
+    {
+      name: "WARUZIKO KURI RADIO RWANDA TARIKI YA 5 main activities",
+      category: "Arts",
+      price: 700,
+      url: "https://yocast-api.nextreflexe.com/videos/podcasts/2021-08-26T11:11:45.357ZBEST OF MOSSAD 15-18- HACIYE UWAMBAYE MU BITERO BYO GUHITANA ABATEGETSI.mp4",
+      cover: [
+        "https://production.listennotes.com/podcasts/radio-rwanda-radio-rwanda-YAI7sMdZQ1z-Qx5K1DS2GuR.300x300.jpg",
+      ],
+      description: "new podcasts about waruziko and gentil gedeo staffs",
+      length: "45:34:90",
+      time: "year ago",
+      likes: 450,
+      views: 1000,
+      updatedAt: "2021-08-26T11:11:47.003Z",
+      createdAt: "2021-08-26T11:11:47.003Z",
+    },
+    {
+      name: "WARUZIKO KURI RADIO RWANDA TARIKI YA 5 main activities",
+      category: "Arts",
+      price: 700,
+      url: "https://yocast-api.nextreflexe.com/videos/podcasts/2021-08-26T11:11:45.357ZBEST OF MOSSAD 15-18- HACIYE UWAMBAYE MU BITERO BYO GUHITANA ABATEGETSI.mp4",
+      cover: [
+        "https://production.listennotes.com/podcasts/radio-rwanda-radio-rwanda-YAI7sMdZQ1z-Qx5K1DS2GuR.300x300.jpg",
+      ],
+      description: "new podcasts about waruziko and gentil gedeo staffs",
+      length: "45:34:90",
+      time: "year ago",
+      likes: 450,
+      views: 1000,
+      updatedAt: "2021-08-26T11:11:47.003Z",
+      createdAt: "2021-08-26T11:11:47.003Z",
+    },
+    {
+      name: "WARUZIKO KURI RADIO RWANDA TARIKI YA 5 main activities",
+      category: "Arts",
+      price: 700,
+      url: "https://yocast-api.nextreflexe.com/videos/podcasts/2021-08-26T11:11:45.357ZBEST OF MOSSAD 15-18- HACIYE UWAMBAYE MU BITERO BYO GUHITANA ABATEGETSI.mp4",
+      cover: [
+        "https://production.listennotes.com/podcasts/radio-rwanda-radio-rwanda-YAI7sMdZQ1z-Qx5K1DS2GuR.300x300.jpg",
+      ],
+      description: "new podcasts about waruziko and gentil gedeo staffs",
+      length: "45:34:90",
+      time: "year ago",
+      likes: 450,
+      views: 1000,
+      updatedAt: "2021-08-26T11:11:47.003Z",
+      createdAt: "2021-08-26T11:11:47.003Z",
     },
   ],
 
@@ -168,42 +277,50 @@ const initialState = {
     {
       category: "Political",
       availablePodcasts: 34,
-      selected: true,
+      selected: false,
+      id:1,
     },
     {
       category: "Religous",
       availablePodcasts: 20,
       selected: false,
+      id:2,
     },
     {
       category: "Geographical",
       availablePodcasts: 10,
       selected: false,
+      id:3,
     },
     {
       category: "Political",
       availablePodcasts: 34,
       selected: false,
+      id:4,
     },
     {
       category: "Business",
       availablePodcasts: 34,
       selected: false,
+      id:5,
     },
     {
       category: "Arts",
       availablePodcasts: 34,
       selected: false,
+      id:6,
     },
     {
       category: "Music",
       availablePodcasts: 34,
       selected: false,
+      id:7,
     },
     {
       category: "Society",
       availablePodcasts: 34,
       selected: false,
+      id:8
     },
   ],
 };
@@ -221,8 +338,8 @@ const podcastSlice = createSlice({
           state.podcast.title = action.payload.value.toString();
           console.log("value", state.podcast.title);
           break;
-        case "status":
-          state.podcast.title = action.payload.value.toString();
+        case "Status":
+          state.podcast.status = action.payload.value.toString();
           break;
         case "Visibility":
           state.podcast.visiblity = action.payload.value.toString();
@@ -242,8 +359,19 @@ const podcastSlice = createSlice({
           console.log(action.payload);
       }
     },
+    setSelected: (state, action: PayloadAction<{id:number}>) => {
+      const selectedCategory = state.podcastsCategories.filter((category) => category.id === action.payload.id)[0];
+      selectedCategory.selected = true;
+      const unselectedCategory = state.podcastsCategories.filter((category) => category.id != action.payload.id);
+      unselectedCategory.forEach((category, index) => {
+        category.selected = false
+      })
+      unselectedCategory.unshift(selectedCategory);
+      state.podcastsCategories = unselectedCategory
+      state.categoryClicked = true;
+    }
   },
 });
 
-export const { initializePodCast } = podcastSlice.actions;
+export const { initializePodCast, setSelected } = podcastSlice.actions;
 export const podcastReducer = podcastSlice.reducer;
