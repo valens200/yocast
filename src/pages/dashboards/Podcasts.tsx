@@ -15,6 +15,9 @@ import { dialogClasses } from '@mui/material'
 import PodcastsList from '../../components/podcastsComponents/PodcastsList'
 import Loading from '../../components/homeComponents/Loading'
 import { initializeLoggedInUser } from '../../features/userSlice'
+import axios from 'axios'
+import { intilializePodcasts } from '../../features/podCastSlice';
+import { baseUrl } from '../../assets/staticAssets/data'
 
 function Podcasts() {
     const user = JSON.parse(localStorage.getItem("user")!);
@@ -22,9 +25,24 @@ function Podcasts() {
 
     useEffect(() => {
         dispatch(initializeLoggedInUser(user))
-        if(!user || user == "" || user == null){
-            navigate("/")
+        if (!user || user == "" || user == null) {
+            navigate("/");
+            return;
         }
+        axios({
+            method: "GET",
+            url: baseUrl + "/podcasts",
+            headers: {
+                Authorization: `Bearer ${user.token.token}`,
+                'Content-Type': "application/json"
+            }
+        }).then((response) => {
+            dispatch(intilializePodcasts(response.data.podcast))
+            console.log(response.data.podcast);
+        }).catch((error) => {
+            console.log(error);
+        })
+
     }, [user])
     const [fethed, setFetched] = useState<Boolean>(false);
     const podcastsCategories = useSelector((store: RootState) => store.podcasts.podcastsCategories);
@@ -32,17 +50,16 @@ function Podcasts() {
     setTimeout(() => {
         setFetched(true);
     }, 1000)
-    // bg-[#f3f3f9]
     const dispatch = useAppDispatch();
-    return <div className={  isDarkMode ? "h-screen w-[100%]  flex flex-row  overflow-y-scroll bg-[#1a1d21]" : "h-screen w-[100%]  flex flex-row  overflow-y-scroll bg-[#f3f3f9]"}>
+    return <div className={isDarkMode ? "h-screen w-[100%]  flex flex-row  overflow-y-scroll bg-[#1a1d21]" : "h-screen w-[100%]  flex flex-row  overflow-y-scroll bg-[#f3f3f9]"}>
         <div className='w-[13.6%] md:block hidden sticky top-0 relative bottom-0   h-[100%]'>
-            <Sidebar/>
+            <Sidebar />
         </div>
         <div className='md:w-[86.4%]  h-[100%]'>
             <div className='h-[12%] nav z-100 sticky top-0 w-[100%]  right-4'>
-                <Navbar  name="PODCASTS"  />
+                <Navbar name="PODCASTS" />
             </div>
-            {fethed == false ? <Loading />: <div>
+            {fethed == false ? <Loading /> : <div>
                 <div className='w-[100%]   flex  items-center  h-screen'>
                     <div className='w-[96%] mt-10  mx-auto flex flex flex-col space-y-10 text-white h-[100%]'>
                         <div className='h-[95%] w-[100%] mx-auto'>

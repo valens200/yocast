@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Podcast } from "../types/appTypes";
 
 type initialStateType = {};
 const initialState = {
@@ -24,6 +25,7 @@ const initialState = {
   podcast: {
     title: "",
     cover: "",
+    price:"343434",
     url: "",
     status: "",
     visiblity: "",
@@ -32,183 +34,7 @@ const initialState = {
     longDescription: "",
     shortDescription: "",
   },
-  availablePodcasts: [
-    {
-      name: "WARUZIKO KURI RADIO RWANDA TARIKI YA 5 main activities",
-      category: "political",
-      cover: [
-        "https://production.listennotes.com/podcasts/radio-rwanda-radio-rwanda-YAI7sMdZQ1z-Qx5K1DS2GuR.300x300.jpg",
-      ],
-      description: "new podcasts about waruziko and gentil gedeo staffs",
-      length: "45:34:90",
-      isFree: false,
-      time: "year ago",
-      likes: 450,
-      views: 1000,
-      createdAt: "1-12-2000",
-    },
-    {
-      name: "WARUZIKO KURI RADIO RWANDA TARIKI YA 5 main activities",
-      category: "Religous",
-      price: 700,
-      url: "https://yocast-api.nextreflexe.com/videos/podcasts/2021-08-26T11:11:45.357ZBEST OF MOSSAD 15-18- HACIYE UWAMBAYE MU BITERO BYO GUHITANA ABATEGETSI.mp4",
-      cover: [
-        "https://production.listennotes.com/podcasts/radio-rwanda-radio-rwanda-YAI7sMdZQ1z-Qx5K1DS2GuR.300x300.jpg",
-      ],
-      description: "new podcasts about waruziko and gentil gedeo staffs",
-      length: "45:34:90",
-      time: "year ago",
-      likes: 450,
-      views: 1000,
-      updatedAt: "2021-08-26T11:11:47.003Z",
-      createdAt: "2021-08-26T11:11:47.003Z",
-    },
-    {
-      name: "WARUZIKO KURI RADIO RWANDA TARIKI YA 5 main activities",
-      category: "Geographical",
-      price: 700,
-      url: "https://yocast-api.nextreflexe.com/videos/podcasts/2021-08-26T11:11:45.357ZBEST OF MOSSAD 15-18- HACIYE UWAMBAYE MU BITERO BYO GUHITANA ABATEGETSI.mp4",
-      cover: [
-        "https://production.listennotes.com/podcasts/radio-rwanda-radio-rwanda-YAI7sMdZQ1z-Qx5K1DS2GuR.300x300.jpg",
-      ],
-      description: "new podcasts about waruziko and gentil gedeo staffs",
-      length: "45:34:90",
-      time: "year ago",
-      likes: 450,
-      views: 1000,
-      updatedAt: "2021-08-26T11:11:47.003Z",
-      createdAt: "2021-08-26T11:11:47.003Z",
-    },
-    {
-      name: "WARUZIKO KURI RADIO RWANDA TARIKI YA 5 main activities",
-      category: "Geographical",
-      price: 700,
-      url: "https://yocast-api.nextreflexe.com/videos/podcasts/2021-08-26T11:11:45.357ZBEST OF MOSSAD 15-18- HACIYE UWAMBAYE MU BITERO BYO GUHITANA ABATEGETSI.mp4",
-      cover: [
-        "https://production.listennotes.com/podcasts/radio-rwanda-radio-rwanda-YAI7sMdZQ1z-Qx5K1DS2GuR.300x300.jpg",
-      ],
-      description: "new podcasts about waruziko and gentil gedeo staffs",
-      length: "45:34:90",
-      time: "year ago",
-      likes: 450,
-      views: 1000,
-      updatedAt: "2021-08-26T11:11:47.003Z",
-      createdAt: "2021-08-26T11:11:47.003Z",
-    },
-    {
-      name: "WARUZIKO KURI RADIO RWANDA TARIKI YA 5 main activities",
-      category: "Geographical",
-      price: 700,
-      url: "https://yocast-api.nextreflexe.com/videos/podcasts/2021-08-26T11:11:45.357ZBEST OF MOSSAD 15-18- HACIYE UWAMBAYE MU BITERO BYO GUHITANA ABATEGETSI.mp4",
-      cover: [
-        "https://production.listennotes.com/podcasts/radio-rwanda-radio-rwanda-YAI7sMdZQ1z-Qx5K1DS2GuR.300x300.jpg",
-      ],
-      description: "new podcasts about waruziko and gentil gedeo staffs",
-      length: "45:34:90",
-      time: "year ago",
-      likes: 450,
-      views: 1000,
-      updatedAt: "2021-08-26T11:11:47.003Z",
-      createdAt: "2021-08-26T11:11:47.003Z",
-    },
-    {
-      name: "WARUZIKO KURI RADIO RWANDA TARIKI YA 5 main activities",
-      category: "Society",
-      price: 700,
-      url: "https://yocast-api.nextreflexe.com/videos/podcasts/2021-08-26T11:11:45.357ZBEST OF MOSSAD 15-18- HACIYE UWAMBAYE MU BITERO BYO GUHITANA ABATEGETSI.mp4",
-      cover: [
-        "https://production.listennotes.com/podcasts/radio-rwanda-radio-rwanda-YAI7sMdZQ1z-Qx5K1DS2GuR.300x300.jpg",
-      ],
-      description: "new podcasts about waruziko and gentil gedeo staffs",
-      length: "45:34:90",
-      time: "year ago",
-      likes: 450,
-      views: 1000,
-      updatedAt: "2021-08-26T11:11:47.003Z",
-      createdAt: "2021-08-26T11:11:47.003Z",
-    },
-    {
-      name: "WARUZIKO KURI RADIO RWANDA TARIKI YA 5 main activities",
-      category: "Society",
-      price: 700,
-      url: "https://yocast-api.nextreflexe.com/videos/podcasts/2021-08-26T11:11:45.357ZBEST OF MOSSAD 15-18- HACIYE UWAMBAYE MU BITERO BYO GUHITANA ABATEGETSI.mp4",
-      cover: [
-        "https://production.listennotes.com/podcasts/radio-rwanda-radio-rwanda-YAI7sMdZQ1z-Qx5K1DS2GuR.300x300.jpg",
-      ],
-      description: "new podcasts about waruziko and gentil gedeo staffs",
-      length: "45:34:90",
-      time: "year ago",
-      likes: 450,
-      views: 1000,
-      updatedAt: "2021-08-26T11:11:47.003Z",
-      createdAt: "2021-08-26T11:11:47.003Z",
-    },
-    {
-      name: "WARUZIKO KURI RADIO RWANDA TARIKI YA 5 main activities",
-      category: "Society",
-      price: 700,
-      url: "https://yocast-api.nextreflexe.com/videos/podcasts/2021-08-26T11:11:45.357ZBEST OF MOSSAD 15-18- HACIYE UWAMBAYE MU BITERO BYO GUHITANA ABATEGETSI.mp4",
-      cover: [
-        "https://production.listennotes.com/podcasts/radio-rwanda-radio-rwanda-YAI7sMdZQ1z-Qx5K1DS2GuR.300x300.jpg",
-      ],
-      description: "new podcasts about waruziko and gentil gedeo staffs",
-      length: "45:34:90",
-      time: "year ago",
-      likes: 450,
-      views: 1000,
-      updatedAt: "2021-08-26T11:11:47.003Z",
-      createdAt: "2021-08-26T11:11:47.003Z",
-    },
-    {
-      name: "WARUZIKO KURI RADIO RWANDA TARIKI YA 5 main activities",
-      category: "Arts",
-      price: 700,
-      url: "https://yocast-api.nextreflexe.com/videos/podcasts/2021-08-26T11:11:45.357ZBEST OF MOSSAD 15-18- HACIYE UWAMBAYE MU BITERO BYO GUHITANA ABATEGETSI.mp4",
-      cover: [
-        "https://production.listennotes.com/podcasts/radio-rwanda-radio-rwanda-YAI7sMdZQ1z-Qx5K1DS2GuR.300x300.jpg",
-      ],
-      description: "new podcasts about waruziko and gentil gedeo staffs",
-      length: "45:34:90",
-      time: "year ago",
-      likes: 450,
-      views: 1000,
-      updatedAt: "2021-08-26T11:11:47.003Z",
-      createdAt: "2021-08-26T11:11:47.003Z",
-    },
-    {
-      name: "WARUZIKO KURI RADIO RWANDA TARIKI YA 5 main activities",
-      category: "Arts",
-      price: 700,
-      url: "https://yocast-api.nextreflexe.com/videos/podcasts/2021-08-26T11:11:45.357ZBEST OF MOSSAD 15-18- HACIYE UWAMBAYE MU BITERO BYO GUHITANA ABATEGETSI.mp4",
-      cover: [
-        "https://production.listennotes.com/podcasts/radio-rwanda-radio-rwanda-YAI7sMdZQ1z-Qx5K1DS2GuR.300x300.jpg",
-      ],
-      description: "new podcasts about waruziko and gentil gedeo staffs",
-      length: "45:34:90",
-      time: "year ago",
-      likes: 450,
-      views: 1000,
-      updatedAt: "2021-08-26T11:11:47.003Z",
-      createdAt: "2021-08-26T11:11:47.003Z",
-    },
-    {
-      name: "WARUZIKO KURI RADIO RWANDA TARIKI YA 5 main activities",
-      category: "Arts",
-      price: 700,
-      url: "https://yocast-api.nextreflexe.com/videos/podcasts/2021-08-26T11:11:45.357ZBEST OF MOSSAD 15-18- HACIYE UWAMBAYE MU BITERO BYO GUHITANA ABATEGETSI.mp4",
-      cover: [
-        "https://production.listennotes.com/podcasts/radio-rwanda-radio-rwanda-YAI7sMdZQ1z-Qx5K1DS2GuR.300x300.jpg",
-      ],
-      description: "new podcasts about waruziko and gentil gedeo staffs",
-      length: "45:34:90",
-      time: "year ago",
-      likes: 450,
-      views: 1000,
-      updatedAt: "2021-08-26T11:11:47.003Z",
-      createdAt: "2021-08-26T11:11:47.003Z",
-    },
-  ],
-
+  availablePodcasts: [] as Podcast[],
   podcasts: [
     {
       title:
@@ -369,9 +195,12 @@ const podcastSlice = createSlice({
       unselectedCategory.unshift(selectedCategory);
       state.podcastsCategories = unselectedCategory
       state.categoryClicked = true;
+    },
+    intilializePodcasts: (state, action: PayloadAction<Podcast[]>) => {
+      state.availablePodcasts = action.payload;
     }
   },
 });
 
-export const { initializePodCast, setSelected } = podcastSlice.actions;
+export const { initializePodCast, setSelected, intilializePodcasts } = podcastSlice.actions;
 export const podcastReducer = podcastSlice.reducer;

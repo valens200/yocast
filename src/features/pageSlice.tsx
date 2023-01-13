@@ -4,6 +4,9 @@ import { FaPortrait, FaBalanceScaleLeft } from "react-icons/fa"
 import { BiDollarCircle, BiUserCircle, BiWallet } from "react-icons/bi"
 
 const initialState = {
+  message:"",
+  showAlerts:false,
+  podcastPostedSucessfully:false,
   showBackDrop:false,
   showSidebar: false,
   isDarkMode: true,
@@ -73,12 +76,28 @@ const pageSlice = createSlice({
         state.showSidebar = state.showSidebar;
       }
     },
+    setPodcastPostedSucessfully: (state, action : PayloadAction<boolean>) => {
+      const sucess = action.payload;
+      if(sucess){
+        state.podcastPostedSucessfully = true;
+      }else{
+        state.podcastPostedSucessfully = false;
+      }
+    },
     setShowBackDrop: (state, action: PayloadAction<String>) => {
       const whatToDO = action.payload;
       if(whatToDO == 'show'){
         state.showBackDrop = true;
       }else{
         state.showBackDrop = false;
+      }
+    },
+    setShowAlerts: (state, action: PayloadAction<boolean>) => {
+      const show = action.payload;
+      if(show == true){
+        state.showAlerts = true;
+      }else{
+        state.showAlerts = false;
       }
 
     },
@@ -97,9 +116,12 @@ const pageSlice = createSlice({
       }else{
         state.next = state.next;
       }
+    },
+    setMessage: (state, action : PayloadAction<String>) => {
+      state.message = action.payload;
     }
   }
 });
 
-export const { setShowSidebar,  setShowBackDrop ,setIsDarkMode, initialCardValues,setNext } = pageSlice.actions;
+export const { setShowSidebar, setShowAlerts,  setPodcastPostedSucessfully, setShowBackDrop ,setIsDarkMode, initialCardValues,setNext } = pageSlice.actions;
 export const pageReducer = pageSlice.reducer;

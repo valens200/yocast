@@ -2,6 +2,22 @@
 
 import { ReactNode } from "react";
 
+export type Podcast = {
+  category: String;
+  cover: String;
+  createdAt: String;
+  description: String;
+  id: String;
+  isFree: String;
+  likes: String;
+  name: String;
+  owner: String;
+  ownerName: String;
+  price: Number;
+  updatedAt: String;
+  url: String;
+  views: Number;
+};
 export type cardType = {
   title: String;
   percentage: String;
