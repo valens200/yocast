@@ -64,8 +64,9 @@ function Signup() {
             localStorage.setItem("username", response.data.user.names);
             localStorage.setItem("user", JSON.stringify(response.data.user));
             localStorage.setItem("token", response.data.user.token.token)
-            Navigate("/dashboards")
+            Navigate("/dashboard")
         }).catch((error) => {
+            console.log(error)
             if (error.response.data.error.statusCode == 400) {
                 toast.error(error.response.data.error.message)
             } else {

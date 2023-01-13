@@ -1,24 +1,26 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import getSidebarFormDivs, { baseUrl } from "../../assets/staticAssets/data";
-import { inputFieldType } from "../../types/appTypes";
+import { inputFieldType, sidebarFormType } from "../../types/appTypes";
 import { useSelector } from "react-redux";
 import { RootState, store } from "../../store";
 import { initializePodCast } from "../../features/podCastSlice";
 import { useDispatch } from "react-redux";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
-import { Button } from "@material-ui/core";
 import { cloudinaryUrl } from "../../assets/staticAssets/data";
 import axios from "axios";
 import BackDrop from "../homeComponents/BackDrop";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { Root } from "postcss";
 import { Slide } from "react-awesome-reveal";
+import { Button } from "@material-ui/core";
 import { setShowBackDrop, setPodcastPostedSucessfully } from "../../features/pageSlice";
 import Alert from '@mui/material/Alert'
-import { setShowAlerts } from "../../features/pageSlice";
-function Form() {
+import { setShowAlerts, setLoading } from "../../features/pageSlice";
+function UpdateForm(props: { podcastTopudate: any; setOpenUpdateModal: (arg0: boolean) => void; }) {
     const [message, setMessage] = useState("");
+    const isLoading = useSelector((store: RootState) => store.page.isLoading);
+    const podcast = props.podcastTopudate;
     const sidebarFormDivs = getSidebarFormDivs();
     const dispatch = useDispatch();
     const isDarkMode = useSelector((store: RootState) => store.page.isDarkMode);
@@ -38,42 +40,30 @@ function Form() {
     const podcastCreatedSucessfully = useSelector((store: RootState) => store.page.podcastPostedSucessfully);
     const podcastt = useSelector((store: RootState) => store.podcasts.podcast);
     const reference = useRef(null);
+    const updatePodcast = () => {
 
-
-    const registerPodcast = () => {
-        const podcast = {
-            url: "https://yocast-api.nextreflexe.com/videos/podcasts/2021-08-26T11:11:45.357ZBEST OF MOSSAD 15-18- HACIYE UWAMBAYE MU BITERO BYO GUHITANA ABATEGETSI.mp4",
-            cover: "https://production.listennotes.com/podcasts/radio-rwanda-radio-rwanda-YAI7sMdZQ1z-Qx5K1DS2GuR.300x300.jpg",
-            owner: "admin@gmail.com",
-            name: podcastt.title,
-            description: podcastt.shortDescription,
-            visiblity: podcastt.visiblity,
-            price: podcastt.price,
-            category: podcastt.category
-        };
         const authorization = {
             headers: {
                 Authorization: `Bearer ${user.token.token}`,
                 "Content-Type": "multipart/form-data"
             },
         };
-        dispatch(setShowBackDrop('show'))
+
         formData.append('podcast', podcastdFile)
         formData.append('name', podcastt.title);
         formData.append('description', podcastt.shortDescription);
         formData.append('price', podcastt.price);
         formData.append('category', podcast.category);
         formData.append('cover', coverImageFile)
-        // formData.append("podcast", JSON.stringify(podcast))
         axios({
-            url: baseUrl + "/admin/podcast",
+            url: `${baseUrl}/admin/podcast/${podcast?.id}`,
             data: formData,
-            method: "POST",
+            method: "PATCH",
             headers: authorization.headers
         }
         )
             .then((response) => {
-                console.log(response);
+                console.log(response)
                 dispatch(setPodcastPostedSucessfully(true))
                 setTimeout(() => {
                     dispatch(setShowBackDrop('hide'))
@@ -83,12 +73,11 @@ function Form() {
                     dispatch(setShowAlerts(false))
                 }, 5000)
                 document.getElementById("main")?.scrollIntoView({ behavior: "smooth" })
+                props.setOpenUpdateModal(false);
+
             })
             .catch((error) => {
-                console.log(error)
-                if (error.response.data.error.statusCode == 400) {
-                    setMessage(error.response.data.error)
-                }
+                setMessage(error.response.data.error)
                 dispatch(setPodcastPostedSucessfully(false))
                 dispatch(setShowBackDrop('hide'))
                 dispatch(setShowAlerts(true))
@@ -97,7 +86,6 @@ function Form() {
                 }, 5000)
                 document.getElementById("main")?.scrollIntoView({ behavior: "smooth" })
             });
-        console.log("hey")
     };
     const getDivClass = (index: number): String => {
         if (index === 0) {
@@ -110,11 +98,36 @@ function Form() {
             : "md:h-[22vh] h-[50vh] rounded flex flex-col space-y-4  bg-white";
     };
 
+    const getInputValue = (inputField: inputFieldType, div: sidebarFormType, inputIndex: Number, divIndex: Number) => {
+        if (divIndex == 0) {
+            if (inputIndex == 0) {
+                // return podcast.status
+                return "";
+            } else if (inputIndex == 1) {
+                return "";
 
-    const getInput = (inputField: inputFieldType, divTitle: String) => {
+            }
+        } else if (divIndex == 1) {
+            if (inputIndex == 0) {
+                // return /
+            }
+        } else if (divIndex == 2) {
+            if (inputIndex == 0) {
+                return podcast == null ? "" : podcast.category;
+            }
+        } else if (divIndex == 3) {
+            // if (inputIndex == 0) {
+            return podcast == null ? "" : podcast.description
+            // }
+        }
+
+    }
+
+    const getInput = (inputField: inputFieldType, divTitle: String, inputIndex: Number, divIndex: Number, div: sidebarFormType) => {
         if (inputField.type === "select") {
             return (
                 <select
+                    defaultValue={getInputValue(inputField, div, inputIndex, divIndex)}
                     onChange={(e) =>
                         dispatch(
                             initializePodCast({ key: divTitle, value: e.target.value })
@@ -142,6 +155,7 @@ function Form() {
         } else {
             return (
                 <input
+                    defaultValue={getInputValue(inputField, div, inputIndex, divIndex)}
                     onChange={(e) =>
                         dispatch(
                             initializePodCast({
@@ -190,6 +204,7 @@ function Form() {
 
                             <div className="md:h-[100%] h-[100%] w-[100%]">
                                 <input
+                                    defaultValue={podcast == null ? "" : podcast.name}
                                     onChange={(e) =>
                                         dispatch(
                                             initializePodCast({
@@ -261,10 +276,10 @@ function Form() {
                         <div className="flex w-[99%] h-[12%]   items-center justify-end">
                             <Button
                                 variant="outlined"
-                                style={{ backgroundColor: "#0ab39c", font: "bold", fontFamily: "poppins", color: "#fff", borderRadius: "rounded", height: "45%", width: "13%" }}
-                                onClick={registerPodcast}
+                                style={{ backgroundColor: "#0ab39c", font: "bold", fontFamily: "poppins", color: "#fff", borderRadius: "rounded", height: "50%", width: "13%" }}
+                                onClick={updatePodcast}
                             >
-                                Save
+                                Update
                             </Button>
                         </div>
                     </div>
@@ -278,7 +293,7 @@ function Form() {
                                 <p className="p-3">{div.title}</p>
                             </div>
                             <div className="w-[95%] flex flex-col h-[60%] space-y-4 mx-auto">
-                                {div.inputs.map((input, index) => (
+                                {div.inputs.map((input, indexx) => (
                                     <div
                                         className="flex flex-col h-[70%] md:h-[78%] space-y-7"
                                         key={index}
@@ -288,7 +303,7 @@ function Form() {
                                                 {input.label}
                                             </h1>
                                         </div>
-                                        {getInput(input, input.label)}
+                                        {getInput(input, input.label, indexx, index, div)}
                                     </div>
                                 ))}
                             </div>
@@ -297,10 +312,10 @@ function Form() {
                     <div className="flex w-[99%] h-[16%] block md:hidden   items-center justify-end">
                         <Button
                             variant="outlined"
-                            style={{ backgroundColor: "#0ab39c", font: "bold", fontFamily: "poppins", color: "#fff", borderRadius: "rounded", height: "45%", width: "13%" }}
-                            onClick={registerPodcast}
+                            style={{ backgroundColor: "#0ab39c", font: "bold", fontFamily: "poppins", color: "#fff", borderRadius: "rounded", height: "50%", width: "13%" }}
+                            onClick={updatePodcast}
                         >
-                            Save
+                            Update
                         </Button>
                     </div>
                 </div>
@@ -309,4 +324,4 @@ function Form() {
     );
 }
 
-export default Form;
+export default UpdateForm;

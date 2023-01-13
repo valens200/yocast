@@ -6,20 +6,9 @@ import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-re
 import 'pure-react-carousel/dist/react-carousel.es.css'
 import { lengthSample } from '../../assets/staticAssets/data';
 import CustomerProgress from './CustomerProgress';
-import { Media, Player, controls, utils } from 'react-media-player'
-const {
-  PlayPause,
-  CurrentTime,
-  Progress,
-  SeekBar,
-  Duration,
-  MuteUnmute,
-  Volume,
-  Fullscreen,
-} = controls
+
 import { BsArrowRightCircleFill, BsArrowLeftCircleFill } from "react-icons/bs"
 function Orders() {
-  const { keyboardControls } = utils
   const isDarkMode = useSelector((store: RootState) => store.page.isDarkMode);
   const orders = useSelector((store: RootState) => store.orders.orders);
   const user = JSON.parse(localStorage.getItem("user")!)
@@ -48,22 +37,6 @@ function Orders() {
             </div>
           </CarouselProvider>
           <div className='w-[50%] h-[20 %]'>
-            {/* <img className='w-[100%] h-[100%]' src="data:image/jpeg;base64,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" alt="" /> */}
-            <Media>
-              <div className='media h-[90%]'>
-                <Player src="https://www.youtube.com/watch?v=65SX6wGyadI" className="media-player " />
-                <div className="media-controls p-2 flex w-[100%] flex-col md:flex-row ">
-                  <PlayPause/>
-                  <CurrentTime />
-                  <Progress />
-                  <SeekBar />
-                  <Duration />
-                  <MuteUnmute />
-                  <Volume />
-                  {/* <Fullscreen /> */}
-                </div>
-              </div>
-            </Media>
           </div>
         </div>
         <div className='w-[100%]'>
@@ -98,7 +71,6 @@ function Orders() {
                       <CustomerProgress />
                     </div>
                   </div>
-
                 </div>
               </div>
             </div>

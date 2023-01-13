@@ -15,16 +15,16 @@ import { useAppDispatch } from '../../store'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {ImFacebook2} from 'react-icons/im'
-import {FcGoogle} from 'react-icons/fc'
-import {GrLinkedin} from 'react-icons/gr'
-import {BsInstagram} from 'react-icons/bs'
+import { ImFacebook2 } from 'react-icons/im'
+import { FcGoogle } from 'react-icons/fc'
+import { GrLinkedin } from 'react-icons/gr'
+import { BsInstagram } from 'react-icons/bs'
 import axios from 'axios'
 function Login() {
     const numbers = [1, 2, 3, 4];
-    const icons = [<ImFacebook2 className='w-[100%] h-[100%] text-[#0ab39c]' />, <FcGoogle  className='w-[100%] h-[100%] text-[#0ab39c]'/>,<GrLinkedin className='w-[100%] h-[100%] text-[#0ab39c]' />, <BsInstagram className='w-[100%] h-[100%] text-[#0ab39c]' />]
+    const icons = [<ImFacebook2 className='w-[100%] h-[100%] text-[#0ab39c]' />, <FcGoogle className='w-[100%] h-[100%] text-[#0ab39c]' />, <GrLinkedin className='w-[100%] h-[100%] text-[#0ab39c]' />, <BsInstagram className='w-[100%] h-[100%] text-[#0ab39c]' />]
     const dispatch = useAppDispatch();
-    const [loggedin, setLoggedIn ] = useState<boolean>(false);
+    const [loggedin, setLoggedIn] = useState<boolean>(false);
     const isDarkMode = useSelector((store: RootState) => store.page.isDarkMode);
     const userToLogin = useSelector((store: RootState) => store.user.user);
     const navigate = useNavigate();
@@ -40,24 +40,36 @@ function Login() {
                 return;
             }
         }
-        axios.post(baseUrl + "/signin", {
-            email: userToLogin.Email,
-            password: userToLogin.Password,
+        axios({
+            method: 'POST',
+            url: baseUrl + "/signin",
+            data: {
+                email: userToLogin.Email,
+                password: userToLogin.Password,
+            },
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+            }
         }).then((response) => {
             setLoggedIn(true)
-            localStorage.setItem("user",  JSON.stringify(response.data.user))
+            console.log(response)
+            localStorage.setItem("user", JSON.stringify(response.data.user))
             toast.success("You loggedin successfully")
             if (response.data.statusCode === 200) {
                 navigate("/dashboard")
             }
         }).catch((error) => {
-            if(error.response.data.error.statusCode == 400){
+            console.log(error)
+            if (error.response.data.error.statusCode == 400) {
                 toast.error("invalid email or password")
-            }else{
+            } else {
                 toast.info("Internal server error")
             }
         })
     }
+
+
 
     return (
         <div className='h-screen font-poppins font-sans  flex-col  flex items-center'>

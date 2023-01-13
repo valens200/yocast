@@ -4,6 +4,7 @@ import { FaPortrait, FaBalanceScaleLeft } from "react-icons/fa"
 import { BiDollarCircle, BiUserCircle, BiWallet } from "react-icons/bi"
 
 const initialState = {
+  isLoading:false,
   message:"",
   showAlerts:false,
   podcastPostedSucessfully:false,
@@ -118,10 +119,19 @@ const pageSlice = createSlice({
       }
     },
     setMessage: (state, action : PayloadAction<String>) => {
-      state.message = action.payload;
+      state.message = action.payload.toString();
+    },
+    setLoading: (state, action : PayloadAction<boolean>) => {
+      const load = action.payload;
+      if(load){
+        state.isLoading = true;
+      }else {
+        state.isLoading = false;
+      }
+
     }
   }
 });
 
-export const { setShowSidebar, setShowAlerts,  setPodcastPostedSucessfully, setShowBackDrop ,setIsDarkMode, initialCardValues,setNext } = pageSlice.actions;
+export const { setShowSidebar,setLoading, setShowAlerts,  setPodcastPostedSucessfully, setShowBackDrop ,setIsDarkMode, initialCardValues,setNext } = pageSlice.actions;
 export const pageReducer = pageSlice.reducer;

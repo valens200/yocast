@@ -7,7 +7,7 @@ export type Podcast = {
   cover: String;
   createdAt: String;
   description: String;
-  id: String;
+  id: Number;
   isFree: String;
   likes: String;
   name: String;

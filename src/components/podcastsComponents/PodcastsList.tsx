@@ -12,15 +12,23 @@ import { useAppDispatch } from '../../store';
 import { useEffect } from 'react';
 import { Podcast } from '../../types/appTypes';
 import { Modal } from '@mui/material';
-import { Avatar, Backdrop, Box, Button, CircularProgress, FormControl } from '@material-ui/core'
+import { Avatar, Box, Button, CircularProgress, FormControl } from '@material-ui/core'
+import Backdrop from '@mui/material/Backdrop';
 import axios from 'axios';
 import ErrorAlert from "../alerts/ErrorAlert"
 import SucessAlert from '../alerts/SucessAlert';
+import UpdateForm from '../createPodcastComponents/UpdateForm';
 import { setPodcastPostedSucessfully, setShowAlerts } from '../../features/pageSlice';
 function PodcastsList(): JSX.Element {
-
     const [open, setOpen] = useState<boolean>(false);
+    const [openUpdateModal, setOpenUpdateModal] = useState(false);
     const [loading, setLoading] = useState<boolean>(false);
+    const [errorMessage, setErrorMessage] = useState("")
+    const [podcastToUpdate, setPodcastToUpdate] = useState<Podcast>();
+    const [currentPage, setCurrentPage] = useState(1);
+    const [recordsPerPage] = useState(7);
+
+
 
     const [selectedPodcast, setSelectedPodcast] = useState<Podcast>();
     const podcastsCategories = useSelector((store: RootState) => store.podcasts.podcastsCategories);
@@ -29,6 +37,16 @@ function PodcastsList(): JSX.Element {
     const selectedCategory = podcastsCategories.filter((Category) => Category.selected == true)[0];
     const user = JSON.parse(localStorage.getItem("user")!);
     const dispatch = useAppDispatch();
+
+
+    const indexOfLastPodcast = currentPage * recordsPerPage;
+    const indexOfFirstPodcast = indexOfLastPodcast - recordsPerPage;
+    const numberOfPages = Math.ceil(availablePodcasts.length / recordsPerPage);
+    const currentPodcasts = availablePodcasts.slice(indexOfFirstPodcast, indexOfLastPodcast);
+    const pageNumbers = [...Array(numberOfPages + 1).keys()].slice(1)
+
+
+
     let podcasts;
     const isAnyCategoryClicked = useSelector((store: RootState) => store.podcasts.categoryClicked);
     const getClass = (selected: boolean) => {
@@ -95,25 +113,38 @@ function PodcastsList(): JSX.Element {
                 dispatch(setShowAlerts(false))
             }, 5000)
         }).catch((error) => {
-            console.log(error);
+            setErrorMessage(error.response.data.error.message)
             setLoading(false);
             setOpen(false)
             dispatch(setShowAlerts(true))
-            dispatch(setPodcastPostedSucessfully(true))
+            dispatch(setPodcastPostedSucessfully(false))
             setTimeout(() => {
                 dispatch(setShowAlerts(false))
                 dispatch(setPodcastPostedSucessfully(false))
             }, 5000)
         })
     }
+    const updatePodcast = (podcast: Podcast) => {
+        setPodcastToUpdate(podcast);
+        setOpenUpdateModal(true);
+    }
     return (
-        <div className='w-[100%] flex md:flex-row flex-col md:space-y-0 space-y-4 justify-between h-[100%]'>
+        <div className='w-[100%]  flex md:flex-row flex-col md:space-y-0 space-y-4 justify-between h-[100%]'>
             <div className={isDarkMode ? 'md:w-[25%] flex items-center   bg-[#212529] h-[80%]' : 'md:w-[25%] flex items-center   bg-white text-[#212529] h-[80%]'}>
                 <div className='w-[95%] rounded flex  h-[94%] flex-col space-y-10 mx-auto'>
                     <div className='flex flex-row justify-between'>
                         <h1>Filters</h1>
                         <p className={isDarkMode ? "font-poppins text-[0.80rem] underline  hover:cursor-pointer text-[#ced4da]" : "font-poppins text-[0.80rem] underline  hover:cursor-pointer text-[#405189] font-poppins font-sans"}>clear All</p>
                     </div>
+                    <Backdrop
+                        open={openUpdateModal}
+                        sx={{ height: "100%", color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                    >
+                        <div className='w-[80%] mx-auto h-[90%] flex-col space-y-4 flex justify-between items-center'>
+                            <h1 className='font-poppins font-sans font-bold'>Update your podcast</h1>
+                            <UpdateForm setOpenUpdateModal={setOpenUpdateModal} podcastTopudate={podcastToUpdate} />
+                        </div>
+                    </Backdrop>
                     <div className='h-[6%] invisible'>
                         <input className={isDarkMode ? 'bg-[#2a2f34]  focus:outline-0 fous:border focus:border-[#32383e] pl-4  w-[100%] h-[100%]' : 'bg-white border   text-[#212529] focus:outline-0 fous:border focus:border-[#32383e] pl-4  w-[100%] h-[100%]'} type="text" />
                     </div>
@@ -134,17 +165,17 @@ function PodcastsList(): JSX.Element {
                 </div>
             </div>
             <div className={isDarkMode ? 'md:w-[73%]   flex items-center bg-[#212529] h-[100%]' : 'md:w-[73%]   flex items-center bg-white h-[100%]'}>
-                <div className='w-[95%] mx-auto overflow-scroll h-[100%] '>
+                <div className='w-[95%] mx-auto  h-[100%] '>
                     <div className='w-[97%] mx-auto mt-3 flex h-[5%] items-center  flex-row justify-between  mx-auto'>
                         <div className='w-[50%]  flex justify-start h-[100%]'>
-                            <button className='bg-[#0ab39c] text-[0.90rem] h-[100%]  w-[70%] md:w-[25%]  h-[4vh] md:h-[80%] rounded hover:bg-[#099885]  border border-[#0ab39c] active:border-[#088675] text-[white]'>Add Podcast </button>
+                            <button className='bg-[#0ab39c] text-[0.90rem] h-[100%] z-100  w-[70%] md:w-[25%]  h-[4vh] md:h-[80%] rounded hover:bg-[#099885]  border border-[#0ab39c] active:border-[#088675] text-[white]'>Add Podcast </button>
                         </div>
                         <div className='w-[40%]  flex justify-end h-[100%]'>
                             <input className={isDarkMode ? 'bg-[#2a2f34]  rounded pl-10 h-[100%] w-[100%] h-[4vh] md:w-[60%] text-[0.90rem] h- focus:outline-0 fous:border focus:border-[#32383e]  pl-4  w-[100%] h-[100%]' : 'bg-white border  rounded border-[#ced4da]  pl-10 h-[100%] w-[100%] h-[4vh] md:w-[60%] text-[0.90rem] h- focus:outline-0 fous:border focus:border-[#32383e] pl-4  w-[100%] h-[100%]'} type="text" placeholder='Search podcasts....' />
                         </div>
                     </div>
                     <SucessAlert Content={"You deleted podcast sucessfully"} />
-                    <ErrorAlert Content={"podcast not delete"} />
+                    <ErrorAlert Content={errorMessage} />
                     <Modal
                         open={open}
                         onClose={handleClose}
@@ -165,59 +196,77 @@ function PodcastsList(): JSX.Element {
                             </div>
                         </Box>
                     </Modal>
-                    <div>
-                        <table className="w-full  text-sm text-left text-gray-500 dark:text-gray-400">
-                            <thead className={isDarkMode ? "text-xs  text-[#7c7f90] bg-[#212529] text-gray-700 uppercase  dark:bg-gray-700 dark:text-gray-400" : "text-xs bg-white  text-gray-700    border border-x-0 border-t-0 border-[#f3f3f9] uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"}>
-                                <tr className='text-[#7c7f90]'>
-                                    <th scope="col" className="py-3 px-6">
-                                    </th>
-                                    {tableHeaders.map((header, index) => (
-                                        <th key={index} scope="col" className="py-3 px-6">
-                                            <div className="flex items-center">
-                                                {header}
-                                                <a href="#"><svg xmlns="http://www.w3.org/2000/svg" className="ml-1 w-3 h-3" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z" /></svg></a>
-                                            </div>
-                                        </th>
-                                    ))}
-                                    <th scope="col" className="py-3 px-6">
-                                        <span className="sr-only">Edit</span>
-                                    </th>
+                    <div className='overflow-scroll h-[80%]' >
+                        <table className=" mt-9 text-sm text-left h-[100%] text-gray-500 dark:text-gray-400">
+                            {/* <thead>
+                                <tr className={isDarkMode ? "bg-[#212529]  text-[#7c7f90]  hover:border-0 hover:bg-[#212529] border-[0.1px]  border-[#32383e]   border-x-0 border-t-0 " : "bg-white  hover:bg-[#f3f3f9] border-b dark:bg-gray-800 dark:border-gray-700"}>
+                                    <td className="text-right px-6">
+                                        <button className="font-medium  text-[green] hover:underline"><GrAssistListening className='text-[1.6rem] z-20' /></button>
+                                    </td>
+                                    <td scope="row" className=" text-[#7c7f90]    font-medium  whitespace-nowrap ">
+                                        Name
+                                    </td>
+                                    <td className="px-6">
+                                        Category
+                                    </td>
+                                    <td className="px-6">
+                                        Likes
+                                    </td>
+                                    <td className="px-6">
+                                        Views
+                                    </td>
+                                    <td className="px-6">
+                                        Crated
+                                    </td>
                                 </tr>
-                            </thead>
+                            </thead> */}
                             <tbody className='text-[0.80rem] font-poppins text-[#212529] font-sans'>
-                                {availablePodcasts.map((podcast, index) => (
-                                    <tr key={index} className={isDarkMode ? "bg-[#212529] text-[#7c7f90]  h-[8vh] hover:border-0 hover:bg-[#212529] border-[0.1px]  border-[#32383e]   border-x-0 border-t-0 " : "bg-white  hover:bg-[#f3f3f9] border-b dark:bg-gray-800 dark:border-gray-700"}>
-                                        <td className="py-4 pr-1 text-right">
+                                {currentPodcasts.map((podcast, index) => (
+                                    <tr key={index} className={isDarkMode ? "bg-[#212529]  text-[#7c7f90]  hover:border-0 hover:bg-[#212529] border-[0.1px]  border-[#32383e]   border-x-0 border-t-0 " : "bg-white  hover:bg-[#f3f3f9] border-b dark:bg-gray-800 dark:border-gray-700"}>
+                                        <td className="text-right px-6">
                                             <button className="font-medium  text-[green] hover:underline"><GrAssistListening className='text-[1.6rem]' /></button>
                                         </td>
-                                        <td scope="row" className="py-4 px-6 font-medium text-gray-900 w-[20%] dark:text-white">
-                                            <img src={podcast.cover.toString()} className="w-[30%] h-[30%]  rounded " alt="activity  title image" />
+                                        <td scope="row" className="font-medium md:block hidden text-gray-900 pxp-3  dark:text-white">
+                                            <img src={podcast.cover.toString()} className="rounded " alt="activity  title image" />
                                         </td>
-                                        <td scope="row" className="py-4 text-[#7c7f90]   px-6 font-medium  whitespace-nowrap ">
+                                        <td scope="row" className=" text-[#7c7f90]    font-medium  whitespace-nowrap ">
                                             {podcast.name.length > lengthSample ? podcast.name.slice(0, lengthSample) + "....." : podcast.name}
                                         </td>
-                                        <td className="py-4 px-6">
+                                        <td className="px-6">
                                             {podcast.category}
                                         </td>
-                                        <td className="py-4 px-6">
+                                        <td className="px-6">
                                             {podcast.likes}
                                         </td>
-                                        <td className="py-4 px-6">
+                                        <td className="px-6">
                                             {podcast.views.toString()}
                                         </td>
-                                        <td className="py-4 px-6">
+                                        <td className="px-6">
                                             {getTime(podcast)}
                                         </td>
-                                        <td className="py-4 px-6 text-right">
-                                            <button className="font-medium text-blue-600 dark:text-blue-500 hover:underline"><HiPencilSquare className='text-[1.2rem]' /></button>
+                                        <td className=" px-6 text-right">
+                                            <button onClick={() => updatePodcast(podcast)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline"><HiPencilSquare className='text-[1.2rem]' /></button>
                                         </td>
-                                        <td className="py-4 px-6 text-right">
+                                        <td className="text-right">
                                             <button onClick={() => showModal(podcast)} className="font-medium text-blue-600 w-[100%] dark:text-blue-500 hover:underline"><AiFillDelete className='text-[1.3rem] text-[red]' /></button>
                                         </td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
+                    </div>
+                    <div>
+                        <ul className='flex flex-row fixed bottom-0 w-[100%] justify-center items-center mt-4'>
+                            <li className='' onClick={() => setCurrentPage(currentPage > 1 ? currentPage - 1 : numberOfPages)}>
+                                <a href="#" className="px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300   rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
+                            </li>
+                            {pageNumbers.map((n, index) => (
+                                <li onClick={() => setCurrentPage(n)} className={currentPage == n ? 'px-3 bg-[#0AB39C] text-white py-2 hover:cursor-pointer w-[3%] text-center leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white' : 'px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'} key={index}>{n}</li>
+                            ))}
+                            <li onClick={() => setCurrentPage(currentPage >= numberOfPages ? 1 : currentPage + 1)}>
+                                <a href="#" className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300  w-[3%] text-center rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>

@@ -1,20 +1,42 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
-import { tableHeaders } from '../../assets/staticAssets/data';
+import { lengthSample, tableHeaders } from '../../assets/staticAssets/data';
+import { Podcast } from '../../types/appTypes';
+import { GrAssistListening } from 'react-icons/gr';
 function SellingProducts() {
   const isDarkMode = useSelector((store: RootState) => store.page.isDarkMode);
-  const availablePodcasts = useSelector((store: RootState) => store.podcasts.availablePodcasts)
+  const availablePodcasts = useSelector((store: RootState) => store.podcasts.availablePodcasts);
+
+  const getTime = (podcast: Podcast): String => {
+    const createdAt = podcast.createdAt;
+    const year = Number.parseInt(createdAt.split("-")[0]);
+    const day = Number.parseInt(createdAt.split("-")[2].split("T")[0]);
+    const month = Number.parseInt(createdAt.split("-")[1]);
+    const curentDate = new Date();
+    if (year < curentDate.getFullYear()) {
+      return curentDate.getFullYear() - year + "years ago";
+    } else if (month < curentDate.getMonth()) {
+      return curentDate.getMonth() - month + " months agp";
+    } else if (curentDate.getDay() > day) {
+      return curentDate.getDay() - day + " days ago";
+    } else {
+      return "to day"
+    }
+  }
   return (
     <div className='w-[100%] flex md:flex-row flex-col justify-between h-[100%]'>
-      <div className={isDarkMode ? 'w-[100%]  bg-[#212529]  items-center flex  h-[100%]' : 'w-[100%] items-center flex h-[100%]'}>
+      <div className={isDarkMode ? 'w-[40%]  bg-[#212529]  items-center flex  h-[100%]' : 'w-[40%] items-center flex h-[100%]'}>
+
+      </div>
+      <div className={isDarkMode ? 'w-[58%]  bg-[#212529]  items-center flex  h-[100%]' : 'w-[100%] items-center flex h-[100%]'}>
         <div className="overflow-x-auto podcasts h-[90%] relative shadow-md sm:rounded-lg">
-          <div className={ isDarkMode ? ' bg-[#212529] flex items-center text-[#212529] h-[18%] dark:bg-gray-700':' bg-white flex items-center text-[#212529] h-[18%] dark:bg-gray-700'}>
+          <div className={isDarkMode ? ' bg-[#212529] flex items-center text-[#212529] h-[18%] dark:bg-gray-700' : ' bg-white flex items-center text-[#212529] h-[18%] dark:bg-gray-700'}>
             <div className='w-[95%] font-poppins font-sans  h-[90%] md:h-[50%] flex md:flex-row flex-col justify-between mx-auto'>
-              <p className='font-poppins font-sans text-[#7c7f90]  text-[0.90rem]'>Best Selling Products</p>
+              <p className='font-poppins font-sans text-[#7c7f90]  text-[0.90rem]'>Best Selling Podcasts</p>
               {/* bg-[#262A2F]  */}
-              <div className={ ' w-[100%] md:w-[50%] h-[100%]  flex justify-end'}>
-                <select onChange={()=> console.log("")} name="sort" className={ isDarkMode ? 'w-[30%]  text-[#7c7f90] bg-[#262A2F]  text-center rounded text-[0.80rem] h-[90%]' : 'w-[30%] text-center rounded text-[0.80rem] h-[90%]'} value="SORT" id="sort">
+              <div className={' w-[100%] md:w-[50%] h-[100%]  flex justify-end'}>
+                <select onChange={() => console.log("")} name="sort" className={isDarkMode ? 'w-[30%]  text-[#7c7f90] bg-[#262A2F]  text-center rounded text-[0.80rem] h-[90%]' : 'w-[30%] text-center rounded text-[0.80rem] h-[90%]'} value="SORT" id="sort">
                   <option className='text-start' value="Last day">Last day</option>
                   <option className='text-start' value="Last month">Last month</option>
                   <option className='text-start' value="Last six months">Last month</option>
@@ -24,7 +46,7 @@ function SellingProducts() {
             </div>
           </div>
           <table className="w-full  text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead className={ isDarkMode ? "text-xs  text-[#7c7f90] bg-[#212529] text-gray-700 uppercase  dark:bg-gray-700 dark:text-gray-400":"text-xs bg-white  text-gray-700    border border-x-0 border-t-0 border-[#f3f3f9] uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"}>
+            <thead className={isDarkMode ? "text-xs  text-[#7c7f90] bg-[#212529] text-gray-700 uppercase  dark:bg-gray-700 dark:text-gray-400" : "text-xs bg-white  text-gray-700    border border-x-0 border-t-0 border-[#f3f3f9] uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"}>
               <tr className='text-[#7c7f90]'>
                 <th scope="col" className="py-3 px-6">
                 </th>
@@ -43,30 +65,27 @@ function SellingProducts() {
             </thead>
             <tbody className='text-[0.80rem] font-poppins text-[#212529] font-sans'>
               {availablePodcasts.map((podcast, index) => (
-                <tr key={index} className={ isDarkMode ? "bg-[#212529] text-[#7c7f90]  h-[8vh] hover:border-0 hover:bg-[#212529] border-[0.1px]  border-[#32383e]   border-x-0 border-t-0 ":"bg-white  hover:bg-[#f3f3f9] border-b dark:bg-gray-800 dark:border-gray-700"}>
-                  <td scope="row" className="py-4 px-6 font-medium text-gray-900 w-[10%] dark:text-white">
-                    <img src={podcast.cover} className="w-[30%] h-[30%]  rounded " alt="activity  title image" />
+                <tr key={index} className={isDarkMode ? "bg-[#212529] text-[#7c7f90]  h-[8vh] hover:border-0 hover:bg-[#212529] border-[0.1px]  border-[#32383e]   border-x-0 border-t-0 " : "bg-white  hover:bg-[#f3f3f9] border-b dark:bg-gray-800 dark:border-gray-700"}>
+                  <td className="py-4 pr-1 text-right">
+                    <button className="font-medium  text-[green] hover:underline"><GrAssistListening className='text-[1.6rem]' /></button>
                   </td>
-                  <td scope="row" className="py-4 text-[#7c7f90]  px-6 font-medium  whitespace-nowrap ">
-                    {podcast.name}
+                  <td scope="row" className="py-4 px-6 font-medium text-gray-900 w-[20%] dark:text-white">
+                    <img src={podcast.cover.toString()} className="w-[30%] h-[30%]  rounded " alt="activity  title image" />
+                  </td>
+                  <td scope="row" className="py-4 text-[#7c7f90]   px-6 font-medium  whitespace-nowrap ">
+                    {podcast.name.length > lengthSample ? podcast.name.slice(0, lengthSample) + "....." : podcast.name}
                   </td>
                   <td className="py-4 px-6">
-                    polytical
-                  </td>
-                  <td className="py-4 px-6">
-                    {podcast.length}
+                    {podcast.category}
                   </td>
                   <td className="py-4 px-6">
                     {podcast.likes}
                   </td>
                   <td className="py-4 px-6">
-                    {podcast.views}
+                    {podcast.views.toString()}
                   </td>
                   <td className="py-4 px-6">
-                    {podcast.time}
-                  </td>
-                  <td className="py-4 px-6 text-right">
-                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                    {getTime(podcast)}
                   </td>
                 </tr>
               ))}
