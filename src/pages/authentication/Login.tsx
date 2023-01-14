@@ -22,7 +22,7 @@ import { BsInstagram } from 'react-icons/bs'
 import axios from 'axios'
 function Login() {
     const numbers = [1, 2, 3, 4];
-    const icons = [<ImFacebook2 className='w-[100%] h-[100%] text-[#0ab39c]' />, <FcGoogle className='w-[100%] h-[100%] text-[#0ab39c]' />, <GrLinkedin className='w-[100%] h-[100%] text-[#0ab39c]' />, <BsInstagram className='w-[100%] h-[100%] text-[#0ab39c]' />]
+    const icons = [<ImFacebook2 className='w-[80%] h-[80%] text-[#0ab39c]' />, <FcGoogle className='w-[80%] h-[80%]  text-[#0ab39c]' />, <GrLinkedin className=' w-[80%] h-[80%] text-[#0ab39c]' />, <BsInstagram className='w-[80%] h-[80%] text-[#0ab39c]' />]
     const dispatch = useAppDispatch();
     const [loggedin, setLoggedIn] = useState<boolean>(false);
     const isDarkMode = useSelector((store: RootState) => store.page.isDarkMode);
@@ -71,6 +71,8 @@ function Login() {
 
 
 
+    //proscottMiller
+
     return (
         <div className='h-screen font-poppins font-sans  flex-col  flex items-center'>
             <ToastContainer />
@@ -85,7 +87,7 @@ function Login() {
                         </div>
                     </div>
                 </div>
-                <div className='md:w-[25%]  text-black flex items-center shadow-xl border w-[95%] flex rounded    h-[58%]  mx-auto ' >
+                <div className='md:w-[25%]  min-[768px]:w-[95%] min-[800px]:w-[70%] xl:w-[35%] min-[1438px]:w-[25%] min-[988px]:w-[50%] text-black flex items-center shadow-xl border w-[95%] flex rounded    h-[58%]  mx-auto ' >
                     <div className="flex  w-[90%] mx-auto  h-[90%]  space-y-5 flex-col text-center">
                         <div className='text-black  h-[10%]'>
                             <h1 className='text-[#405189]'>Welcome Back !</h1>
@@ -95,8 +97,8 @@ function Login() {
                             {FormInputs.slice(1, 4).map((input, index) => {
                                 if (input.name == 'Password') {
                                     return (
-                                        <div key={index} className='h-[18%] w-[95%] mx-auto '>
-                                            <div className='h-[10%] flex justify-between'>
+                                        <div key={index} className='h-[18%]  w-[95%] mx-auto '>
+                                            <div className='h-[10%] max-[232px]:flex-col  flex justify-between'>
                                                 <p className='text-start font-poppins font-sans text-[0.90rem]  text-[#212529]'>{input.name} <span className='text-[#F06548]' >*</span></p>
                                                 <p className='text-start font-poppins font-sans text-[0.90rem]  text-[#878A99]'>Forgot password</p>
                                             </div>
@@ -119,19 +121,19 @@ function Login() {
                             <div className='h-[15%] flex items-center  w-[95%] mx-auto'>
                                 <button onClick={login} className='bg-[#0ab39c] text-center items-center font-bold  h-[80%] w-[100%] rounded  text-[#fff] hover:bg-[#099885]'>Signin</button>
                             </div>
-                            <div className=' flex w-[95%] mx-auto'>
-                                <div className='border-[0.01rem]  h-[20%] border-t-0 border-x-0  border-dashed  w-[35%]'>
+                            <div className=' flex  max-[352px]:space-x-3 w-[95%] mx-auto'>
+                                <div className='border-[0.01rem] max-[352px]:hidden  h-[20%] border-t-0 border-x-0  border-dashed  w-[35%]'>
                                 </div>
-                                <div className='w-[30%]'>
+                                <div className='w-[30%]   max-[352px]:-translate-y-2  max-[352px]:w-[80%]'>
                                     <p>Sign in with</p>
                                 </div>
-                                <div className='w-[35%] h-[20%] border-t-0 border-x-0 border-[0.01rem] border-dashed'>
+                                <div className='w-[35%] h-[20%] max-[352px]:hidden max-[352px]:w-[20%] border-t-0 border-x-0 border-[0.01rem] border-dashed'>
                                 </div>
                             </div>
                             <div className='h-[19%] flex  justify-center   w-[50%] mx-auto'>
                                 {icons.map((icon, index) => (
-                                    <div key={index} className='w-[20%]  hover:cursor-pointer h-[60%] border'>
-                                        <p className='w-[100%] h-[100%]'>{icon}</p>
+                                    <div key={index} className='w-[20%]  hover:cursor-pointer h-[60%] '>
+                                        <p className='w-[100%] h-[100%]  text-[0.80rem]'>{icon}</p>
                                     </div>
                                 ))}
                             </div>

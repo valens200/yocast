@@ -16,10 +16,10 @@ import { baseUrl } from '../../assets/staticAssets/data'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom'
-import {ImFacebook2} from 'react-icons/im'
-import {FcGoogle} from 'react-icons/fc'
-import {GrLinkedin} from 'react-icons/gr'
-import {BsInstagram} from 'react-icons/bs'
+import { ImFacebook2 } from 'react-icons/im'
+import { FcGoogle } from 'react-icons/fc'
+import { GrLinkedin } from 'react-icons/gr'
+import { BsInstagram } from 'react-icons/bs'
 function Signup() {
     const numbers = [1, 2, 3, 4];
     const dispatch = useAppDispatch();
@@ -27,7 +27,7 @@ function Signup() {
     const [message, setMessage] = useState("");
     const isDarkMode = useSelector((store: RootState) => store.page.isDarkMode);
     const userToregister = useSelector((store: RootState) => store.user.user);
-    const icons = [<ImFacebook2 className='w-[100%] h-[100%] text-[#0ab39c]' />, <FcGoogle  className='w-[100%] h-[100%] text-[#0ab39c]'/>,<GrLinkedin className='w-[100%] h-[100%] text-[#0ab39c]' />, <BsInstagram className='w-[100%] h-[100%] text-[#0ab39c]' />]
+    const icons = [<ImFacebook2 className='w-[100%] h-[100%] text-[#0ab39c]' />, <FcGoogle className='w-[100%] h-[100%] text-[#0ab39c]' />, <GrLinkedin className='w-[100%] h-[100%] text-[#0ab39c]' />, <BsInstagram className='w-[100%] h-[100%] text-[#0ab39c]' />]
     const registerUser = () => {
         const inputs = [userToregister.FullName, userToregister.Email, userToregister.Country, userToregister.Password];
         for (let i = 0; i < inputs.length; i++) {
@@ -46,7 +46,7 @@ function Signup() {
                 } else if (i === 2) {
                     toast.error("Country is required, can not be empty");
                     return;
-                } else if (i + 1 === 3) {   
+                } else if (i + 1 === 3) {
                     toast.error("Password is required , can not be empty");
                     return;
                 } else {
@@ -88,7 +88,7 @@ function Signup() {
                         </div>
                     </div>
                 </div>
-                <div className='md:w-[25%]  text-black flex items-center shadow-xl border w-[95%] flex rounded    h-[68%]  mx-auto ' >
+                <div className='md:w-[25%]  min-[768px]:w-[95%] min-[800px]:w-[70%] xl:w-[35%] min-[1438px]:w-[25%] min-[988px]:w-[50%] text-black flex items-center shadow-xl border w-[95%] flex rounded    h-[65%]  mx-auto ' >
                     <div className="flex  w-[90%] mx-auto  h-[90%]  space-y-5 flex-col text-center">
                         <div className='text-black text-[0.90rem]  h-[5%]'>
                             <h1 className='text-[#405189]'>Create new account</h1>
@@ -97,7 +97,7 @@ function Signup() {
                         <form onSubmit={(e) => e.preventDefault()} className="h-[95%]  flex flex-col space-y-3 w-[100%] ">
                             {FormInputs.map((input, index) => {
                                 return (
-                                    <div key={index} className='w-[95%] font-poppins font-sans  flex flex-col  mx-auto space-y-2  h-[22%]'>
+                                    <div key={index} className='w-[95%] font-poppins font-sans  flex flex-col  mx-auto space-y-2  h-[30%]'>
                                         <label className='text-start font-poppins font-sans text-[0.90rem]  text-[#212529]' htmlFor="">{input.name} <span className='text-[#F06548]'>*</span></label>
                                         <input autoComplete='on' onChange={(e) => dispatch(initializeUser({ key: input.name, value: e.target.value }))} type={input.type} className='h-[100%] text-[black] border text-[0.80rem] pl-3 focus:outline-0  w-[100%]' placeholder={"Enter " + input.name} />
                                     </div>
