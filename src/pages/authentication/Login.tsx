@@ -80,7 +80,7 @@ function Login() {
                     <div className='flex flex-col space-y-3'>
                         <Header />
                         <div className='text-[0.80rem] text-center font-poppins font-sans' >
-                            <p>Sign in with your  <span className='text-[#0ab39c] font-sans mx-2 underline'>Yocast</span> account </p>
+                            <p className='sm:text-[red] lg:text-[green] xl:text-[blue]'>Sign in with your  <span className='text-[#0ab39c] font-sans mx-2 underline'>Yocast</span> account </p>
                             <p> to start listening</p>
                         </div>
                     </div>

@@ -59,8 +59,8 @@ function Podcasts() {
             <div className='h-[12%] nav z-100 sticky top-0 w-[100%]  right-4'>
                 <Navbar name="PODCASTS" />
             </div>
-            {fethed == false ? <Loading /> : <div className='h-[78%]'>
-                <div className='w-[95%]   flex  items-center  h-screen'>
+            {fethed == false ? <Loading /> : <div className='h-[78%] w-[100%]   '>
+                <div className='w-[95%]  mx-auto  flex  items-center  h-screen'>
                     <div className='w-[100%] mt-10  mx-auto flex flex flex-col space-y-10 text-white h-[100%]'>
                         <div className='h-[100%] w-[100%] mx-auto'>
                             <PodcastsList />

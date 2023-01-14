@@ -118,8 +118,8 @@ const pageSlice = createSlice({
         state.next = state.next;
       }
     },
-    setMessage: (state, action : PayloadAction<String>) => {
-      state.message = action.payload.toString();
+    setMessage: (state, action : PayloadAction<{message:String}>) => {
+      state.message = action.payload.message.toString();
     },
     setLoading: (state, action : PayloadAction<boolean>) => {
       const load = action.payload;
@@ -133,5 +133,5 @@ const pageSlice = createSlice({
   }
 });
 
-export const { setShowSidebar,setLoading, setShowAlerts,  setPodcastPostedSucessfully, setShowBackDrop ,setIsDarkMode, initialCardValues,setNext } = pageSlice.actions;
+export const { setShowSidebar,setLoading, setShowAlerts,  setMessage, setPodcastPostedSucessfully, setShowBackDrop ,setIsDarkMode, initialCardValues,setNext } = pageSlice.actions;
 export const pageReducer = pageSlice.reducer;

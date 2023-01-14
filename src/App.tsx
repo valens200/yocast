@@ -22,7 +22,6 @@ function App() {
         <Route path="/subscriptions" element={<Subscriptions />} />
         <Route path='/create_podcast' element={<CreatePodcast />} />
         {/* <Route path='*' element={<For04 />} /> */}
-        <Route path='/details' element={<PodcastDetails />} />
       </Routes>
     </Router>
   )

@@ -4,24 +4,21 @@ import { inputFieldType } from '../../types/appTypes'
 import { clientsButtons, inputFields,subscriptionTableHeaders } from '../../assets/staticAssets/data'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../store'
-function ClientsTable() {
+function    ClientsTable() {
     const isDarkMode = useSelector((store: RootState) => store.page.isDarkMode);
     const subscriptions = useSelector((store: RootState) => store.subscriptions.subscriptions);
     const getButtonClass = (index: number) => {
         if (index === 0) {
-            return isDarkMode ? "w-[50%] font-poppins rounded h-[100%] bg-[#0ab39c] hover:bg-[#099885] text-[#fff]" : "w-[50%] font-poppins rounded h-[100%] bg-[#0ab39c] hover:bg-[#099885] text-[#fff]"
+            return isDarkMode ? "w-[30%] max-[356px]:w-[80%]  max-[356px]:p-2 font-poppins rounded h-[100%] bg-[#0ab39c] hover:bg-[#099885] text-[#fff]" : "w-[50%]  max-[356px]:w-[80%]  max-[356px]:p-2 font-poppins rounded h-[100%] bg-[#0ab39c] hover:bg-[#099885] text-[#fff]"
         }
-        return "w-[30%]  font-poppins font-sans rounded h-[100%] bg-[#299cdb]  hover:bg-[#2385ba] text-[#fff]"
+        return "w-[30%]  font-poppins max-[356px]:w-[80%] max-[356px]:p-2 font-sans rounded h-[100%] bg-[#299cdb]  hover:bg-[#2385ba] text-[#fff]"
     }
     const getInputFieldClass = (index: number) => {
         if (index == 0) {
-            return "md:w-[50%] font-sans font-poppins w-[100%] h-[100%]"
+            return "md:w-[40%] font-sans font-poppins w-[100%] h-[100%]"
         }
-        return "md:w-[15%] w-[100%] h-[100%]"
+        return "md:w-[19%] w-[100%] h-[100%]"
     }
-
-    //getting inputFields to be used based on their types
-
     const getInputField = (inputField: inputFieldType) => {
         if (inputField.type === "select") {
             return <select className={isDarkMode ? 'w-[100%]  rounded  pl-3 focus:outline-0 bg-[#2a2f34] h-[100%]' : 'w-[100%]  rounded  pl-3 focus:outline-0 bg-[#f3f3f9] text-[#212529] h-[100%]'} name="select">
@@ -43,12 +40,12 @@ function ClientsTable() {
             <div className={isDarkMode ? 'w-[100%] p-4  space-y-10 flex flex-col  items-center bg-[#212529] h-[96%]' : 'w-[100%]   space-y-10 flex flex-col p-4   flex items-center bg-white bg-white h-[96%]'}>
                 <div className=' flex flex-col space-y-10 h-[40%] md:h-[20%] w-[100%]'>
                     <div className='md:h-[50%] h-[7vh] border border-dashed border-t-0 border-x-0  border-[0.1px]  border-[#32383e]  w-[100%] mx-auto'>
-                        <div className='w-[96%] tems-center  flex  h-[100%] justify-between mx-auto'>
-                            <div className=' w-[30%] md:w-[80%]'>
-                                <h1>Clients List</h1>
+                        <div className='w-[96%]  max-[332px]:flex-col tems-center  flex  h-[100%] justify-between mx-auto'>
+                            <div className=' max-[356px]:text-center max-[366px]:w-[80%] mx-auto w-[30%] md:w-[80%]'>
+                                <h1 >Clients List</h1>
                             </div>
-                            <div className='flex space-x-1 justify-end text-[0.90rem] items-center w-[70%] md:w-[20%] h-[80%] flex-row'>
-                                <button className={isDarkMode ? 'w-[20%] rounded h-[100%]   bg-[#F065481A]' : 'w-[20%] rounded h-[100%]   bg-[#F065481A]'}></button>
+                           
+                            <div className='flex max-[356px]:w-[80%] mx-auto max-[356px]:flex-col max-[356px]:space-y-1 space-x-1 justify-end text-[0.90rem] items-center w-[70%] md:w-[70%]  h-[80%] flex-row'>
                                 {clientsButtons.map((button, index) => (
                                     <button className={getButtonClass(index)} key={index}>{button.title}</button>
                                 ))}
@@ -86,8 +83,9 @@ function ClientsTable() {
                                     <td scope="row" className="py-4 text-[#405189] px-6 font-medium  whitespace-nowrap dark:text-white">
                                         {subscription.id}
                                     </td>
+                                     {/* sm:bg-black md:bg-white lg:bg-[green] xl:bg-[blue] text-white font-sans  */}
                                     <td scope="row" className="py-4 flex items-center h-[10%]  px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        <img src={subscription.owner?.avatar} className="md:w-[4.2vw] w-[35%] h-[5vh] mr-2 md:h-[8vh]  rounded-full " alt="subscription image" />
+                                        <img src={subscription.owner?.avatar} className="md:w-[7vw] xl:w-[4.3vw] lg:w-[6.4vw] w-[35%] h-[5vh] mr-2 md:h-[8vh]  rounded-full " alt="subscription image" />
                                         <p className=' text-[#7c7f90]'>{subscription.owner?.name}</p>
                                     </td>
                                     <td scope="row" className="py-4 text-[#7c7f90] px-6 font-medium whitespace-nowrap dark:text-white">

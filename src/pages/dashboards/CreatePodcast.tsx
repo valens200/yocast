@@ -17,12 +17,12 @@ import { initializeLoggedInUser } from '../../features/userSlice'
 import { setShowBackDrop } from '../../features/pageSlice'
 function CreateProduct() {
     const user = JSON.parse(localStorage.getItem("user")!);
-   
+
     const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(initializeLoggedInUser(user))
-        if(!user || user == "" || user == null){
+        if (!user || user == "" || user == null) {
             navigate("/")
         }
     }, [user])
@@ -43,29 +43,29 @@ function CreateProduct() {
             return "hover:text-[grey]"
         }
     }
-    return <div className={ isDarkMode  === true ? "h-screen w-[100%]  flex flex-row  overflow-y-scroll bg-[#1a1d21]" : "h-screen w-[100%]  flex flex-row  overflow-y-scroll  bg-[#f3f3f9] "}>
-            <div className='w-[13.6%] md:block hidden  sticky top-0 relative bottom-0   h-[100%]'>
-                <Sidebar />
+    return <div className={isDarkMode === true ? "h-screen w-[100%]  flex flex-row  overflow-y-scroll bg-[#1a1d21]" : "h-screen w-[100%]  flex flex-row  overflow-y-scroll  bg-[#f3f3f9] "}>
+        <div className='w-[18.6%] xl:w-[13.6%] md:block hidden  sticky top-0 relative bottom-0   h-[100%]'>
+            <Sidebar />
+        </div>
+        <div className=' md:w-[81.4%]    xl:w-[86.4%]  w-[100%] h-[100%]'>
+            <div className='h-[12%] nav z-100 sticky top-0 w-[100%]  right-4'>
+                <Navbar name="CREATE PODCAST" />
             </div>
-            <div className='md:w-[86.4%]  w-[100%] h-[100%]'>
-                <div className='h-[12%] nav z-100 sticky top-0 w-[100%]  right-4'>
-                    <Navbar name="CREATE PODCAST" />
-                </div>
-                {fethed == false ? <Loading />: <div className='w-[100%]   flex flex-col  justify-between h-[100%]'>
-                    <div className='w-[100%]  flex items-center  text-white h-[190vh]'>
-                        <div className='h-[95%] w-[100%] '>
-                            <div className='h-[100%] w-[95%] mx-auto'>
-                                <Form />
-                            </div>
+            {fethed == false ? <Loading /> : <div className='w-[100%]   flex flex-col  justify-between h-[100%]'>
+                <div className='w-[100%]  flex items-center  text-white sm:h-[200vh] h-[190vh]'>
+                    <div className='h-[95%] w-[100%] '>
+                        <div className='h-[100%] w-[95%] mx-auto'>
+                            <Form />
                         </div>
                     </div>
-                    <div className='w-[100%]  bottom-0  '>
-                        <Footer />
-                    </div>
-                </div>}
+                </div>
+                <div className='w-[100%]  bottom-0  '>
+                    <Footer />
+                </div>
+            </div>}
 
-            </div>
         </div>
+    </div>
 }
 
 export default CreateProduct

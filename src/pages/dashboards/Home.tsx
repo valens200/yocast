@@ -23,28 +23,52 @@ import Footer from '../../components/homeComponents/Footer'
 import Loading from '../../components/homeComponents/Loading'
 import { useNavigate } from 'react-router-dom'
 import { initializeLoggedInUser } from '../../features/userSlice'
+import { baseUrl } from '../../assets/staticAssets/data'
+import axios from 'axios'
+import { intilializePodcasts } from '../../features/podCastSlice'
+import { setLoading } from '../../features/pageSlice'
 function Home() {
     const user = JSON.parse(localStorage.getItem("user")!);
     const navigate = useNavigate();
+    const availablePodcasts = useSelector((store: RootState) => store.podcasts.availablePodcasts)
 
     useEffect(() => {
         dispatch(initializeLoggedInUser(user))
-        if(!user || user == "" || user == null){
+        if (!user || user == "" || user == null) {
             navigate("/")
         }
     }, [user])
+    useEffect(() => {
+        dispatch(initializeLoggedInUser(user))
+        if (!user || user == "" || user == null) {
+            navigate("/");
+            return;
+        }
+        axios({
+            method: "GET",
+            url: baseUrl + "/podcasts",
+            headers: {
+                Authorization: `Bearer ${user.token.token}`,
+                'Content-Type': "application/json"
+            }
+        }).then((response) => {
+            dispatch(intilializePodcasts(response.data.podcast))
+            dispatch(setLoading(true))
+        }).catch((error) => {
+            dispatch(setLoading(true))
+        })
 
-    const [fethed, setFetched] = useState<Boolean>(false);
+    }, [user])
+
     const recentActivities = useSelector((store: RootState) => store.recentActivities.activities);
     const podcasts = useSelector((store: RootState) => store.podcasts.podcasts);
     const clientsReviews = useSelector((store: RootState) => store.podcasts.reviews)
+    const isLoading = useSelector((store: RootState) => store.page.isLoading)
     const [counter, setCounter] = useState(0);
     const [main, setMain] = useState(0);
     const lengthSample: number = "WARUZIKO KURI RADIO RWANDA TARIKI YA 5".length;
     const isDarkMode = useSelector((store: RootState) => store.page.isDarkMode);
-    setTimeout(() => {
-        setFetched(true);
-    }, 1000)
+
     const dispatch = useAppDispatch();
     const getClass = (index: number) => {
         if (index == 1) {
@@ -72,7 +96,7 @@ function Home() {
         </div>
         return div;
     }
-    return fethed == false ? (
+    return isLoading == false ? (
         <Loading />
     ) : (
         <div className={isDarkMode ? "h-screen w-[100%]  flex flex-row  overflow-y-scroll bg-[#1a1d21]" : "h-screen w-[100%]  flex flex-row  overflow-y-scroll bg-[#f3f3f9]"}>
@@ -83,8 +107,8 @@ function Home() {
                 <div className='h-[12%] nav z-100 sticky top-0 w-[100%]  right-4'>
                     <Navbar name={"ADMIN"} />
                 </div>
-                <div className='w-[100%]  flex flex-row   justify-between h-[82%]'>
-                    <div className='md:w-[85%] w-[100%]  md:space-y-[2%] space-y-[8%] flex flex-col text-white '>
+                <div className='w-[100%]  flex flex-row   justify-between  h-[82%]'>
+                    <div className='md:w-[85%] w-[100%]   h-[6  0vh] md:space-y-[2%] space-y-[8%] flex flex-col text-white '>
                         <div className='font-poppins font-sans'>
                             <div className=' md:h-[10vh] h-[15vh] md:p-0 p-4 md:items-center md:space-y-0 space-y-4 mx-auto flex md:flex-row flex-col justify-start md:justify-between  w-[90%] md:w-[95%]'>
                                 <div className='md:w-[40%] font-poppins font-sans'>
@@ -108,10 +132,10 @@ function Home() {
                             <AnalyticsCards />
                         </div>
                         <div className='w-[95%] h-[100%] mx-auto flex md:flex-row  md:space-y-0  space-y-10 flex-col md:justify-between '>
-                            <div className={isDarkMode ? 'md:w-[65%]  bg-[#212529] h-[40vh]' : 'md:w-[65%]  bg-white h-[40vh]'}>
+                            <div className={isDarkMode ? 'md:w-[65%]  bg-[#212529] h-[60vh]' : 'md:w-[65%]   bg-white h-[60vh]'}>
 
                             </div>
-                            <div className={isDarkMode ? 'md:w-[34%]  bg-[#212529] h-[100%]' : 'md:w-[34%]  bg-white h-[40vh]'}>
+                            <div className={isDarkMode ? 'md:w-[34%]  bg-[#212529] h-[100%]' : 'md:w-[34%]  bg-white h-[60vh]'}>
 
                             </div>
                         </div>
@@ -125,8 +149,8 @@ function Home() {
                             <Footer />
                         </div>
                     </div>
-                    <div className={isDarkMode ? 'w-[15%] md:block hidden  sticky right-sidebar bg-[#212529]  text-white   z-20 ' : 'w-[15%] md:block hidden  sticky right-sidebar bg-white  text-white   z-20 '}>
-                        <div className='w-[95%] overflow-y-scroll flex flex-col space-y-5  mx-auto p-2 mt-4 overflow-y-scroll h-[34%]'>
+                    <div className={isDarkMode ? 'w-[15%] md:block hidden  side sticky right-sidebar bg-[#212529]  text-white   z-20 ' : 'w-[15%] md:block hidden  sticky right-sidebar bg-white  text-white   z-20 '}>
+                        <div className='w-[95%] hidden overflow-y-scroll flex flex-col space-y-5  mx-auto p-2 mt-4 overflow-y-scroll h-[34%]'>
                             <h1 className='text-[grey] font-poppins font-sans font-bold  text-[0.90rem]'>RECENT ACTIVITIES</h1>
                             <div ref={activityRef} className='flex w-[100%] flex-col space-y-9'>
                                 {/* displaying all activities  */}
@@ -183,7 +207,7 @@ function Home() {
                                         </div>
                                     ))}
                                 </div>
-                                <h1 className='text-center text-[grey] underline hover:text-white hover:cursor-pointer '>Vew all podcasts</h1>
+                                <Link to="/podcasts"><h1 className='text-center text-[grey] underline hover:text-white hover:cursor-pointer '>Vew all podcasts</h1></Link>
                                 <p className="font-poppins text-[0.80rem]  font-sans font-bold text-[grey]">PODCASTS REVIEWS</p>
                                 <div className='h-[23vh] hover:cursor-pointer overflow-y-scroll'>
                                     {clientsReviews.map((activity, index) => (

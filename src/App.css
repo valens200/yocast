@@ -6,12 +6,16 @@
   z-index: 100;
 }
 .right-sidebar {
-  z-index: 0.3;
+  z-index: 100;
 }
 ::-webkit-scrollbar {
   background-color: rgba(128, 128, 128, 0.26);
   width: 7px;
   height: 20%;
+}
+.notification{
+  z-index: 0;
+  font-family: sans-serif;
 }
 /* .main{
   rotate: 160deg;
@@ -25,6 +29,12 @@
 }
 .textfield:focus{
   outline: 0;
+}
+.nav{
+  z-index: 100;
+}
+.side{
+  z-index: 0.1;
 }
 .main {
   color: white;

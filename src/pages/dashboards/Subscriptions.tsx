@@ -21,7 +21,7 @@ function Subscriptions() {
 
     useEffect(() => {
         dispatch(initializeLoggedInUser(user))
-        if(!user || user == "" || user == null){
+        if (!user || user == "" || user == null) {
             navigate("/")
         }
     }, [user])
@@ -41,16 +41,17 @@ function Subscriptions() {
     }, 1000)
     const dispatch = useAppDispatch();
     return <div className="h-screen w-[100%]  flex flex-row  overflow-y-scroll bg-[#1a1d21]">
-        <div className='w-[13.6%] md:block hidden sticky top-0 relative bottom-0   h-[100%]'>
+        <div className='w-[18.6%] xl:w-[13.6%]  md:block hidden sticky top-0 relative bottom-0   h-[100%]'>
             <Sidebar />
         </div>
-        <div className='md:w-[86.4%]  w-[100%] h-[100%]'>
+             {/* sm:bg-black md:bg-white lg:bg-[green] xl:bg-[blue] text-white font-sans  */}
+        <div className='md:w-[81.4%]   xl:w-[86.4%]  w-[100%] h-[100%]'>
             <div className='h-[12%] nav z-100 sticky top-0 w-[100%]  right-4'>
                 <Navbar name="Subscriptions" />
             </div>
             {/* bg-[#f3f3f9] */}
-            {fethed == false ? <Loading />: <div>
-                <div className={ isDarkMode ? 'w-[100%]    flex  items-center  h-screen':'w-[100%] bg-[#f3f3f9]    flex  items-center  h-screen'}>
+            {fethed == false ? <Loading /> : <div>
+                <div className={isDarkMode ? 'w-[100%]    flex  items-center  h-screen' : 'w-[100%] bg-[#f3f3f9]    flex  items-center  h-screen'}>
                     <div className='w-[96%] mt-10  mx-auto flex flex flex-col space-y-10 text-white h-[100%]'>
                         <div className='h-[95%] w-[100%] mx-auto'>
                             <ClientsTable />

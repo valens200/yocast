@@ -12,10 +12,11 @@ function Sidebar() {
     const showSidebar = useSelector((store: RootState) => store.page.showSidebar);
     const isDarkMode = useSelector((store: RootState) => store.page.isDarkMode);
     const getSidebarClass = (): String => {
+    
         if (showSidebar) {
-            return isDarkMode ? "md:w-[13.6%]  w-[50%] flex sidebar  flex-col space-y-10 text-white  font-sans fixed top-0     bottom-0 bg-[#212529]   h-[100%]" : "w-[50%] md:w-[13.6%]   flex sidebar  flex-col space-y-10 text-white   font-sans fixed top-0    bottom-0  bg-[#405189]  h-[100%]"
+            return isDarkMode ? "md:w-[13.6%] max-[298px]:w-[100%] sm:w-[25%]    w-[50%] flex sidebar  flex-col space-y-10 text-white  font-sans fixed top-0     bottom-0 bg-[#212529]   h-[100%]" : "w-[50%] md:w-[13.6%]   flex sidebar  flex-col space-y-10 text-white   font-sans fixed top-0    bottom-0  bg-[#405189]  h-[100%]"
         }
-        return isDarkMode ? "w-[13.6%] md:block sidebar hidden  flex  flex-col space-y-10 text-white  font-sans  fixed top-0   bottom-0  bg-[#212529]  h-[100%]" : "w-[13.6%] md:block sidebar hidden  flex text-[#838fb9] flex-col space-y-10  font-sans  fixed top-0   bottom-0  bg-[#405189]  h-[100%]"
+        return isDarkMode ? "w-[18.6%] md:block sidebar hidden xl:w-[13.6%]  flex  flex-col space-y-10 text-white  font-sans  fixed top-0   bottom-0  bg-[#212529]  h-[100%]" : "w-[13.6%] md:block sidebar hidden  flex text-[#838fb9] flex-col space-y-10  font-sans  fixed top-0   bottom-0  bg-[#405189]  h-[100%]"
     }
 
     const dispatch = useDispatch();

@@ -38,12 +38,12 @@ export const FormInputs = [
   },
 ];
 export const tableHeaders = [
-  "",
   " Podcast Title",
   " Category",
   "Likes",
   "Views",
   "Created",
+  ""
 ];
 export const ordersTableHeders = [
   "OrderId",
@@ -139,10 +139,6 @@ export const sidebarLinks: sidebarLinksType[] = [
   {
     title: "Podcasts",
     link: "/podcasts",
-  },
-  {
-    title: "Podcast Details",
-    link: "/details",
   },
   {
     title: "Create Podcast",
