@@ -18,7 +18,7 @@ const user = JSON.parse(localStorage.getItem("user")!);
 export const cloudinaryUrl =
   "https://api.cloudinary.com/v1_1/rwanda-sdfcoding-fdsacademy/image/upload";
 export const lengthSample: number = "WARUZIKO KURI RADIO RWANDA ".length;
-export const baseUrl = "http://localhost:7000";
+export const baseUrl = "https://yocast.rw";
 export const FormInputs = [
   {
     name: "FullName",
