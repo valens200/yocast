@@ -14,7 +14,10 @@ import Backdrop from '@mui/material/Backdrop';
 import UpdateForm from '../createPodcastComponents/UpdateForm';
 import { AiFillDelete } from 'react-icons/ai';
 import { HiPencilSquare } from 'react-icons/hi2';
-function SellingProducts(props : Podcast[]) {
+import Doughnurt from '../charts/Doughnurt';
+
+
+function SellingProducts() {
   const [selectedPodcast, setSelectedPodcast] = useState<Podcast>();
   const [openUpdateModal, setOpenUpdateModal] = useState(false);
   const [podcastToUpdate, setPodcastToUpdate] = useState<Podcast>()
@@ -82,7 +85,8 @@ function SellingProducts(props : Podcast[]) {
   }
   return (
     <div className='w-[100%] flex md:flex-row flex-col justify-between h-[100%]'>
-      <div className={isDarkMode ? 'w-[40%]  bg-[#212529]   items-center flex  h-[100%]' : 'w-[40%] shadow-lg items-center flex h-[100%]'}>
+      <div className={isDarkMode ? 'md:w-[40%]  w-[100%] bg-[#212529]   items-center flex  h-[100%]' : ' w-[100%] md:w-[40%] shadow-lg items-center flex h-[100%]'}>
+        <Doughnurt />
 
       </div>
       <div className={isDarkMode ? 'md:w-[58%]  w-[95%] mx-auto bg-[#212529]  items-center flex  h-[100%]' : 'w-[100%] items-center flex h-[100%]'}>

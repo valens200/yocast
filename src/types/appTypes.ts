@@ -3,6 +3,7 @@
 import { ReactNode } from "react";
 
 export type Podcast = {
+  podcast: any;
   category: String;
   cover: String;
   createdAt: String;

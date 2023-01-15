@@ -18,6 +18,7 @@ import { initializeLoggedInUser } from '../../features/userSlice'
 import axios from 'axios'
 import { intilializePodcasts } from '../../features/podCastSlice';
 import { baseUrl } from '../../assets/staticAssets/data'
+import PodcastDetails from '../../components/podcastsComponents/PodcastDetails'
 
 function Podcasts() {
     const user = JSON.parse(localStorage.getItem("user")!);
@@ -38,9 +39,8 @@ function Podcasts() {
             }
         }).then((response) => {
             dispatch(intilializePodcasts(response.data.podcast))
-            console.log(response.data.podcast);
         }).catch((error) => {
-            console.log(error);
+            console.log(error)
         })
 
     }, [user])

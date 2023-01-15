@@ -71,13 +71,11 @@ function Navbar(props: { name: string }) {
         headers: { Authorization: `Bearer ${user.token.token}` }
     }
     const logout = () => {
-        console.log(user.token.token)
         axios.post(baseUrl + "/user/signout",
             config,
             authorization
         ).then((response) => {
             handleClose();
-            console.log(response);
             dispatch(setShowBackDrop('show'))
             setTimeout(() => {
                 localStorage.removeItem("user");

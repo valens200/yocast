@@ -77,7 +77,6 @@ function Form() {
         }
         )
             .then((response) => {
-                console.log(response);
                 dispatch(setPodcastPostedSucessfully(true))
                 setTimeout(() => {
                     dispatch(setShowBackDrop('hide'))
@@ -90,7 +89,6 @@ function Form() {
                 dispatch(setMessage({ message: "Podcast created sucessfully" }))
             })
             .catch((error) => {
-                console.log(error)
                 if (error.response.data.error.statusCode == 400) {
                     dispatch(setMessage({ message: error.response.data.error }))
                 }
@@ -102,7 +100,6 @@ function Form() {
                 }, 5000)
                 document.getElementById("main")?.scrollIntoView({ behavior: "smooth" })
             });
-        console.log("hey")
     };
     const getDivClass = (index: number): String => {
         if (index === 0) {

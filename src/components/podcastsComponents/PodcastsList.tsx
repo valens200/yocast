@@ -20,18 +20,19 @@ import SucessAlert from '../alerts/SucessAlert';
 import UpdateForm from '../createPodcastComponents/UpdateForm';
 import { setMessage } from '../../features/pageSlice';
 import { setPodcastPostedSucessfully, setShowAlerts } from '../../features/pageSlice';
+import PodcastDetails from './PodcastDetails';
+import { setSelectedPodcast } from '../../features/podCastSlice';
 function PodcastsList(): JSX.Element {
     const [open, setOpen] = useState<boolean>(false);
     const [openUpdateModal, setOpenUpdateModal] = useState(false);
+    const [openPodcastDetails, setOpenPodcastDetails] = useState(false);
     const [loading, setLoading] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState("")
     const [podcastToUpdate, setPodcastToUpdate] = useState<Podcast>();
     const [currentPage, setCurrentPage] = useState(1);
     const [recordsPerPage] = useState(7);
 
-
-
-    const [selectedPodcast, setSelectedPodcast] = useState<Podcast>();
+    const selectedPodcast = useSelector((store: RootState) => store.podcasts.selectedPodcast);
     const subscriptions = useSelector((store: RootState) => store.subscriptions.subscriptions);
     const podcastsCategories = useSelector((store: RootState) => store.podcasts.podcastsCategories);
     const isDarkMode = useSelector((store: RootState) => store.page.isDarkMode);
@@ -131,6 +132,11 @@ function PodcastsList(): JSX.Element {
         setPodcastToUpdate(podcast);
         setOpenUpdateModal(true);
     }
+
+    const showDetails = (podcast: Podcast) => {
+        setOpenPodcastDetails(true);
+        dispatch(setSelectedPodcast(podcast));
+    }
     return (
         <div className='w-[100%]  flex md:flex-row flex-col md:space-y-0 space-y-4 justify-between h-[100%]'>
             <div className={isDarkMode ? 'md:w-[25%] flex items-center   bg-[#212529] h-[80%]' : 'md:w-[25%] flex items-center   bg-white text-[#212529] h-[80%]'}>
@@ -139,6 +145,15 @@ function PodcastsList(): JSX.Element {
                         <h1>Filters</h1>
                         <p className={isDarkMode ? "font-poppins text-[0.80rem] underline  hover:cursor-pointer text-[#ced4da]" : "font-poppins text-[0.80rem] underline  hover:cursor-pointer text-[#405189] font-poppins font-sans"}>clear All</p>
                     </div>
+                    <Backdrop
+                        open={openPodcastDetails}
+                        sx={{ height: "100%", color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                    >
+                        <div className='w-[80%] mx-auto h-[90%] flex-col space-y-4 flex justify-between items-center'>
+                            <h1 className='font-poppins font-sans font-bold'>Update your podcast</h1>
+                            <PodcastDetails />
+                        </div>
+                    </Backdrop>
                     <Backdrop
                         open={openUpdateModal}
                         sx={{ height: "100%", color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
@@ -217,7 +232,7 @@ function PodcastsList(): JSX.Element {
                                     </thead>
                                     <tbody>
                                         {currentPodcasts.map((podcast, index) => (
-                                            <tr className={isDarkMode ? " border-b hover:border-0 h-[2%]   border-[0.1px]  border-[#32383e]   border-x-0 border-t-0  dark:bg-gray-800 dark:border-gray-700" : " hover:bg-[#f3f3f9]  "}>
+                                            <tr onClick={() => showDetails(podcast)} className={isDarkMode ? " border-b hover:border-0 h-[2%]   border-[0.1px]  border-[#32383e]   border-x-0 border-t-0  dark:bg-gray-800 dark:border-gray-700" : " hover:bg-[#f3f3f9]  "}>
                                                 <th scope="row" className="px-6 py-4 text-[#6B7280] font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                     <img className='md:w-[7vw] xl:w-[3vw] xl:h-[5.2vh] lg:w-[6.4vw] w-[35%] h-[5vh] mr-2 md:h-[8vh]  rounded-full' src={podcast.cover.toString()} alt="covermage" />
                                                     {podcast.name}

@@ -27,6 +27,8 @@ import { baseUrl } from '../../assets/staticAssets/data'
 import axios from 'axios'
 import { intilializePodcasts } from '../../features/podCastSlice'
 import { setLoading } from '../../features/pageSlice'
+import BarChart from '../../components/charts/BarChart'
+import PieChart from '../../components/charts/Doughnurt'
 function Home() {
     const user = JSON.parse(localStorage.getItem("user")!);
     const navigate = useNavigate();
@@ -132,8 +134,8 @@ function Home() {
                             <AnalyticsCards />
                         </div>
                         <div className='w-[95%] h-[100%] mx-auto flex md:flex-row  md:space-y-0  space-y-10 flex-col md:justify-between '>
-                            <div className={isDarkMode ? 'md:w-[65%]  bg-[#212529] h-[60vh]' : 'md:w-[65%]   bg-white h-[60vh]'}>
-
+                            <div className={isDarkMode ? 'md:w-[65%]  bg-[#212529] h-[48vh]' : 'md:w-[65%]   bg-white h-[60vh]'}>
+                                <BarChart />
                             </div>
                             <div className={isDarkMode ? 'md:w-[34%]  bg-[#212529] h-[100%]' : 'md:w-[34%]  bg-white h-[60vh]'}>
 
@@ -208,8 +210,8 @@ function Home() {
                                     ))}
                                 </div>
                                 <Link to="/podcasts"><h1 className='text-center text-[grey] underline hover:text-white hover:cursor-pointer '>Vew all podcasts</h1></Link>
-                                <p className="font-poppins text-[0.80rem]  font-sans font-bold text-[grey]">PODCASTS REVIEWS</p>
-                                <div className='h-[23vh] hover:cursor-pointer overflow-y-scroll'>
+                                <p className="font-poppins   text-[0.80rem]  font-sans font-bold text-[grey]">PODCASTS REVIEWS</p>
+                                <div className='h-[23vh] hidden hover:cursor-pointer overflow-y-scroll'>
                                     {clientsReviews.map((activity, index) => (
                                         <div className='w-[100%] border border-dashed border-[grey] p-2 h-[10vh]' key={index}>
                                             <div className='flex space-x-2 w-[100%]'>
