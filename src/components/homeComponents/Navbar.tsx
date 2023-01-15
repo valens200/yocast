@@ -88,7 +88,7 @@ function Navbar(props: { name: string }) {
         })
     }
     return (
-        <div className={isDarkMode === true ? 'w-[100%] text-white font-sans bg-[#2a2f34] h-[12vh]' : 'w-[100%] text-black font-sans   bg-white h-[100%]'}>
+        <div className={isDarkMode === true ? 'w-[100%] text-white font-sans bg-[#2a2f34] h-[12vh]' : 'w-[100%] text-black font-sans    bg-white h-[100%]'}>
             <div className='h-[60%]  w-[100%]'>
                 <div className='flex flex-row h-[100%] items-center  justify-between w-[98%] mx-auto' >
                     <Modal

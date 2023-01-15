@@ -122,8 +122,8 @@ function Signup() {
                             </div>
                             <div className='h-[19%] flex  justify-center   w-[50%] mx-auto'>
                                 {icons.map((icon, index) => (
-                                    <div key={index} className='w-[20%] hover:cursor-pointer h-[60%] border'>
-                                        <p className='w-[100%] h-[100%]'>{icon}</p>
+                                    <div key={index} className='w-[20%]  hover:cursor-pointer h-[60%] '>
+                                        <p className='w-[100%] h-[100%]  text-[0.80rem]'>{icon}</p>
                                     </div>
                                 ))}
                             </div>
