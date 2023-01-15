@@ -19,12 +19,17 @@ import axios from 'axios'
 import { intilializePodcasts } from '../../features/podCastSlice';
 import { baseUrl } from '../../assets/staticAssets/data'
 import PodcastDetails from '../../components/podcastsComponents/PodcastDetails'
+import { setLoading } from '../../features/pageSlice'
 
 function Podcasts() {
+
+    const [fethed, setFetched] = useState<Boolean>(false);
+
+    const isLoading = useSelector((store: RootState) => store.page.isLoading);
     const user = JSON.parse(localStorage.getItem("user")!);
     const navigate = useNavigate();
-
     useEffect(() => {
+
         dispatch(initializeLoggedInUser(user))
         if (!user || user == "" || user == null) {
             navigate("/");
@@ -39,17 +44,15 @@ function Podcasts() {
             }
         }).then((response) => {
             dispatch(intilializePodcasts(response.data.podcast))
+            setFetched(true)
         }).catch((error) => {
             console.log(error)
+            setFetched(true)
         })
 
     }, [user])
-    const [fethed, setFetched] = useState<Boolean>(false);
     const podcastsCategories = useSelector((store: RootState) => store.podcasts.podcastsCategories);
     const isDarkMode = useSelector((store: RootState) => store.page.isDarkMode);
-    setTimeout(() => {
-        setFetched(true);
-    }, 1000)
     const dispatch = useAppDispatch();
     return <div className={isDarkMode ? " flex flex-row h-[100%]  overflow-y-scroll bg-[#1a1d21]" : "h-screen w-[100%]  flex flex-row  overflow-y-scroll bg-[#f3f3f9]"}>
         <div className='w-[13.6%] md:block hidden sticky top-0 relative bottom-0   h-[100%]'>
@@ -59,7 +62,7 @@ function Podcasts() {
             <div className='h-[12%] nav z-100 sticky top-0 w-[100%]  right-4'>
                 <Navbar name="PODCASTS" />
             </div>
-            {fethed == false ? <Loading /> : <div className='h-[78%] w-[100%]   '>
+            {fethed == false ? <Loading name="Podcasts..." /> : <div className='h-[78%] w-[100%]   '>
                 <div className='w-[95%]  mx-auto  flex  items-center  h-screen'>
                     <div className='w-[100%] mt-10  mx-auto flex flex flex-col space-y-10 text-white h-[100%]'>
                         <div className='h-[100%] w-[100%] mx-auto'>

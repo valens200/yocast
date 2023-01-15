@@ -6,7 +6,7 @@ import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import { setShowAlerts } from '../../features/pageSlice';
 import { Root } from 'postcss';
-function SucessAlert(props: { Content: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | React.ReactPortal | null | undefined; }) {
+function SucessAlert() {
     const podcastCreatedSucessfully = useSelector((store: RootState) => store.page.podcastPostedSucessfully);
     const isDarkMode = useSelector((store: RootState) => store.page.isDarkMode);
     const showAlerts = useSelector((store: RootState) => store.page.showAlerts)

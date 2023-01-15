@@ -27,8 +27,8 @@ function Form() {
     const isLoading = useSelector((store: RootState) => store.page.isLoading)
     const showBackDrop = useSelector(
         (store: RootState) => store.page.showBackDrop
-        );
-        const isDarkMode = useSelector((store: RootState) => store.page.isDarkMode);
+    );
+    const isDarkMode = useSelector((store: RootState) => store.page.isDarkMode);
     const podcastTobeSaved = useSelector(
         (store: RootState) => store.podcasts.podcast
     );
@@ -77,10 +77,10 @@ function Form() {
         }
         )
             .then((response) => {
-                dispatch(setPodcastPostedSucessfully(true))
                 setTimeout(() => {
                     dispatch(setShowBackDrop('hide'))
                 }, 500)
+                dispatch(setPodcastPostedSucessfully(true))
                 dispatch(setShowAlerts(true))
                 setTimeout(() => {
                     dispatch(setShowAlerts(false))
@@ -189,7 +189,6 @@ function Form() {
                 <div className="flex w-[95%]  mx-auto  h-[95%]">
                     <div className=" w-[100%] w-[100%]  flex-col space-y-8 md:space-y-5 h-[100%]">
                         <div className=" flex w-[100%] h-[20%]  md:h-[10%] flex-col space-y-2 mx-auto">
-
                             <div className="md:h-[100%] h-[100%] w-[100%]">
                                 <input
                                     onChange={(e) =>

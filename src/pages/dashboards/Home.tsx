@@ -109,7 +109,7 @@ function Home() {
                 <div className='h-[12%] nav z-100 sticky top-0 w-[100%]  right-4'>
                     <Navbar name={"ADMIN"} />
                 </div>
-                <div className='w-[100%]  flex flex-row   justify-between  h-[82%]'>
+                <div className='w-[100%]  flex flex-row   justify-between   h-[60%]'>
                     <div className='md:w-[85%] w-[100%]   h-[6  0vh] md:space-y-[2%] space-y-[8%] flex flex-col text-white '>
                         <div className='font-poppins font-sans'>
                             <div className=' md:h-[10vh] h-[15vh] md:p-0 p-4 md:items-center md:space-y-0 space-y-4 mx-auto flex md:flex-row flex-col justify-start md:justify-between  w-[90%] md:w-[95%]'>
@@ -144,16 +144,14 @@ function Home() {
                         <div className='w-[95%] mx-auto  h-[80vh] md:mt-0 mt-[20%]'>
                             <SellingProducts />
                         </div>
-                        {/* <div className='h-[100%]'>
-                            <Orders />
-                        </div> */}
+                     
                         <div ref={footRef} className='sticky md:hidden bottom-0'>
                             <Footer />
                         </div>
                     </div>
                     <div className={isDarkMode ? 'w-[15%] md:block hidden  side sticky right-sidebar bg-[#212529]  text-white   z-20 ' : 'w-[15%] md:block hidden  sticky right-sidebar bg-white  text-white   z-20 '}>
                         <div className='w-[95%] hidden overflow-y-scroll flex flex-col space-y-5  mx-auto p-2 mt-4 overflow-y-scroll h-[34%]'>
-                            <h1 className='text-[grey] font-poppins font-sans font-bold  text-[0.90rem]'>RECENT ACTIVITIES</h1>
+                            <h1 className='text-[grey] font-poppins hidden font-sans font-bold  text-[0.90rem]'>RECENT ACTIVITIES</h1>
                             <div ref={activityRef} className='flex w-[100%] flex-col space-y-9'>
                                 {/* displaying all activities  */}
                                 {recentActivities.map((activity, index) => (
@@ -211,7 +209,7 @@ function Home() {
                                 </div>
                                 <Link to="/podcasts"><h1 className='text-center text-[grey] underline hover:text-white hover:cursor-pointer '>Vew all podcasts</h1></Link>
                                 <p className="font-poppins   text-[0.80rem]  font-sans font-bold text-[grey]">PODCASTS REVIEWS</p>
-                                <div className='h-[23vh] hidden hover:cursor-pointer overflow-y-scroll'>
+                                <div className='h-[23vh]  hover:cursor-pointer overflow-y-scroll'>
                                     {clientsReviews.map((activity, index) => (
                                         <div className='w-[100%] border border-dashed border-[grey] p-2 h-[10vh]' key={index}>
                                             <div className='flex space-x-2 w-[100%]'>
@@ -245,7 +243,6 @@ function Home() {
                                     <p className='text-[0.80rem] font-poppins text-[grey] text-center '>Refer a new seller to us and earn $100 per refer</p>
                                     <button className={isDarkMode ? 'bg-[#405189] rounded-full w-[80%] mx-auto font-poppins font-sans h-[4vh]' : 'bg-[#405189] text-white font-sans rounded-full w-[80%] mx-auto font-poppins h-[4vh]'}><span className='w-[40%] bg-[blue] text-[blue] mr-1 rounded-full h-[100%]'>iks</span><span>Invite Now</span></button>
                                 </div>
-
                             </div>
 
                         </div>

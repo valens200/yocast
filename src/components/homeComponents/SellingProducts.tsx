@@ -84,14 +84,13 @@ function SellingProducts() {
     setOpen(true);
   }
   return (
-    <div className='w-[100%] flex md:flex-row flex-col justify-between h-[100%]'>
-      <div className={isDarkMode ? 'md:w-[40%]  w-[100%] bg-[#212529]   items-center flex  h-[100%]' : ' w-[100%] md:w-[40%] shadow-lg items-center flex h-[100%]'}>
+    <div className='w-[100%] flex md:flex-row flex-col md:space-x-0 md:space-x-4 justify-between h-[100%]'>
+      <div className={isDarkMode ? 'w-[100%] md:w-[37%] bg-[#212529]   items-center flex  h-[100%]' : ' w-[100%] md:w-[37%] bg-white  h-[70%] flex justify-center items-center  shadow-lg items-center flex h-[100%]'}>
         <Doughnurt />
-
       </div>
-      <div className={isDarkMode ? 'md:w-[58%]  w-[95%] mx-auto bg-[#212529]  items-center flex  h-[100%]' : 'w-[100%] items-center flex h-[100%]'}>
-        <div className="overflow-x-auto podcasts h-[90%] relative shadow-md sm:rounded-lg">
-          <div className={isDarkMode ? ' bg-[#212529] flex items-center text-[#212529] h-[18%] dark:bg-gray-700' : ' bg-white flex items-center text-[#212529] h-[18%] dark:bg-gray-700'}>
+      <div className={isDarkMode ? 'w-[100%] md:w-[60%] ] mx-auto bg-[#212529]  items-center flex  h-[100%]' : 'w-[100%] md:w-[60%] items-center bg-white  shadow-md overflow-y-scroll flex h-[70%]'}>
+        <div className="  podcasts h-[90%] relative  sm:rounded-lg">
+          <div className={isDarkMode ? ' bg-[#212529] flex items-center text-[#212529]  w-[100%] h-[18%] dark:bg-gray-700' : ' bg-white flex items-center w-[100%] text-[#212529] h-[18%] dark:bg-gray-700'}>
             <div className='w-[95%] font-poppins font-sans  h-[90%] md:h-[50%] flex md:flex-row flex-col justify-between mx-auto'>
               <p className='font-poppins font-sans text-[#7c7f90]  text-[0.90rem]'>Best Selling Podcasts</p>
               {/* bg-[#262A2F]  */}
@@ -114,7 +113,7 @@ function SellingProducts() {
               <UpdateForm setOpenUpdateModal={setOpenUpdateModal} podcastTopudate={podcastToUpdate} />
             </div>
           </Backdrop>
-          <table className="w-full  text-sm text-left text-gray-500 dark:text-gray-400">
+          <table className="w-[100%] text-sm text-left text-gray-500 dark:text-gray-400">
             <thead className={isDarkMode ? "text-xs  text-[#7c7f90] bg-[#212529] text-gray-700 uppercase  dark:bg-gray-700 dark:text-gray-400" : "text-xs bg-white  text-gray-700    border border-x-0 border-t-0 border-[#f3f3f9] uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"}>
               <tr className='text-[#7c7f90]'>
                 {tableHeaders.map((header, index) => (

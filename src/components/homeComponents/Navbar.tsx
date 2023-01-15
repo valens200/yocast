@@ -149,6 +149,8 @@ function Navbar(props: { name: string }) {
                     </div>
                 </div>
             </div>
+            <SucessAlert />
+            <ErrorAlert Content="Some thing went wrong" />
             <div className={isDarkMode ? 'bg-[#212529] sticky  top-0 w-[100%] h-[40%]' : 'bg-white border border-x-0 border-b-0 sticky  top-0 w-[100%] h-[40%]'}>
                 <div className='flex font-poppins font-sans flex-row justify-between items-center  h-[100%] w-[97%] mx-auto'>
                     <div className='w-[90%]'>

@@ -17,6 +17,7 @@ import { Button } from "@material-ui/core";
 import { setShowBackDrop, setPodcastPostedSucessfully } from "../../features/pageSlice";
 import Alert from '@mui/material/Alert'
 import { setShowAlerts, setLoading, setMessage } from "../../features/pageSlice";
+import { setOpenUpdateModal } from "../../features/podCastSlice";
 function UpdateForm(props: { podcastTopudate: any; setOpenUpdateModal: (arg0: boolean) => void; }) {
     const isLoading = useSelector((store: RootState) => store.page.isLoading);
     const podcast = props.podcastTopudate;
@@ -75,6 +76,8 @@ function UpdateForm(props: { podcastTopudate: any; setOpenUpdateModal: (arg0: bo
                 props.setOpenUpdateModal(false);
                 dispatch(setLoading(false))
                 dispatch(setMessage({ message: "Podcast updated successfully" }))
+                dispatch(setLoading(false))
+                dispatch(setOpenUpdateModal(false))
 
             })
             .catch((error) => {
@@ -86,7 +89,8 @@ function UpdateForm(props: { podcastTopudate: any; setOpenUpdateModal: (arg0: bo
                     dispatch(setShowAlerts(false))
                 }, 5000)
                 document.getElementById("main")?.scrollIntoView({ behavior: "smooth" })
-                dispatch(setLoading(true))
+                dispatch(setLoading(false))
+                dispatch(setOpenUpdateModal(false))
             });
     };
     const getDivClass = (index: number): String => {

@@ -16,6 +16,9 @@ import { setIsDarkMode } from '../../features/pageSlice'
 import Loading from '../../components/homeComponents/Loading'
 import { initializeLoggedInUser } from '../../features/userSlice'
 function Subscriptions() {
+    const [fethed, setFetched] = useState<Boolean>(false);
+
+
     const user = JSON.parse(localStorage.getItem("user")!);
     const navigate = useNavigate();
 
@@ -25,7 +28,6 @@ function Subscriptions() {
             navigate("/")
         }
     }, [user])
-    const [fethed, setFetched] = useState<Boolean>(false);
     const podcastsCategories = useSelector((store: RootState) => store.podcasts.podcastsCategories);
     const showSidebar = useSelector((store: RootState) => store.page.showSidebar);
     const isDarkMode = useSelector((store: RootState) => store.page.isDarkMode);
@@ -36,9 +38,6 @@ function Subscriptions() {
         }
         return "w-[13.6%]  sticky top-0 relative bottom-0   h-[100%]"
     }
-    setTimeout(() => {
-        setFetched(true);
-    }, 1000)
     const dispatch = useAppDispatch();
     return <div className="h-screen w-[100%]  flex flex-row  overflow-y-scroll bg-[#1a1d21]">
         <div className='w-[18.6%] xl:w-[13.6%]  md:block hidden sticky top-0 relative bottom-0   h-[100%]'>
@@ -50,7 +49,7 @@ function Subscriptions() {
                 <Navbar name="Subscriptions" />
             </div>
             {/* bg-[#f3f3f9] */}
-            {fethed == false ? <Loading /> : <div>
+            {   <div>
                 <div className={isDarkMode ? 'w-[100%]    flex  items-center  h-screen' : 'w-[100%] bg-[#f3f3f9]    flex  items-center  h-screen'}>
                     <div className='w-[96%] mt-10  mx-auto flex flex flex-col space-y-10 text-white h-[100%]'>
                         <div className='h-[95%] w-[100%] mx-auto'>

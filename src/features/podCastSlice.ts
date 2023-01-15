@@ -3,7 +3,8 @@ import { Podcast } from "../types/appTypes";
 
 type initialStateType = {};
 const initialState = {
-  openPodcastDetails:false,
+  openPodcastDetails: false,
+  openUpdateModal: false,
   selectedPodcast: {
     podcast: "",
     category: "",
@@ -205,18 +206,37 @@ const podcastSlice = createSlice({
     setSelectedPodcast: (state, action: PayloadAction<Podcast>) => {
       state.selectedPodcast = action.payload;
     },
-      // setOpenUpdateModal: (state, action:PayloadAction<boolean>) => {
-      //   let showModal = action.payload;
-      //   if(showModal == true){
-      //     showModal = true;
-      //   }else{
-      //     showModal = false,
-      //   }
-      // }
+    // setOpenUpdateModal: (state, action:PayloadAction<boolean>) => {
+    //   let showModal = action.payload;
+    //   if(showModal == true){
+    //     showModal = true;
+    //   }else{
+    //     showModal = false,
+    //   }
+    // }
+    // },
+    setOpenPodcastDetails: (state, action: PayloadAction<boolean>) => {
+      const show = action.payload;
+      if (show) {
+        state.openPodcastDetails = true;
+      } else {
+        state.openPodcastDetails = false;
+      }
+    },
+    setOpenUpdateModal: (state, action: PayloadAction<boolean>) => {
+      const show = action.payload;
+      if (show) {
+        state.openUpdateModal = true;
+      } else {
+        state.openUpdateModal = false;
+      }
+    },
   },
 });
 
 export const {
+  setOpenUpdateModal,
+  setOpenPodcastDetails,
   initializePodCast,
   setSelectedPodcast,
   setSelected,

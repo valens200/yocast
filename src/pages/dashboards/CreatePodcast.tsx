@@ -51,7 +51,7 @@ function CreateProduct() {
             <div className='h-[12%] nav z-100 sticky top-0 w-[100%]  right-4'>
                 <Navbar name="CREATE PODCAST" />
             </div>
-            {fethed == false ? <Loading /> : <div className='w-[100%]   flex flex-col  justify-between h-[100%]'>
+            {<div className='w-[100%]   flex flex-col  justify-between h-[100%]'>
                 <div className='w-[100%]  flex items-center  text-white sm:h-[200vh] h-[190vh]'>
                     <div className='h-[95%] w-[100%] '>
                         <div className='h-[100%] w-[95%] mx-auto'>

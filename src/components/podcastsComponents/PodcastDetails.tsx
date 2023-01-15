@@ -5,9 +5,11 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../../store'
 import { getClassName } from 'jodit/types/core/helpers'
 import { ImCross } from 'react-icons/im'
-
+import { useAppDispatch } from '../../store'
+import { setOpenPodcastDetails } from '../../features/podCastSlice'
 
 function PodcastDetails() {
+  const dispatch = useAppDispatch();
   const selectedPodcast = useSelector((store: RootState) => store.podcasts.selectedPodcast);
   const getClassName = () => {
     return "bg-[url('" + selectedPodcast.cover + "')]";
@@ -19,7 +21,7 @@ function PodcastDetails() {
         <div className="w-[100%] h-[40%]">
           <img className='w-[100%] h-[100%]' src={selectedPodcast.cover} alt="" />
         </div>
-        <p className='text-white  fixed top-[30%]  flex p-2 float-right text-end'><ImCross /></p>
+        <p className='text-white  fixed top-[30%]  border rounded-full ml-2 border-black  flex p-2 float-right text-end'><ImCross  onClick={() => dispatch(setOpenPodcastDetails(false))} /></p>
         <ReactAudioPlayer className='z-20  w-[40%]  mx-auto -translate-y-[13vh]' src={selectedPodcast.url} controls />
         <div className='w-[95%]  flex flex-col space-y-6  text-[black] mx-auto '>
           <div className='font-poppins font-sans'>

@@ -21,17 +21,19 @@ import UpdateForm from '../createPodcastComponents/UpdateForm';
 import { setMessage } from '../../features/pageSlice';
 import { setPodcastPostedSucessfully, setShowAlerts } from '../../features/pageSlice';
 import PodcastDetails from './PodcastDetails';
-import { setSelectedPodcast } from '../../features/podCastSlice';
+import { setSelectedPodcast, setOpenUpdateModal, setOpenPodcastDetails } from '../../features/podCastSlice';
+import { BiHeadphone } from 'react-icons/bi';
+import { ImCross } from 'react-icons/im';
 function PodcastsList(): JSX.Element {
     const [open, setOpen] = useState<boolean>(false);
-    const [openUpdateModal, setOpenUpdateModal] = useState(false);
-    const [openPodcastDetails, setOpenPodcastDetails] = useState(false);
     const [loading, setLoading] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState("")
     const [podcastToUpdate, setPodcastToUpdate] = useState<Podcast>();
     const [currentPage, setCurrentPage] = useState(1);
     const [recordsPerPage] = useState(7);
 
+    const openUpdateModal = useSelector((store: RootState) => store.podcasts.openUpdateModal);
+    const openPodcastDetails = useSelector((store: RootState) => store.podcasts.openPodcastDetails);
     const selectedPodcast = useSelector((store: RootState) => store.podcasts.selectedPodcast);
     const subscriptions = useSelector((store: RootState) => store.subscriptions.subscriptions);
     const podcastsCategories = useSelector((store: RootState) => store.podcasts.podcastsCategories);
@@ -93,7 +95,7 @@ function PodcastsList(): JSX.Element {
         pb: 3,
     };
     const showModal = (podcast: Podcast) => {
-        setSelectedPodcast(podcast);
+        dispatch(setSelectedPodcast(podcast));
         setOpen(true);
     }
     const deletePodcast = () => {
@@ -106,7 +108,6 @@ function PodcastsList(): JSX.Element {
                 'Content-Type': "application/json"
             }
         }).then((response) => {
-            setLoading(false);
             setOpen(false)
             dispatch(setShowAlerts(true))
             dispatch(setPodcastPostedSucessfully(true))
@@ -115,8 +116,9 @@ function PodcastsList(): JSX.Element {
                 dispatch(setShowAlerts(false))
             }, 5000)
             setMessage({ message: "Podcast deleted successfully" })
+            setLoading(false);
         }).catch((error) => {
-            setErrorMessage(error.response.data.error.message)
+            console.log(error)
             setLoading(false);
             setOpen(false)
             dispatch(setShowAlerts(true))
@@ -125,16 +127,17 @@ function PodcastsList(): JSX.Element {
                 dispatch(setShowAlerts(false))
                 dispatch(setPodcastPostedSucessfully(false))
             }, 5000)
-            setMessage({ message: "Some thing went wrong !" })
+            console.log(selectedPodcast)
+            dispatch(setMessage({ message: "Some thing went wrong !" }))
         })
     }
     const updatePodcast = (podcast: Podcast) => {
         setPodcastToUpdate(podcast);
-        setOpenUpdateModal(true);
+        dispatch(setOpenUpdateModal(true));
     }
 
     const showDetails = (podcast: Podcast) => {
-        setOpenPodcastDetails(true);
+        dispatch(setOpenPodcastDetails(true))
         dispatch(setSelectedPodcast(podcast));
     }
     return (
@@ -159,7 +162,7 @@ function PodcastsList(): JSX.Element {
                         sx={{ height: "100%", color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                     >
                         <div className='w-[80%] mx-auto h-[90%] flex-col space-y-4 flex justify-between items-center'>
-                            <h1 className='font-poppins font-sans font-bold'>Update your podcast</h1>
+                            <p className='text-white  fixed w-[90%] mx-auto  rounded-full ml-2  justify-end  flex p-2 float-right text-end'><ImCross className='border rounded-full text-2xl' onClick={() => dispatch(setOpenUpdateModal(false))} /></p>
                             <UpdateForm setOpenUpdateModal={setOpenUpdateModal} podcastTopudate={podcastToUpdate} />
                         </div>
                     </Backdrop>
@@ -172,7 +175,7 @@ function PodcastsList(): JSX.Element {
                             <div className='flex flex-row justify-between'>
                                 <p className={isAnyCategoryClicked && isDarkMode ? "  text-white hover:cursor-pointer " : " text-[#0ab39c] hover:cursor-pointer "}>All</p>
                             </div>
-                            {podcastsCategories.map((Category, index) => (
+                            {podcastsCategories.map((Category: { id: any; selected: boolean; category: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | React.ReactPortal | null | undefined; availablePodcasts: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | React.ReactPortal | null | undefined; }, index: React.Key | null | undefined) => (
                                 <div key={index} className='flex flex-row justify-between'>
                                     <p onClick={() => dispatch(setSelected({ id: Category.id }))} className={getClass(Category.selected)}>{Category.category}</p>
                                     <p className={isDarkMode ? 'bg-[#2A2F34] text-[9px] text-[#878A99] items-center flex justify-center w-[7%] text-center rounded-full' : 'bg-[#F3F6F9]  items-center flex justify-center text-[9px] text-[#405189] w-[7%] text-center rounded-full'}>{Category.availablePodcasts}</p>
@@ -192,8 +195,6 @@ function PodcastsList(): JSX.Element {
                             <input className={isDarkMode ? 'bg-[#2a2f34]  rounded pl-10 h-[100%] w-[100%] h-[4vh] md:w-[60%] text-[0.90rem] h- focus:outline-0 fous:border focus:border-[#32383e]  pl-4  w-[100%] h-[100%]' : 'bg-white border  rounded border-[#ced4da]  pl-10 h-[100%] w-[100%] h-[4vh] md:w-[60%] text-[0.90rem] h- focus:outline-0 fous:border focus:border-[#32383e] pl-4  w-[100%] h-[100%]'} type="text" placeholder='Search podcasts....' />
                         </div>
                     </div>
-                    <SucessAlert Content={"You deleted podcast sucessfully"} />
-                    <ErrorAlert Content={errorMessage} />
                     <Modal
                         open={open}
                         onClose={handleClose}
@@ -232,7 +233,7 @@ function PodcastsList(): JSX.Element {
                                     </thead>
                                     <tbody>
                                         {currentPodcasts.map((podcast, index) => (
-                                            <tr onClick={() => showDetails(podcast)} className={isDarkMode ? " border-b hover:border-0 h-[2%]   border-[0.1px]  border-[#32383e]   border-x-0 border-t-0  dark:bg-gray-800 dark:border-gray-700" : " hover:bg-[#f3f3f9]  "}>
+                                            <tr className={isDarkMode ? " border-b hover:border-0 h-[2%]   border-[0.1px]  border-[#32383e]   border-x-0 border-t-0  dark:bg-gray-800 dark:border-gray-700" : " hover:bg-[#f3f3f9]  "}>
                                                 <th scope="row" className="px-6 py-4 text-[#6B7280] font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                     <img className='md:w-[7vw] xl:w-[3vw] xl:h-[5.2vh] lg:w-[6.4vw] w-[35%] h-[5vh] mr-2 md:h-[8vh]  rounded-full' src={podcast.cover.toString()} alt="covermage" />
                                                     {podcast.name}
@@ -248,6 +249,9 @@ function PodcastsList(): JSX.Element {
                                                 </td>
                                                 <td className="px-3 py-2">
                                                     {getTime(podcast)}
+                                                </td>
+                                                <td className="px-3 py-2 text-right">
+                                                    <button onClick={() => showDetails(podcast)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline text-[1.5rem]"><BiHeadphone /></button>
                                                 </td>
                                                 <td className="px-3 py-2 text-right">
                                                     <button onClick={() => updatePodcast(podcast)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline text-[1.5rem]"><HiPencilSquare /></button>
