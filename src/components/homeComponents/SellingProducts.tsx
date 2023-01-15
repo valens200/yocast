@@ -85,10 +85,10 @@ function SellingProducts() {
   }
   return (
     <div className='w-[100%] flex md:flex-row flex-col md:space-x-0 md:space-x-4 justify-between h-[100%]'>
-      <div className={isDarkMode ? 'w-[100%] md:w-[37%] bg-[#212529]   items-center flex  h-[100%]' : ' w-[100%] md:w-[37%] bg-white  h-[70%] flex justify-center items-center  shadow-lg items-center flex h-[100%]'}>
+      <div className={isDarkMode ? 'w-[100%] md:w-[37%] bg-[#212529]   items-center flex  h-[70%]' : ' w-[100%] md:w-[37%] bg-white  h-[70%] flex justify-center items-center  shadow-lg items-center flex h-[100%]'}>
         <Doughnurt />
       </div>
-      <div className={isDarkMode ? 'w-[100%] md:w-[60%] ] mx-auto bg-[#212529]  items-center flex  h-[100%]' : 'w-[100%] md:w-[60%] items-center bg-white  shadow-md overflow-y-scroll flex h-[70%]'}>
+      <div className={isDarkMode ? 'w-[100%] md:w-[60%] ] mx-auto bg-[#212529]  items-center flex  h-[100%] overflow-y-scroll' : 'w-[100%] md:w-[60%] items-center bg-white  shadow-md overflow-y-scroll flex h-[100%]'}>
         <div className="  podcasts h-[90%] relative  sm:rounded-lg">
           <div className={isDarkMode ? ' bg-[#212529] flex items-center text-[#212529]  w-[100%] h-[18%] dark:bg-gray-700' : ' bg-white flex items-center w-[100%] text-[#212529] h-[18%] dark:bg-gray-700'}>
             <div className='w-[95%] font-poppins font-sans  h-[90%] md:h-[50%] flex md:flex-row flex-col justify-between mx-auto'>

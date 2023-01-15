@@ -45,6 +45,7 @@ function Login() {
             }
         }
         
+        // sending an http post request to login the user
         axios({
             method: 'POST',
             url: baseUrl + "/signin",
@@ -58,6 +59,7 @@ function Login() {
             }
         }).then((response) => {
             setLoggedIn(true)
+            // saving the loggedIn user credentials including emails and tokens in localstorage
             localStorage.setItem("user", JSON.stringify(response.data.user))
             toast.success("You loggedin successfully")
             if (response.data.statusCode === 200) {
@@ -73,8 +75,6 @@ function Login() {
             dispatch(setLoading(false))
         })
     }
-
-
 
     //proscottMiller
 
@@ -99,6 +99,7 @@ function Login() {
                             <p className='text-[#878A99] font-poppins font-sans' >Sign in to continue to Yocast.</p>
                         </div>
                         <form onSubmit={(e) => e.preventDefault()} className="h-[90%]  flex flex-col space-y-3 w-[100%] ">
+                            {/* getting form inputs by slicing them inorder to get what we need only */}
                             {FormInputs.slice(1, 4).map((input, index) => {
                                 if (input.name == 'Password') {
                                     return (

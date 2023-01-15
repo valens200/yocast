@@ -1,15 +1,22 @@
 import { Button } from '@material-ui/core'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { inputFieldType } from '../../types/appTypes'
-import { clientsButtons, inputFields,subscriptionTableHeaders } from '../../assets/staticAssets/data'
-import { useSelector } from 'react-redux'
+import { baseUrl, clientsButtons, inputFields,subscriptionTableHeaders } from '../../assets/staticAssets/data'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../store'
+import { useNavigate } from 'react-router-dom'
+import { initializeLoggedInUser } from '../../features/userSlice'
+import { intilializePodcasts } from '../../features/podCastSlice'
+import axios from 'axios'
 function    ClientsTable() {
+    const user = JSON.parse(localStorage.getItem("user")!);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const isDarkMode = useSelector((store: RootState) => store.page.isDarkMode);
     const subscriptions = useSelector((store: RootState) => store.subscriptions.subscriptions);
     const getButtonClass = (index: number) => {
         if (index === 0) {
-            return isDarkMode ? "w-[30%] max-[356px]:w-[80%]  max-[356px]:p-2 font-poppins rounded h-[100%] bg-[#0ab39c] hover:bg-[#099885] text-[#fff]" : "w-[50%]  max-[356px]:w-[80%]  max-[356px]:p-2 font-poppins rounded h-[100%] bg-[#0ab39c] hover:bg-[#099885] text-[#fff]"
+            return isDarkMode ? "w-[30%] max-[356px]:w-[80%]  max-[356px]:p-2 font-poppins rounded h-[100%] bg-[#0ab39c] hover:bg-[#099885] text-[#fff]" : "w-[30%]  max-[356px]:w-[80%]  max-[356px]:p-2 font-poppins rounded h-[100%] bg-[#0ab39c] hover:bg-[#099885] text-[#fff]"
         }
         return "w-[30%]  font-poppins max-[356px]:w-[80%] max-[356px]:p-2 font-sans rounded h-[100%] bg-[#299cdb]  hover:bg-[#2385ba] text-[#fff]"
     }

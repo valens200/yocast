@@ -54,6 +54,8 @@ function Signup() {
                 }
             }
         }
+
+        // sending an http request to save the user
         axios.post(baseUrl + "/signup", {
             names: userToregister.FullName,
             email: userToregister.Email,

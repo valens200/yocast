@@ -34,12 +34,7 @@ function Home() {
     const navigate = useNavigate();
     const availablePodcasts = useSelector((store: RootState) => store.podcasts.availablePodcasts)
 
-    useEffect(() => {
-        dispatch(initializeLoggedInUser(user))
-        if (!user || user == "" || user == null) {
-            navigate("/")
-        }
-    }, [user])
+    //initializing loggedIn user and getting all the podcasts from database using useEffect Hook
     useEffect(() => {
         dispatch(initializeLoggedInUser(user))
         if (!user || user == "" || user == null) {
@@ -79,12 +74,9 @@ function Home() {
             return "hover:text-[grey]"
         }
     }
-    //handling the bottom footer
-    const footRef = useRef<HTMLDivElement>(null);
-    const activityRef = useRef<HTMLDivElement>(null);
 
-    //displaying images associated with on actitivity
 
+    //this is a function to get images or cover images as an array and each one mapped to HTML div element
     const getImages = (activity: activityType) => {
         let div;
         div = <div className='flex border border-dashed border-[grey] p-2 flex-row'>
@@ -98,8 +90,10 @@ function Home() {
         </div>
         return div;
     }
+
+    // if we are loading some thing from the data base we use the loader component to make sure that the page is rendered with full needed data
     return isLoading == false ? (
-        <Loading />
+        <Loading name="Home" />
     ) : (
         <div className={isDarkMode ? "h-screen w-[100%]  flex flex-row  overflow-y-scroll bg-[#1a1d21]" : "h-screen w-[100%]  flex flex-row  overflow-y-scroll bg-[#f3f3f9]"}>
             <div className='w-[13.6%] md:block hidden sticky top-0 relative bottom-0   h-[100%]'>
@@ -130,6 +124,7 @@ function Home() {
 
                             </div>
                         </div>
+                        {/* defining analyticsCards component */}
                         <div className='h-[90vh]'>
                             <AnalyticsCards />
                         </div>
@@ -141,19 +136,21 @@ function Home() {
 
                             </div>
                         </div>
+                        {/* importing sellingProducts or podcasts component */}
                         <div className='w-[95%] mx-auto  h-[80vh] md:mt-0 mt-[20%]'>
                             <SellingProducts />
                         </div>
                      
-                        <div ref={footRef} className='sticky md:hidden bottom-0'>
+                     {/* this is the foot of yocast appp */}
+                        <div className='sticky md:hidden bottom-0'>
                             <Footer />
                         </div>
                     </div>
                     <div className={isDarkMode ? 'w-[15%] md:block hidden  side sticky right-sidebar bg-[#212529]  text-white   z-20 ' : 'w-[15%] md:block hidden  sticky right-sidebar bg-white  text-white   z-20 '}>
                         <div className='w-[95%] hidden overflow-y-scroll flex flex-col space-y-5  mx-auto p-2 mt-4 overflow-y-scroll h-[34%]'>
                             <h1 className='text-[grey] font-poppins hidden font-sans font-bold  text-[0.90rem]'>RECENT ACTIVITIES</h1>
-                            <div ref={activityRef} className='flex w-[100%] flex-col space-y-9'>
-                                {/* displaying all activities  */}
+                            <div className='flex w-[100%] flex-col space-y-9'>
+                                {/* displaying all activities   activities are stored as an array and i mapped each one  to the HTML div element to make the codes simple and increase readablity and time saving*/}
                                 {recentActivities.map((activity, index) => (
                                     <div className='w-[100%]' key={index}>
                                         <div className='flex space-x-2 w-[100%]'>
@@ -170,6 +167,7 @@ function Home() {
 
                                                 <p>{activity.description}</p>
                                                 {
+                                                    // checking wether the description is null of not to avoid tun time errors
                                                     activity.descriptionImage[0] == "" ? null :
                                                         //calling the function to get images associated with an activity if there are
                                                         getImages(activity)
@@ -186,6 +184,7 @@ function Home() {
                             <div className={isDarkMode ? 'w-[95%]  bg-[#212529] mx-auto p-4 font-sans font-poppins flex flex-col space-y-8' : 'w-[95%] text-[#212529] fontpoppins font-sans  bg-white  mx-auto p-4 flex flex-col space-y-8'}>
                                 <h1 className="font-poppins font-sans text-[0.80rem] font-bold text-[grey]">TOP 10 PODCASTS</h1>
                                 <div>
+                                    {/* generating all podcasts by mapping each one to HTML div element */}
                                     {podcasts.map((activity, index) => (
                                         <div className='w-[100%] h-[10vh]' key={index}>
                                             <div className='flex space-x-2 w-[100%]'>
